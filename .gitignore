@@ -1,0 +1,29 @@
+# Dependencies and generated builds
+node_modules/
+dist/
+.vite/
+coverage/
+*.tsbuildinfo
+
+# Local scratch, exports, and package archives
+work/
+outputs/
+*.zip
+*.log
+npm-debug.log*
+
+# Secrets and machine-local environment files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+.npmrc
+
+# Editor and operating system files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
