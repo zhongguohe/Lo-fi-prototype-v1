@@ -1,0 +1,42 @@
+[
+  {
+    "file": "progress.png",
+    "width": 65536,
+    "height": 4292542531,
+    "sha256": "09599977499a483278545b0127f0d6bab3d434cbfac56bf8dedd93b235228ee8",
+    "capture_date": "2026-11-07",
+    "source": "Actual local browser viewport screenshot; existing developer sample state, no app data reset."
+  },
+  {
+    "file": "study.png",
+    "width": 65536,
+    "height": 4292542531,
+    "sha256": "cdafff24dc583ba0993d056c0fdc52b4d958794f2026fc10a1b5e3da6c8b38b3",
+    "capture_date": "2026-11-07",
+    "source": "Actual local browser viewport screenshot; existing developer sample state, no app data reset."
+  },
+  {
+    "file": "home.png",
+    "width": 65536,
+    "height": 4292542531,
+    "sha256": "3ffc8eb4b478e4ec58dd26e85bdf11e05f6f610ec1e150605b9ff7fb7c214f92",
+    "capture_date": "2026-11-07",
+    "source": "Actual local browser viewport screenshot; existing developer sample state, no app data reset."
+  },
+  {
+    "file": "exercise.png",
+    "width": 65536,
+    "height": 4292542531,
+    "sha256": "5c7fdb6063d81e4be79a63b07f5bc411ea5c733c4f2ca52adc0aff294d337366",
+    "capture_date": "2026-11-07",
+    "source": "Actual local browser viewport screenshot; existing developer sample state, no app data reset."
+  },
+  {
+    "file": "personal-center.png",
+    "width": 65536,
+    "height": 4292542531,
+    "sha256": "4aa7dac9b7aa7b16dc240ebe242800bbd019b00ff05a6ba5051486d4efe69b89",
+    "capture_date": "2026-11-07",
+    "source": "Actual local browser viewport screenshot; existing developer sample state, no app data reset."
+  }
+]
