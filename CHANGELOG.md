@@ -38,3 +38,7 @@ Exact per-feature implementation times were not separately versioned. This entry
 - Prototype timer, device and data controls; no backend, account, push delivery, sensors, sync, or production tracking.
 - Follow-up sizing and English-error fixes: a logical 390 × 844 canvas scales for short desktop previews; shared Form/Field validation replaces localized native error bubbles. Sixteen-pixel form inputs reduce mobile focus-zoom risk, though physical phones remain untested.
 - Developer walkthroughs recorded all page entrances and key flow branches. Automated suite reached 15 model/validation tests. Classroom participant results and a completed walkthrough video were not supplied.
+
+### 2026-11-07 — Group repository upload verified
+
+Uploaded 61 reviewed project files to the existing zhongguohe/Lo-fi-prototype-v1 repository. Fetched the remote tree and verified every file against the upload set. A fresh remote-source copy passed dependency installation, all 15 tests and production build. GitHub Actions build also succeeded; deployment awaits owner Pages activation (configure-pages returned Not Found). Public demo remains unverified. No UI or activity logic was changed in this publication follow-up.

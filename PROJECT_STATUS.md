@@ -90,7 +90,7 @@ The [decision register](docs/design-decisions.md) separates explicit brief decis
 
 ## Next steps
 
-1. Review this package and the known issues with the group. GitHub creation/upload is a separate task.
+1. Review the shared repository and known issues with the group. The owner must enable Pages with GitHub Actions and rerun the workflow before online-demo verification.
 2. Run participant tasks using the blank [testing template](docs/lo-fi-v1/testing-notes.md); record observations and distinguish task success from health effectiveness.
 3. Recheck known issues and physical phone/browser accessibility before classroom reliance where relevant.
 4. Prioritize Lo-fi V2 changes using actual findings and current course requirements; do not preemptively build them.
@@ -122,5 +122,7 @@ Deployment changes are limited to vite.config.js, production HashRouter selectio
 
 - Local repository-prefixed production build: passed; 15 tests passed.
 - Plain static-server browser preflight: Setup → Home, Study, Exercise, Progress, Personal Center worked at /Lo-fi-prototype-v1/. Refreshing the nested Personal Center hash route restored the correct page. Further checks are recorded in prototypes/lo-fi-v1/github-publication.md.
-- Remote upload and Pages deployment status must be recorded after execution. **Online demo: Implemented but Unverified, pending owner Pages enablement and successful deployment.** Expected URL alone is not evidence that the site works.
+- **Source upload: Implemented and Verified.** All 61 curated files at commit fcdadfcf6070ce4400d5b2ef4b0c8da79d8a5d38 match the local upload set byte for byte. A fresh copy from the remote tree passed npm ci, all 15 tests, and the repository-prefixed production build.
+- **GitHub Actions build: Implemented and Verified.** [Run #1](https://github.com/zhongguohe/Lo-fi-prototype-v1/actions/runs/42413227164) completed the build job successfully. Deploy failed at configure-pages with “Get Pages site failed” / Not Found because Pages is not enabled. No source build failure was observed.
+- **Online demo: Implemented but Unverified.** Pending owner Pages enablement, rerun, and real public-URL browser verification. Expected URL alone is not evidence that the site works. Source upload and configuration are complete; owner activation remains external to this task.
 - Existing V1 known issues and physical-device/accessibility limits remain. Local preflight and source upload are not participant tests.
