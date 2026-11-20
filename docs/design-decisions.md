@@ -63,3 +63,16 @@ Research summaries and references in the original documents are preserved withou
 ## Publication authorization — 2026-11-07
 
 The user supplied the existing public group repository and authorized uploading the project and Pages configuration, then explicitly chose to wait for the owner to enable Pages. Public demonstration is now authorized as that limited follow-up scope; earlier maintenance-only no-upload statements remain historical. No intervention or visual redesign is authorized. Production-only HashRouter and a Vite deployment base resolve static-host refresh/resource paths; local development keeps its original paths. No live URL is considered verified until a deployment succeeds and is opened.
+
+## V2 local repair authorization — 2026-11-20
+
+The user authorized local changes on the existing grayscale implementation, with approval requested before key interaction changes. The first batch repairs developer-audit A01/A02/A03/A05/A06/A07 without adding an intervention or changing reward rules. Leaving saved feedback pauses an on-break study session; unsaved activity remains protected. Backup fields share the existing in-memory plan draft; refresh persistence is still out of scope. When a future goal has taken effect, its value is promoted to the current base before storing the next appointment; this is not a full goal-history model. Actual records must be dated no later than the displayed day; past schedules require a valid new date/time. Legacy future records are retained for correction but excluded from current totals.
+
+The user subsequently approved all three proposals in `lo-fi-v2/interaction-proposals-zh.md`: explicit actual-intensity choice for planned exercise (including manual entry), accurate preparation labels without automatic timing, and activity-first saved feedback with pet-off levels hidden. These are implemented locally. Intensity inference A06 in the historical V1 assumptions is superseded for new V2 exercise records; already-saved records are not silently reclassified. Code review remains assigned to other teammates' agents. This authorization does not include pushing or merging changes.
+
+### 2026-11-20 — Plan time and backup provenance
+User requested new plans default to today and the time the editor opens, without automatic ticking; implemented. Save-time past-date/time checks remain. The formally submitted SI684_Causal_Diagrams_Revised.pdf, page 1, component 2 explicitly describes choosing a shorter backup and making an if-then plan while planning a workout. It does not prescribe a mandatory separate page or form validation. Existing required backup fields remain pending any explicit change to that interaction.
+
+### 2026-11-20 — Publication authorized
+
+After the walkthrough discussion, the user accepted the remaining contents and explicitly requested committing/pushing Valen_branch and opening a PR to main. Required backup behavior is retained. The owner/teammates handle code review, task walkthrough and merge; no merge or deployment is authorized by this request.

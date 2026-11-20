@@ -53,3 +53,10 @@ test("valid optional and disabled controls do not block saving", () => {
     "",
   );
 });
+
+test("date boundaries use clear English date messages", () => {
+  assert.equal(message(control({ type: "date", min: "2026-11-20", validity: { rangeUnderflow: true } })),
+    "Choose a date on or after 2026-11-20.");
+  assert.equal(message(control({ type: "date", max: "2026-11-20", validity: { rangeOverflow: true } })),
+    "Choose a date on or before 2026-11-20.");
+});

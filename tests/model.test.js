@@ -9,6 +9,10 @@ import {
   saveRecord,
   tick,
   goalFor,
+  updateWeeklyGoal,
+  recordDateError,
+  scheduleErrors,
+  releaseSavedActivity,
 } from "../src/model.js";
 const today = dateKey();
 const record = (extra = {}) => ({
@@ -127,4 +131,87 @@ test("next day without activity retains cumulative points; empty start has no re
   assert.equal(next.todayBreaks, 0);
   assert.equal(initialState(false).plans.length, 0);
   assert.equal(initialState(false).records.length, 0);
+});
+
+test("future actual records cannot create or replace activity credit", () => {
+  let s = initialState(false);
+  const future = record({ date: shiftDate(today, 1), planId: "planned" });
+  s.plans = [{ id: "planned", status: "Planned" }];
+  assert.equal(saveRecord(s, future), s);
+  assert.equal(s.plans[0].status, "Planned");
+  s = saveRecord(s, record());
+  const corrected = saveRecord(s, future);
+  assert.equal(corrected, s);
+  assert.equal(stats(corrected.records, today).total, 10);
+  assert.equal(recordDateError("2026-02-31", today), "Enter a valid activity date.");
+  assert.equal(recordDateError(today, today), "");
+  assert.equal(recordDateError(shiftDate(today, -1), today), "");
+});
+
+test("exercise must have an explicitly chosen valid intensity before saving", () => {
+  const s = initialState(false);
+  for (const intensity of ["", undefined, "Unknown"]) {
+    assert.equal(saveRecord(s, record({ intensity })), s);
+  }
+  const light = saveRecord(s, record({ intensity: "Light" }));
+  assert.equal(stats(light.records, today).moderate, 0);
+  assert.equal(stats(light.records, today).total, 10);
+  const moderate = saveRecord(s, record({ intensity: "Moderate" }));
+  assert.equal(stats(moderate.records, today).moderate, 10);
+});
+
+test("legacy future records are retained but excluded from current activity totals", () => {
+  const records = [
+    record({ id: "old", date: "2026-11-19" }),
+    record({ id: "future", date: "2026-11-21", duration: 40 }),
+    record({ id: "future-break", category: "study", date: "2026-11-21" }),
+  ];
+  const totals = stats(records, "2026-11-20");
+  assert.equal(totals.moderate, 10);
+  assert.equal(totals.total, 10);
+  assert.equal(totals.breaks, 0);
+  assert.equal(records.length, 3);
+});
+
+test("new future goal preserves the goal that has already taken effect", () => {
+  let s = initialState(false);
+  s.prefs.scheduledGoal = { value: 90, week: "2026-11-16" };
+  s = updateWeeklyGoal(s, 120, "next", "2026-11-20");
+  assert.equal(goalFor(s, "2026-11-20"), 90);
+  assert.equal(goalFor(s, "2026-11-23"), 120);
+  s = updateWeeklyGoal(s, 150, "next", "2026-11-20");
+  assert.equal(goalFor(s, "2026-11-20"), 90);
+  assert.equal(goalFor(s, "2026-11-23"), 150);
+  s = updateWeeklyGoal(s, 75, "this", "2026-11-20");
+  assert.equal(s.prefs.scheduledGoal, null);
+  assert.equal(goalFor(s, "2026-11-20"), 75);
+  assert.equal(s.records.length, 0);
+});
+
+test("plan dates and times reject past schedules while allowing future days", () => {
+  const now = new Date(2026, 10, 20, 15, 30);
+  assert.ok(scheduleErrors("2026-11-19", "17:30", "2026-11-20", now).date);
+  assert.ok(scheduleErrors("2026-11-20", "15:29", "2026-11-20", now).time);
+  assert.deepEqual(scheduleErrors("2026-11-20", "15:30", "2026-11-20", now), {});
+  assert.deepEqual(scheduleErrors("2026-11-21", "08:00", "2026-11-20", now), {});
+  assert.ok(scheduleErrors("2026-11-20", "25:00", "2026-11-20", now).time);
+});
+
+test("leaving saved feedback releases the task without changing its record or plan", () => {
+  let s = initialState();
+  s.active = { category: "study", status: "saved", id: "sample-break" };
+  s.study = { ...s.study, status: "on-break", seconds: 120 };
+  const next = releaseSavedActivity(s);
+  assert.equal(next.active, null);
+  assert.equal(next.study.status, "paused");
+  assert.equal(next.study.seconds, 120);
+  assert.equal(next.records, s.records);
+  assert.equal(next.plans, s.plans);
+  assert.equal(stats(next.records, today).total, 23);
+  for (const status of ["ready", "running", "paused", "pending"]) {
+    s.active = { category: "study", status };
+    assert.equal(releaseSavedActivity(s), s);
+  }
+  s.active = { category: "exercise", status: "saved" };
+  assert.equal(releaseSavedActivity(s).study, s.study);
 });

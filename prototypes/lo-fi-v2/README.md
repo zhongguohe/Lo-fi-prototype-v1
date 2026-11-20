@@ -1,7 +1,13 @@
-# Lo-fi V2 — not started
+# Lo-fi V2 — local iteration in progress
 
-This stage will iterate on Lo-fi V1 using actual classroom feedback and the course's confirmed requirements. No V2 design or source fork has been created.
+The current shared `src/` contains the first user-authorized V2 repair batch, preserving V1's grayscale design. Changes are based on developer-audit findings; actual classroom findings have not been supplied. There is no second React application.
 
-Record observed usability findings, evidence-linked group decisions, updated flows, iteration history and verification here when work begins. Until then, proposals remain unconfirmed. Preserve the complete V1 ZIP before modifying the shared root src/; later a Git tag such as lofi-v1 may protect that baseline. Do not create a second React application in this directory.
+Start with [中文变更说明与走查](../../docs/lo-fi-v2/iteration-01-zh.md). The first repair batch and three user-approved interaction adjustments are locally implemented and verified. User authorized branch publication and a PR to main on November 20; [owner handoff instructions](../../docs/lo-fi-v2/owner-handoff-zh.md) cover review, walkthrough and merge. Merge/deployment are not part of this publication task.
+
+Record actual observations, evidence-linked decisions and verification here. The V1 source snapshot was preserved before this iteration; proposed changes remain separate from approved implementation.
 
 Existing planning notes are retained in [docs/lo-fi-v2](../../docs/lo-fi-v2/README.md). [Project status](../../PROJECT_STATUS.md) is the overall source of progress and issues.
+
+2026-11-20: Added a [Chinese V1 flow baseline and walkthrough checklist](../../docs/lo-fi-v2/user-flow-baseline-zh.md) for reviewing later V2 changes. [Visual diagram review](../../docs/lo-fi-v2/user-flow-review-zh.html) provides navigation and zoom. This is source-grounded documentation; the checklist is unexecuted and product behavior remains V1.
+
+2026-11-20 walkthrough follow-up: new plan time defaults to the local hour/minute when the editor opens (fixed until edited); draft values are preserved. Past schedules remain blocked at save. 22 tests and build passed; this default-value change has not been rechecked in browser.

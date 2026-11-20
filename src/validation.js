@@ -11,8 +11,14 @@ export function englishValidationMessage(control) {
       ? "Please choose an option."
       : "Please fill out this field.";
   }
-  if (v.rangeUnderflow) return `Enter a value of ${control.min} or more.`;
-  if (v.rangeOverflow) return `Enter a value of ${control.max} or less.`;
+  if (v.rangeUnderflow)
+    return control.type === "date"
+      ? `Choose a date on or after ${control.min}.`
+      : `Enter a value of ${control.min} or more.`;
+  if (v.rangeOverflow)
+    return control.type === "date"
+      ? `Choose a date on or before ${control.max}.`
+      : `Enter a value of ${control.max} or less.`;
   if (v.stepMismatch) return `Use increments of ${control.step || "1"}.`;
   if (v.tooLong) return `Use ${control.maxLength} characters or fewer.`;
   if (v.tooShort) return `Use at least ${control.minLength} characters.`;

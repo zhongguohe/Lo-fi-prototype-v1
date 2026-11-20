@@ -36,13 +36,15 @@ import {
   STORAGE_KEY,
   uid,
   dateKey,
-  shiftDate,
-  weekKey,
   minutes,
   round,
   initialState,
   todayFor,
   goalFor,
+  updateWeeklyGoal,
+  recordDateError,
+  scheduleErrors,
+  releaseSavedActivity,
   stats,
   saveRecord,
   tick,
@@ -155,7 +157,32 @@ function Toggle({ label, checked, onChange }) {
     </label>
   );
 }
+function IntensityField({ draft, setDraft }) {
+  const exercise = draft.category === "exercise";
+  return (
+    <>
+      <Field label={exercise ? "Actual intensity" : "Intensity"}>
+        <select
+          required
+          name="intensity"
+          value={draft.intensity || ""}
+          onChange={(e) => setDraft({ ...draft, intensity: e.target.value })}
+        >
+          {exercise && <option value="">Choose intensity</option>}
+          <option value="Light">Light</option>
+          <option value="Moderate">Moderate</option>
+        </select>
+      </Field>
+      <p className="hint">
+        {exercise
+          ? "Only moderate planned exercise counts toward your weekly goal."
+          : "Study breaks are tracked separately from planned exercise."}
+      </p>
+    </>
+  );
+}
 function ActivityFields({ draft, setDraft, category = false }) {
+  const { today } = useApp();
   const change = (k, v) => setDraft({ ...draft, [k]: v });
   return (
     <>
@@ -163,7 +190,11 @@ function ActivityFields({ draft, setDraft, category = false }) {
         <Field label="Activity Category">
           <select
             value={draft.category}
-            onChange={(e) => change("category", e.target.value)}
+            onChange={(e) => setDraft({
+              ...draft,
+              category: e.target.value,
+              intensity: e.target.value === "exercise" ? "" : "Light",
+            })}
           >
             <option value="study">Study Break</option>
             <option value="exercise">Planned Exercise</option>
@@ -183,6 +214,8 @@ function ActivityFields({ draft, setDraft, category = false }) {
         <input
           required
           type="date"
+          name="date"
+          max={today}
           value={draft.date}
           onInput={(e) => change("date", e.currentTarget.value)}
           onChange={(e) => change("date", e.target.value)}
@@ -199,18 +232,7 @@ function ActivityFields({ draft, setDraft, category = false }) {
           onChange={(e) => change("duration", e.target.value)}
         />
       </Field>
-      <Field label="Intensity">
-        <select
-          value={draft.intensity}
-          onChange={(e) => change("intensity", e.target.value)}
-        >
-          <option>Light</option>
-          <option>Moderate</option>
-        </select>
-      </Field>
-      <p className="hint">
-        Light activities do not count toward your weekly moderate exercise goal.
-      </p>
+      <IntensityField draft={draft} setDraft={setDraft} />
     </>
   );
 }
@@ -289,53 +311,55 @@ function App() {
       },
     }));
   const startActivity = (category, plan = null, backup = false) => {
-    if (state.active) {
+    if (state.active && state.active.status !== "saved") {
+      setModal(null);
       nav(
-        state.active.status === "pending" || state.active.status === "saved"
+        state.active.status === "pending"
           ? "/confirm"
           : "/activity",
       );
       return;
     }
-    setState((s) => ({
-      ...s,
-      study:
-        category === "study" ? { ...s.study, status: "on-break" } : s.study,
-      active: {
-        id: uid(),
-        category,
-        planId: plan?.id,
-        activity:
-          category === "study"
-            ? s.prefs.activity
-            : backup
-              ? plan.backup
-              : plan.activity,
-        planned: Number(
-          category === "study"
-            ? s.prefs.duration
-            : backup
-              ? plan.backupDuration
-              : plan.duration,
-        ),
-        intensity:
-          category === "study" ||
-          !/brisk|cycl|jogg|running|swim|aerobic/i.test(
-            backup ? plan.backup : plan.activity,
-          )
-            ? "Light"
-            : "Moderate",
-        date: today,
-        source: "Self-reported",
-        status: "ready",
-        seconds: 0,
-        completion: "Completed",
-        previousPlanStatus: plan?.status,
-        usingBackup: backup,
-      },
-    }));
+    setState((previous) => {
+      const s = releaseSavedActivity(previous);
+      return {
+        ...s,
+        study:
+          category === "study" ? { ...s.study, status: "on-break" } : s.study,
+        active: {
+          id: uid(),
+          category,
+          planId: plan?.id,
+          activity:
+            category === "study"
+              ? s.prefs.activity
+              : backup
+                ? plan.backup
+                : plan.activity,
+          planned: Number(
+            category === "study"
+              ? s.prefs.duration
+              : backup
+                ? plan.backupDuration
+                : plan.duration,
+          ),
+          intensity: category === "study" ? "Light" : "",
+          date: today,
+          source: "Self-reported",
+          status: "ready",
+          seconds: 0,
+          completion: "Completed",
+          previousPlanStatus: plan?.status,
+          usingBackup: backup,
+        },
+      };
+    });
     setModal(null);
     nav("/activity");
+  };
+  const leaveSavedActivity = (to) => {
+    setState(releaseSavedActivity);
+    nav(to);
   };
   const finishActivity = (early = false) => {
     setState((s) => ({
@@ -389,6 +413,7 @@ function App() {
     patchPrefs,
     studyRound,
     startActivity,
+    leaveSavedActivity,
     finishActivity,
     discard,
     planDraft,
@@ -463,7 +488,7 @@ function App() {
               <div className="brand">
                 <BookOpen size={18} />
                 <span>MOVE MORE</span>
-                <span className="lofi">LO-FI V1</span>
+                <span className="lofi">LO-FI V2</span>
               </div>
               <div className="header-row">
                 {location.pathname !== "/" &&
@@ -487,7 +512,7 @@ function App() {
                     onClick={() =>
                       location.pathname === "/activity"
                         ? setModal({ type: "leave-activity" })
-                        : nav("/personal")
+                        : leaveSavedActivity("/personal")
                     }
                   >
                     {state.prefs.avatar === "icon" ? (
@@ -742,7 +767,7 @@ function Home() {
         </p>
         <LinkButton to="/study">
           {state.study.status === "idle"
-            ? "Start Studying"
+            ? "Open Study Session"
             : "View Study Session"}
         </LinkButton>
       </Card>
@@ -1068,7 +1093,7 @@ function Activity() {
   );
 }
 function Confirmation() {
-  const { state, setState, nav, setModal, summary, studyRound } = useApp();
+  const { state, setState, nav, setModal, summary, studyRound, today, leaveSavedActivity } = useApp();
   const a = state.active;
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(a ? { ...a } : null);
@@ -1089,7 +1114,8 @@ function Confirmation() {
       !Number.isFinite(Number(draft.duration)) ||
       Number(draft.duration) <= 0 ||
       Number(draft.duration) > 600 ||
-      !draft.date
+      !["Light", "Moderate"].includes(draft.intensity) ||
+      recordDateError(draft.date, today)
     ) {
       setEditing(true);
       return;
@@ -1099,10 +1125,10 @@ function Confirmation() {
       duration: Number(draft.duration),
       activity: draft.activity.trim(),
     };
-    setState((s) => ({
-      ...saveRecord(s, record),
-      active: { ...record, status: "saved" },
-    }));
+    setState((s) => {
+      const saved = saveRecord(s, record);
+      return saved === s ? s : { ...saved, active: { ...record, status: "saved" } };
+    });
     setEditing(false);
   };
   return (
@@ -1112,15 +1138,24 @@ function Confirmation() {
           <div className="feedback">
             <Check size={32} />
             <h2>Activity saved</h2>
-            <strong className="stat">+{a.duration} Growth Points</strong>
+            <h3>{a.activity}</h3>
+            <p>{a.duration} min · {categoryName(a.category)}</p>
+            <p>+{a.duration} Growth Point{a.duration === 1 ? "" : "s"}</p>
             <p>
-              {summary.total} total points · Stage {summary.stage}
+              {summary.total} total points
+              {state.prefs.pet ? ` · Stage ${summary.stage}` : ""}
             </p>
           </div>
           <p>
             Your {categoryName(a.category).toLowerCase()} record has been added
             once.
           </p>
+          {a.category === "exercise" && a.intensity === "Light" && (
+            <p className="hint">
+              This activity adds to your cumulative progress. Light activity does
+              not add to your weekly moderate exercise minutes.
+            </p>
+          )}
           {a.category === "study" ? (
             <Button
               onClick={() => {
@@ -1141,9 +1176,9 @@ function Confirmation() {
               Done
             </Button>
           )}
-          <LinkButton secondary to="/progress">
+          <Button secondary onClick={() => leaveSavedActivity("/progress")}>
             View Progress
-          </LinkButton>
+          </Button>
           {a.category === "study" && (
             <Button
               secondary
@@ -1167,7 +1202,7 @@ function Confirmation() {
           )}
         </>
       ) : (
-        <Form onSubmit={save}>
+        <Form onSubmit={save} validate={() => editing ? { date: recordDateError(draft.date, today) } : {}}>
           <Badge>Activity Pending Confirmation</Badge>
           <p>Check what you actually did. Nothing counts until you save.</p>
           {editing ? (
@@ -1176,7 +1211,9 @@ function Confirmation() {
             <Card>
               <Row label="Activity Type" value={draft.activity} />
               <Row label="Actual Duration" value={`${draft.duration} min`} />
-              <Row label="Intensity" value={draft.intensity} />
+              {draft.category === "exercise"
+                ? <IntensityField draft={draft} setDraft={setDraft} />
+                : <Row label="Intensity" value={draft.intensity} />}
               <Row label="Record Source" value={draft.source} />
               <Row label="Completion Status" value={draft.completion} />
               <Row label="Category" value={categoryName(draft.category)} />
@@ -1278,23 +1315,25 @@ function PlanEditor() {
   const editing = path.endsWith("/edit");
   const id = path.split("/")[2];
   const existing = state.plans.find((p) => p.id === id);
-  const [d, setD] = useState(
-    editing
+  const [d, setD] = useState(() => {
+    const openedAt = new Date();
+    return editing
       ? existing
       : planDraft || {
           activity: "Brisk walk",
           date: today,
-          time: "17:30",
+          time: `${String(openedAt.getHours()).padStart(2, "0")}:${String(openedAt.getMinutes()).padStart(2, "0")}`,
           duration: 20,
           backup: "Indoor stretching",
           backupDuration: 10,
           barrier: "",
-        },
-  );
+        };
+  });
   if (!d) return <Empty>Plan not found.</Empty>;
   const change = (k, v) => setD({ ...d, [k]: v });
   return (
     <Form
+      validate={() => scheduleErrors(d.date, d.time, today)}
       onSubmit={(e) => {
         e.preventDefault();
         const clean = {
@@ -1333,6 +1372,8 @@ function PlanEditor() {
         <input
           required
           type="date"
+          name="date"
+          min={today}
           value={d.date}
           onInput={(e) => change("date", e.currentTarget.value)}
           onChange={(e) => change("date", e.target.value)}
@@ -1342,6 +1383,7 @@ function PlanEditor() {
         <input
           required
           type="time"
+          name="time"
           value={d.time}
           onInput={(e) => change("time", e.currentTarget.value)}
           onChange={(e) => change("time", e.target.value)}
@@ -1390,6 +1432,7 @@ function BackupFields({ draft: d, setDraft }) {
       <Field label="Backup Activity Type">
         <input
           required
+          name="backup"
           pattern=".*\S.*"
           maxLength={70}
           value={d.backup}
@@ -1412,8 +1455,7 @@ function BackupFields({ draft: d, setDraft }) {
   );
 }
 function Backup() {
-  const { planDraft, setPlanDraft, setState, nav } = useApp();
-  const [d, setD] = useState(planDraft);
+  const { planDraft: d, setPlanDraft: setD, setState, nav, today } = useApp();
   if (!d)
     return (
       <>
@@ -1423,6 +1465,12 @@ function Backup() {
     );
   return (
     <Form
+      validate={() => {
+        const errors = scheduleErrors(d.date, d.time, today);
+        return Object.keys(errors).length
+          ? { backup: "Your planned time has passed. Go Back and choose a new time." }
+          : {};
+      }}
       onSubmit={(e) => {
         e.preventDefault();
         const plan = {
@@ -1433,7 +1481,7 @@ function Backup() {
           status: "Planned",
         };
         setState((s) => ({ ...s, plans: [...s.plans, plan] }));
-        setPlanDraft(null);
+        setD(null);
         nav(`/plan/${plan.id}`);
       }}
     >
@@ -1454,7 +1502,6 @@ function Backup() {
         secondary
         type="button"
         onClick={() => {
-          setPlanDraft(d);
           nav("/plan/new");
         }}
       >
@@ -1464,7 +1511,7 @@ function Backup() {
         secondary
         type="button"
         onClick={() => {
-          setPlanDraft(null);
+          setD(null);
           nav("/exercise");
         }}
       >
@@ -1524,7 +1571,7 @@ function PlanDetails() {
       {!done ? (
         <>
           <Button onClick={() => startActivity("exercise", p)}>
-            Start Activity
+            Prepare Activity
           </Button>
           <Button secondary onClick={() => nav(`/plan/${id}/edit`)}>
             Edit Plan
@@ -1681,6 +1728,7 @@ function Record() {
     <>
       {editing ? (
         <Form
+          validate={() => ({ date: recordDateError(d.date, today) })}
           onSubmit={(e) => {
             e.preventDefault();
             setState((s) =>
@@ -1767,7 +1815,7 @@ function Pet() {
             <Meter
               value={round(summary.total % 30)}
               max={30}
-              label="points to next stage"
+              label="points earned this stage"
             />
             <p>
               {summary.next} more points to Stage {summary.stage + 1}.
@@ -1791,7 +1839,7 @@ function Pet() {
           Correcting a record updates its contribution. Missing a day never
           removes points or harms your pet.
         </p>
-        <p className="hint">Decorations are not part of this V1 prototype.</p>
+        <p className="hint">Decorations are not part of this prototype.</p>
       </Card>
       <LinkButton secondary to="/progress">
         Back to Progress
@@ -2001,7 +2049,7 @@ function Modal() {
               {state.prefs.activity.toLowerCase()}, or choose a time that works
               better.
             </p>
-            <Button onClick={() => startActivity("study")}>Start Break</Button>
+            <Button onClick={() => startActivity("study")}>Prepare Break</Button>
             <Button secondary onClick={() => setModal({ type: "later" })}>
               Remind Later
             </Button>
@@ -2104,6 +2152,7 @@ function Modal() {
         )}
         {m.type === "reschedule" && (
           <Form
+            validate={() => scheduleErrors(d.date, d.time, today)}
             onSubmit={(e) => {
               e.preventDefault();
               updatePlan({
@@ -2123,6 +2172,8 @@ function Modal() {
               <input
                 required
                 type="date"
+                name="date"
+                min={today}
                 value={d.date || ""}
                 onInput={(e) => setD({ ...d, date: e.currentTarget.value })}
                 onChange={(e) => setD({ ...d, date: e.target.value })}
@@ -2132,6 +2183,7 @@ function Modal() {
               <input
                 required
                 type="time"
+                name="time"
                 value={d.time || ""}
                 onInput={(e) => setD({ ...d, time: e.currentTarget.value })}
                 onChange={(e) => setD({ ...d, time: e.target.value })}
@@ -2265,14 +2317,7 @@ function Modal() {
           <Form
             onSubmit={(e) => {
               e.preventDefault();
-              const nextWeek = shiftDate(weekKey(today), 7);
-              patchPrefs(
-                d.when === "next"
-                  ? {
-                      scheduledGoal: { value: Number(d.value), week: nextWeek },
-                    }
-                  : { goal: Number(d.value), scheduledGoal: null },
-              );
+              setState((s) => updateWeeklyGoal(s, d.value, d.when || "next", today));
               close();
             }}
           >
@@ -2375,7 +2420,7 @@ function Modal() {
         )}
         {m.type === "help" && (
           <>
-            <p>SI684 Low-Fidelity Prototype V1</p>
+            <p>SI684 Low-Fidelity Prototype V2</p>
             <p>
               Take adjustable study breaks, plan exercise with a backup, and
               review your cumulative progress.
