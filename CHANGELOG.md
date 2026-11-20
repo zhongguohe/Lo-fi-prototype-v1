@@ -1,5 +1,10 @@
 # Changelog
 
+## 2026-11-20 — New plan opening time
+
+- New exercise plans initialize to today's displayed date and the local hour/minute when the editor opens, instead of 17:30. The value stays fixed until edited; returning to a draft preserves it. Existing save-time checks reject past schedules.
+- Verification: 22 tests passed; production build passed. This small default-value update has not received a new browser walkthrough.
+
 Append significant updates; preserve earlier entries. Dates below use America/Detroit. Initial feature history is reconstructed from the retained source files and developer verification notes, not Git commits or group meeting records.
 
 ## 2026-11-07 — GitHub Pages upload preparation
@@ -42,3 +47,30 @@ Exact per-feature implementation times were not separately versioned. This entry
 ### 2026-11-07 — Group repository upload verified
 
 Uploaded 61 reviewed project files to the existing zhongguohe/Lo-fi-prototype-v1 repository. Fetched the remote tree and verified every file against the upload set. A fresh remote-source copy passed dependency installation, all 15 tests and production build. GitHub Actions build also succeeded; deployment awaits owner Pages activation (configure-pages returned Not Found). Public demo remains unverified. No UI or activity logic was changed in this publication follow-up.
+
+## 2026-11-20 — User-flow baseline for team walkthroughs (America/New_York)
+
+- Added a Chinese source-grounded V1 baseline with 14 flow diagrams (F00–F13), stable node IDs, task cases, field constraints, current-state defects and audit mappings.
+- Added a navigable diagram document generated from the Markdown source, plus regeneration tooling and stage entry links.
+- Included a change-log/PR template connecting each future change to its task, before/after behavior, evidence and verification. No product behavior changes, participant findings, commit, push or deployment were performed by this documentation task.
+- Clarified the team workflow at the user's request: the project iterates from the copied V1 toward the V2 assignment; code review belongs to the responsible teammates' agents. Added a plain-language 12-task trial guide, simple issue-report/update examples, and marked detailed engineering checklists as optional references.
+- Revised the Chinese collaboration guide to use concise professional language and standard task/steps/expected-result terminology. Added separate English agent review notes; product behavior remains unchanged.
+
+## 2026-11-20 — V2 iteration 1: interaction and data repairs
+
+- A01 / F05-12: leaving saved feedback releases the completed task; an on-break study session becomes paused, and subsequent activities can start without duplicating earlier records. Unsaved tasks retain their protection.
+- A02 / F05/F08: completed-activity dates cannot be in the future; shared field and model validation protect saves. Legacy future records remain in history but do not contribute to current totals.
+- A03 / F06-09: backup text is held in the existing shared draft, so top and bottom Back preserve inputs consistently. Refresh still loses unsaved drafts.
+- A05 / F10-06: scheduling a new future weekly goal retains an already-effective goal as the current value.
+- A06 / F07-11: plan creation/editing and rescheduling reject past dates/times; passing time on the backup step is also checked before plan creation.
+- A07 / F09-03: pet progress distinguishes points earned this stage from remaining points. Grayscale layout and reward calculations remain unchanged; version labels identify V2.
+- Preserved the V1 source ZIP before code changes. Added focused regressions; 21 tests and build passed. Targeted browser evidence is documented separately from participant findings.
+- Core interaction proposals (intensity, startup labels, activity-first feedback) await user approval. No commit, push, merge or deployment performed.
+
+### 2026-11-20 — Approved interaction updates
+
+- User explicitly approved all three interaction proposals in this chat; no additional group vote inferred.
+- A04 / F05-02/03: new planned-exercise activity requires an actual Light/Moderate choice directly on confirmation; manual exercise entry also clears the default and requires a choice. Removed name-based inference for new exercise tasks. Existing saved records are not silently reclassified.
+- F01-07 / F03-05 / F07-07: changed preparation entry labels to Open Study Session / Prepare Break / Prepare Activity, retaining explicit Start Activity timing.
+- F05-07: saved feedback prioritizes the activity name, actual duration and category; light exercise explains its separate contribution; pet-off feedback omits the growth stage. Reward rules remain unchanged.
+- 22 tests and build passed; browser checked both intensity choices, missing-choice errors, manual-entry validation, and pet-off feedback. Actual participant testing and walkthrough video remain outstanding.

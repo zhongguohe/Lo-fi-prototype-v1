@@ -1,4 +1,4 @@
-# SI684 Health Technology — Lo-fi V1
+# SI684 Health Technology — Lo-fi V2 in progress
 
 **Helping University Students Move More During and Beyond Study Time**  
 **Course:** SI/HBHE 684 — Prototyping and Evaluation of Consumer Health Technologies
@@ -11,7 +11,7 @@ A group design project for undergraduate and graduate students aged 18+ who stud
 2. **Backup Exercise Plans and Rescheduling:** original plan plus backup; use backup, choose a new time or skip; confirm actual movement before credit.
 3. **Cumulative Progress Feedback and Optional Virtual Pet:** classified totals, editable history/manual records and optional pet without missed-day punishment.
 
-Current stage: **Lo-fi Prototype V1 — preparation for classroom testing**. Fifteen interfaces connect Home, Study, Exercise, Progress and header-entry Personal Center. No classroom feedback results, V2, or Hi-fi implementation have been created.
+Current stage: **Lo-fi Prototype V2 — local iteration in progress on Valen_branch**. The first batch repairs confirmed V1 interaction and data issues while retaining the grayscale mobile wireframe. Fifteen interfaces connect Home, Study, Exercise, Progress and header-entry Personal Center. Classroom participant findings and the V2 walkthrough video have not been supplied. See [V2 changes and walkthrough](docs/lo-fi-v2/iteration-01-zh.md); V1 source materials remain preserved.
 
 ## Open the interactive prototype
 
@@ -38,7 +38,7 @@ For a clean checkout, `npm ci` uses the included lockfile. No .env, API key, acc
 | --- | --- |
 | Current runnable code | [src/](src/) — one shared React/Vite/JavaScript application |
 | V1 goals, flows, actual screenshots and blank feedback | [prototypes/lo-fi-v1/](prototypes/lo-fi-v1/README.md) |
-| Future V2 | [prototypes/lo-fi-v2/](prototypes/lo-fi-v2/README.md) — waiting for actual feedback |
+| Current V2 iteration | [prototypes/lo-fi-v2/](prototypes/lo-fi-v2/README.md) — changes, verification and pending decisions |
 | Future Hi-fi | [prototypes/hi-fi/](prototypes/hi-fi/README.md) — not started |
 | Design sources | [docs/README.md](docs/README.md) — real DOCX files; original causal PDF unavailable |
 | Progress / issues / version preservation | [PROJECT_STATUS.md](PROJECT_STATUS.md) |
@@ -71,7 +71,7 @@ Vite uses vite.config.js to support a repository-specific deployment base path. 
 
 English grayscale mobile wireframe; logical 390 × 844 canvas, proportional desktop preview, responsive phone CSS. Timers, in-app reminders, device toggle, sample data and pet visuals are demonstrations. Records are self-reported and stored only in each browser's localStorage. There is no real push/sensing/sync, login, backend, AI. Pages is prepared but awaits owner setup and verification. Pet-off preserves saved records.
 
-Known issues include effective future-goal replacement, memory-only plan drafts, initial intensity guessing and saved-feedback navigation edges. Physical phones, full accessibility and background timing remain unverified. See PROJECT_STATUS; developer checks do not establish health effectiveness.
+The first V2 batch repairs effective future-goal replacement, saved-feedback navigation, future-record credit, backup-step return behavior and schedule validation. Unsaved plan drafts remain memory-only, and initial intensity guessing awaits an interaction decision. Physical phones, full accessibility and background timing remain unverified. See PROJECT_STATUS and the V2 iteration record; developer checks do not establish health effectiveness.
 
 The complete `SI684-Health-Technology-LoFiV1.zip` is a restorable V1 source snapshot. Keep it before editing the shared src for later stages. Once Git is set up separately, reviewed commits and tags such as `lofi-v1` / `lofi-v2` can preserve versions; the repository already belongs to the group; this publication task uploads source/configuration without creating a new repository or tag. Pages activation remains an owner action. Group members can clone/download, install and run the same commands above. Uploading source alone will not publish a clickable app.
 

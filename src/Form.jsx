@@ -21,7 +21,7 @@ export function Field({ label, children }) {
     </div>
   );
 }
-export default function Form({ children, onSubmit, ...props }) {
+export default function Form({ children, onSubmit, validate, ...props }) {
   const [errors, setErrors] = useState({});
   function submit(event) {
     event.preventDefault();
@@ -31,6 +31,14 @@ export default function Form({ children, onSubmit, ...props }) {
     for (const control of controls) {
       const message = englishValidationMessage(control);
       if (message) {
+        nextErrors[control.id] = message;
+        firstInvalid ||= control;
+      }
+    }
+    const customErrors = validate?.() || {};
+    for (const [name, message] of Object.entries(customErrors)) {
+      const control = event.currentTarget.elements.namedItem(name);
+      if (message && control && !nextErrors[control.id]) {
         nextErrors[control.id] = message;
         firstInvalid ||= control;
       }
