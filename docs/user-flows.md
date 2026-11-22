@@ -1,3 +1,9 @@
+# Prototype 2 current flow updates — 2026-11-22
+
+Home now says Open Study Session; Study starts the timer. Activity uses Finish & Review and explicit intensity. Shorter actual time is labeled Ended Early; actual confirmed minutes still earn growth. Saved-feedback exits release the saved snapshot. Backup drafts are shared and session-persisted. Disruption adds a shorter activity up to five minutes alongside existing backup/reschedule/skip. Progress uses weekly study and exercise summaries and cumulative growth. See README for current walkthrough.
+
+## V1 historical flow record
+
 # User flows for the current prototype
 
 These are implementation walkthroughs. They are not evidence from classroom participants. See [PROJECT_STATUS.md](../PROJECT_STATUS.md) for verification levels.
