@@ -1,3 +1,48 @@
+# Move More — Prototype 2 · Color Edition
+
+Updated November 22, 2026. User-authorized colorful iteration of the existing React app. The shared `src/` is now Prototype 2. Earlier V1 documents are historical evidence, not the current operating guide. No remote upload or public deployment has been performed for this iteration.
+
+## Open this version
+
+**Quickest:** double-click `MoveMore-Prototype2.html` in this source package. It contains the production JavaScript, styles, icons and pet artwork, works offline, and requires no npm installation. Browser local-file storage behavior varies; use the local server for repeatable testing. Local file records and hosted records are separate.
+
+**Development:** use a supported Node version (20.19+ or 22.12+), then `npm ci` and `npm run dev`. Open the Local URL printed in Terminal and leave Terminal running. If a restricted environment reports `uv_interface_addresses`, use `npm run dev -- --host 127.0.0.1`.
+
+`npm test` runs 19 model/validation tests. `npm run build` creates the production build. The included HTML preview is generated from that build.
+
+## Changes
+
+- Purple primary actions, mint study cards, peach exercise cards, cream pet rewards; readable dark text, visible focus and mobile layout retained.
+- Three source-native vector pet forms: Little explorer, Growing companion, Blooming buddy. Higher stages keep the third form. Home preview and saved-activity feedback honor pet visibility.
+- Saved-feedback navigation releases old activity state; active/pending activities stay protected.
+- New-plan and backup edits use one draft persisted in sessionStorage within the current tab, including refresh. Top and in-page Back preserve edits; Cancel/Save clear the draft.
+- Activity intensity is explicit in plan, backup and activity screens. Legacy plans retain an initial fallback and can be corrected.
+- Finish & Review prompts for actual minutes; shorter activity saves as Ended Early. Explicit End Early remains available.
+- Disruption flow offers a shorter activity up to five minutes, prepared backup, reschedule or skip. Selection alone earns nothing.
+- Progress shows both movement categories for the displayed Monday–Sunday week; growth remains cumulative. History retains all dates.
+- Effective goal is preserved when scheduling another future goal. There is still only one future goal slot.
+- Demo records are visibly labeled on Home; Home's study entry is now Open Study Session.
+
+## Walkthrough
+
+1. Setup → choose Yes, show my pet → Save & Continue.
+2. Home → Open Study Session → Start Studying.
+3. Prototype time controls → Simulate Next Reminder → Start Break → Start Activity.
+4. Advance Activity 1 Minute as needed → Finish & Review → review/edit actual time → Save Activity.
+5. View Progress can now be used before starting another activity. Continue Studying resumes study; leaving feedback for Progress pauses study.
+6. Exercise → Create Exercise Plan → activity/date/time/minutes/intensity → Next → backup/barrier/intensity → Save Plan.
+7. I Can't Do This Now → shorter activity / Use Backup / Reschedule / Skip.
+8. Progress → View Activity History → record → Edit → Save. Existing record contribution is replaced.
+9. Progress → View Virtual Pet → toggle off/on. Ordinary records and points remain.
+
+## Verification and limits
+
+November 22, 2026: 19 automated tests passed; production build passed. Actual browser screenshot/responsive/click verification of the new version was blocked because both connected and cloud browsers could not reach this workspace's localhost. Component checks, when recorded separately in prototypes/lo-fi-v2/README.md, are DOM emulation, not real-browser evidence. Physical phone, background timing and full accessibility testing remain unverified. No classroom participant results are claimed.
+
+Reminders, device connection and timer controls remain prototypes. Records are self-reported and local; no real push, sensors, account, backend or sync. Pet art is static; there is no animation or permanent unlock ledger.
+
+## Earlier V1 documentation (historical)
+
 # SI684 Health Technology — Lo-fi V1
 
 **Helping University Students Move More During and Beyond Study Time**  
