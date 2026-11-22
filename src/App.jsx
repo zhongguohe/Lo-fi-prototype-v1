@@ -29,7 +29,6 @@ import {
   Pause,
   Play,
   Check,
-  Cat,
   X,
 } from "lucide-react";
 import {
@@ -43,6 +42,9 @@ import {
   initialState,
   todayFor,
   goalFor,
+  scheduleGoal,
+  activityCompletion,
+  releaseSavedActivity,
   stats,
   saveRecord,
   tick,
@@ -94,7 +96,7 @@ function Button({
 }
 function Card({ title, children, className = "" }) {
   return (
-    <section className={`card ${className}`}>
+    <section className={`card ${/Study|Original Plan/.test(title || "") ? "tone-study" : /Exercise|Backup/.test(title || "") ? "tone-exercise" : /Growth|Progress Preview/.test(title || "") ? "tone-growth" : ""} ${className}`}>
       {title && <h2>{title}</h2>}
       {children}
     </section>
@@ -229,7 +231,12 @@ function App() {
   const [state, setState] = useState(readState),
     [modal, setModal] = useState(null),
     [notice, setNotice] = useState(""),
-    [planDraft, setPlanDraft] = useState(null);
+    [planDraft, setPlanDraft] = useState(() => {
+      try { return JSON.parse(sessionStorage.getItem("move-more-plan-draft")) || null; } catch { return null; }
+    });
+  useEffect(() => {
+    try { if (planDraft) sessionStorage.setItem("move-more-plan-draft", JSON.stringify(planDraft)); else sessionStorage.removeItem("move-more-plan-draft"); } catch {}
+  }, [planDraft]);
   const nav = useNavigate(),
     location = useLocation(),
     content = useRef();
@@ -268,6 +275,7 @@ function App() {
   }, [state, modal, location.pathname]);
   useEffect(() => {
     content.current?.scrollTo(0, 0);
+    if (location.pathname !== "/confirm") setState(releaseSavedActivity);
   }, [location.pathname]);
   useEffect(() => {
     if (notice) {
@@ -289,7 +297,7 @@ function App() {
       },
     }));
   const startActivity = (category, plan = null, backup = false) => {
-    if (state.active) {
+    if (state.active && state.active.status !== "saved") {
       nav(
         state.active.status === "pending" || state.active.status === "saved"
           ? "/confirm"
@@ -318,13 +326,13 @@ function App() {
               ? plan.backupDuration
               : plan.duration,
         ),
-        intensity:
+        intensity: (backup ? plan?.backupIntensity : plan?.intensity) || (
           category === "study" ||
           !/brisk|cycl|jogg|running|swim|aerobic/i.test(
             backup ? plan.backup : plan.activity,
           )
             ? "Light"
-            : "Moderate",
+            : "Moderate"),
         date: today,
         source: "Self-reported",
         status: "ready",
@@ -344,7 +352,8 @@ function App() {
         ...s.active,
         status: "pending",
         duration: Math.max(0.1, minutes(s.active.seconds)),
-        completion: early ? "Ended Early" : "Completed",
+        completion: activityCompletion(minutes(s.active.seconds), s.active.planned, early),
+        endedEarly: early,
       },
     }));
     setModal(null);
@@ -416,7 +425,7 @@ function App() {
       setModal({ type: "leave-activity" });
       return;
     }
-    if (location.pathname === "/confirm" && state.active?.status !== "saved") {
+    if (location.pathname === "/confirm" && state.active && state.active.status !== "saved") {
       setModal({ type: "discard" });
       return;
     }
@@ -458,12 +467,12 @@ function App() {
           className="phone-stage"
           style={{ "--preview-scale": previewScale }}
         >
-          <div className="phone">
+          <div className="phone" data-section={location.pathname.split("/")[1] || "home"}>
             <header className="header">
               <div className="brand">
                 <BookOpen size={18} />
                 <span>MOVE MORE</span>
-                <span className="lofi">LO-FI V1</span>
+                <span className="lofi">PROTOTYPE 2</span>
               </div>
               <div className="header-row">
                 {location.pathname !== "/" &&
@@ -690,6 +699,8 @@ function Home() {
       <p className="eyebrow">{displayDate(today)}</p>
       <p className="intro">Hi, {state.prefs.nickname}.</p>
       <p className="subtle">A little movement, on your terms.</p>
+      {state.records.some((r) => r.id.startsWith("sample-")) && <p className="demo-banner"><strong>Demo data included</strong> · Sample records help you explore. Start fresh in Personal Center → Device & Data.</p>}
+      {state.prefs.pet && <button className="pet-home" onClick={() => nav("/pet")}><PetArt stage={summary.stage} compact /><span><strong>Your movement buddy</strong><br />Stage {summary.stage} · {summary.next} points to grow<small>Little steps, growing together <ChevronRight size={14} /></small></span></button>}
       {state.active && (
         <Card title="Activity to finish">
           <p>
@@ -742,7 +753,7 @@ function Home() {
         </p>
         <LinkButton to="/study">
           {state.study.status === "idle"
-            ? "Start Studying"
+            ? "Open Study Session"
             : "View Study Session"}
         </LinkButton>
       </Card>
@@ -994,6 +1005,8 @@ function Activity() {
             }
           />
         </Field>
+        <Field label="Activity Intensity"><select value={a.intensity} onChange={(e) => setState((s) => ({ ...s, active: { ...s.active, intensity: e.target.value } }))}><option>Light</option><option>Moderate</option></select></Field>
+        <p className="hint">Choose what matches your effort: Light feels easy; Moderate raises your breathing while you can still talk. You can correct this before saving.</p>
         <Row label="Planned Duration" value={`${a.planned} min`} />
         <Row
           label="Activity Status"
@@ -1038,7 +1051,7 @@ function Activity() {
         disabled={a.seconds === 0}
         onClick={() => finishActivity(false)}
       >
-        Finish Activity
+        Finish & Review
       </Button>
       <Button
         secondary
@@ -1098,6 +1111,7 @@ function Confirmation() {
       ...draft,
       duration: Number(draft.duration),
       activity: draft.activity.trim(),
+      completion: activityCompletion(draft.duration, a.planned, a.endedEarly),
     };
     setState((s) => ({
       ...saveRecord(s, record),
@@ -1117,10 +1131,9 @@ function Confirmation() {
               {summary.total} total points · Stage {summary.stage}
             </p>
           </div>
-          <p>
-            Your {categoryName(a.category).toLowerCase()} record has been added
-            once.
-          </p>
+          <p>Your {categoryName(a.category).toLowerCase()} record is saved.</p>
+          {a.category === "exercise" && a.intensity === "Light" && <p className="notice">You earned growth points. Light activity does not add to your weekly moderate exercise minutes.</p>}
+          {state.prefs.pet && <PetArt stage={summary.stage} compact />}
           {a.category === "study" ? (
             <Button
               onClick={() => {
@@ -1141,9 +1154,10 @@ function Confirmation() {
               Done
             </Button>
           )}
-          <LinkButton secondary to="/progress">
-            View Progress
-          </LinkButton>
+          <Button secondary onClick={() => {
+            setState(releaseSavedActivity);
+            nav("/progress");
+          }}>View Progress</Button>
           {a.category === "study" && (
             <Button
               secondary
@@ -1170,6 +1184,7 @@ function Confirmation() {
         <Form onSubmit={save}>
           <Badge>Activity Pending Confirmation</Badge>
           <p>Check what you actually did. Nothing counts until you save.</p>
+          {Number(draft.duration) < a.planned && <p className="notice">You planned {a.planned} minutes and recorded {draft.duration}. Saving will keep these actual minutes as Ended Early. A shorter activity still counts.</p>}
           {editing ? (
             <ActivityFields draft={draft} setDraft={setDraft} />
           ) : (
@@ -1178,7 +1193,7 @@ function Confirmation() {
               <Row label="Actual Duration" value={`${draft.duration} min`} />
               <Row label="Intensity" value={draft.intensity} />
               <Row label="Record Source" value={draft.source} />
-              <Row label="Completion Status" value={draft.completion} />
+              <Row label="Completion Status" value={activityCompletion(draft.duration, a.planned, a.endedEarly)} />
               <Row label="Category" value={categoryName(draft.category)} />
             </Card>
           )}
@@ -1286,13 +1301,15 @@ function PlanEditor() {
           date: today,
           time: "17:30",
           duration: 20,
+          intensity: "Moderate",
+          backupIntensity: "Light",
           backup: "Indoor stretching",
           backupDuration: 10,
           barrier: "",
         },
   );
   if (!d) return <Empty>Plan not found.</Empty>;
-  const change = (k, v) => setD({ ...d, [k]: v });
+  const change = (k, v) => { const next = { ...d, [k]: v }; setD(next); if (!editing) setPlanDraft(next); };
   return (
     <Form
       onSubmit={(e) => {
@@ -1357,6 +1374,8 @@ function PlanEditor() {
           onChange={(e) => change("duration", e.target.value)}
         />
       </Field>
+      <Field label="Planned Intensity"><select value={d.intensity || "Moderate"} onChange={(e) => change("intensity", e.target.value)}><option>Light</option><option>Moderate</option></select></Field>
+      <p className="hint">Light: easy effort. Moderate: breathing faster, but still able to talk.</p>
       {editing && (
         <>
           <h2>Backup Plan</h2>
@@ -1396,6 +1415,7 @@ function BackupFields({ draft: d, setDraft }) {
           onChange={(e) => setDraft({ ...d, backup: e.target.value })}
         />
       </Field>
+      <Field label="Backup Intensity"><select value={d.backupIntensity || "Light"} onChange={(e) => setDraft({ ...d, backupIntensity: e.target.value })}><option>Light</option><option>Moderate</option></select></Field>
       <Field label="Backup Duration (minutes)">
         <input
           required
@@ -1413,7 +1433,8 @@ function BackupFields({ draft: d, setDraft }) {
 }
 function Backup() {
   const { planDraft, setPlanDraft, setState, nav } = useApp();
-  const [d, setD] = useState(planDraft);
+  const d = planDraft;
+  const setD = setPlanDraft;
   if (!d)
     return (
       <>
@@ -1559,13 +1580,13 @@ function Progress() {
   return (
     <>
       <p>Two kinds of movement. One view of your progress.</p>
-      <Card title="Study Breaks">
-        <Row label="Study Breaks Completed" value={summary.breaks} />
+      <Card title="Study Breaks · This Week">
+        <Row label="Study Breaks Completed" value={summary.weekBreaks} />
         <Row
           label="Study Break Minutes"
-          value={`${summary.breakMinutes} min`}
+          value={`${summary.weekBreakMinutes} min`}
         />
-        <p className="hint">All confirmed study breaks, across all dates.</p>
+        <p className="hint">Monday–Sunday. All-time activity remains in your history.</p>
       </Card>
       <Card title="Weekly Moderate Exercise">
         <strong className="stat">
@@ -1747,6 +1768,24 @@ function Record() {
     </>
   );
 }
+function PetArt({ stage, compact = false }) {
+  const form = Math.min(3, stage);
+  return <div className={`pet-art form-${form} ${compact ? "compact" : ""}`}>
+    <svg viewBox="0 0 240 190" role="img" aria-label={`Movement buddy: ${form === 1 ? "Little explorer" : form === 2 ? "Growing companion" : "Blooming buddy"}`}>
+      <ellipse cx="120" cy="169" rx="66" ry="9" fill="#d8c584" opacity=".3" />
+      <circle cx="120" cy="90" r="75" fill="#fff6cf" />
+      <path d="M65 86L61 36Q80 34 96 57M145 57Q165 34 180 36L175 90" fill="#c6b3ed" stroke="#685190" strokeWidth="3" strokeLinejoin="round" />
+      <path d="M76 128Q65 165 96 165H145Q173 165 164 129" fill="#c6b3ed" stroke="#685190" strokeWidth="3" />
+      <rect x="62" y="55" width="116" height="91" rx="43" fill="#decef6" stroke="#685190" strokeWidth="3" />
+      <ellipse cx="88" cy="111" rx="12" ry="7" fill="#f4adad" /><ellipse cx="152" cy="111" rx="12" ry="7" fill="#f4adad" />
+      <path d="M89 96Q95 87 101 96M139 96Q145 87 151 96M108 112Q120 127 132 112" fill="none" stroke="#514164" strokeWidth="4" strokeLinecap="round" />
+      {form >= 2 && <><path d="M83 139Q120 153 158 139L154 153Q120 166 86 151Z" fill="#77bca3" /><path d="M141 147L156 170L139 169L130 151" fill="#77bca3" /></>}
+      {form >= 3 && <><path d="M104 59L96 36L117 45L128 25L138 45L158 36L151 61Z" fill="#edbb61" stroke="#96702b" strokeWidth="2" /><path d="M39 79v16m-8-8h16M196 115v16m-8-8h16" stroke="#b18bca" strokeWidth="3" strokeLinecap="round" /></>}
+      {form === 1 && <path d="M117 58Q106 39 94 46Q96 61 117 58Q136 37 145 46Q140 61 117 58" fill="#77bca3" />}
+    </svg>
+    {!compact && <><strong>{["", "Little explorer", "Growing companion", "Blooming buddy"][form]}</strong><span>Growing with every little move.</span></>}
+  </div>;
+}
 function Pet() {
   const { state, summary, patchPrefs } = useApp();
   return (
@@ -1758,10 +1797,7 @@ function Pet() {
       />
       {state.prefs.pet ? (
         <>
-          <div className="pet-placeholder">
-            <Cat size={94} strokeWidth={1} />
-            <span>Virtual pet placeholder</span>
-          </div>
+          <PetArt stage={summary.stage} />
           <Card title={`Current Growth Stage: ${summary.stage}`}>
             <Row label="Total Growth Points" value={summary.total} />
             <Meter
@@ -1791,7 +1827,7 @@ function Pet() {
           Correcting a record updates its contribution. Missing a day never
           removes points or harms your pet.
         </p>
-        <p className="hint">Decorations are not part of this V1 prototype.</p>
+        <p className="hint">Your buddy has three visual growth forms. Further stages keep the grown-up form. Correcting activity can recalculate the displayed stage; missing a day never does.</p>
       </Card>
       <LinkButton secondary to="/progress">
         Back to Progress
@@ -1897,6 +1933,7 @@ export default App;
 function Modal() {
   const {
     modal: m,
+    setPlanDraft,
     setModal,
     state,
     setState,
@@ -1952,6 +1989,7 @@ function Modal() {
       plans: s.plans.map((p) => (p.id === m.plan.id ? { ...p, ...values } : p)),
     }));
   const restore = (examples) => {
+    setPlanDraft(null);
     setState(initialState(examples));
     close();
     nav("/setup");
@@ -2082,6 +2120,8 @@ function Modal() {
                 {m.plan.backup} · {m.plan.backupDuration} min
               </p>
             </Card>
+            <p className="hint">Not enough time? Try a shorter version. Staying indoors? Use your backup. Busy now? Reschedule. Need rest? Skip and keep your progress.</p>
+            <Button secondary onClick={() => startActivity("exercise", { ...m.plan, duration: Math.min(5, Number(m.plan.duration)) })}>Try a Shorter Activity (Up to 5 Min)</Button>
             <Button onClick={() => startActivity("exercise", m.plan, true)}>
               Use Backup
             </Button>
@@ -2266,13 +2306,8 @@ function Modal() {
             onSubmit={(e) => {
               e.preventDefault();
               const nextWeek = shiftDate(weekKey(today), 7);
-              patchPrefs(
-                d.when === "next"
-                  ? {
-                      scheduledGoal: { value: Number(d.value), week: nextWeek },
-                    }
-                  : { goal: Number(d.value), scheduledGoal: null },
-              );
+              if (d.when === "next") setState((s) => scheduleGoal(s, d.value, nextWeek, today));
+              else patchPrefs({ goal: Number(d.value), scheduledGoal: null });
               close();
             }}
           >
@@ -2375,7 +2410,7 @@ function Modal() {
         )}
         {m.type === "help" && (
           <>
-            <p>SI684 Low-Fidelity Prototype V1</p>
+            <p>SI684 Prototype 2 · Color Edition</p>
             <p>
               Take adjustable study breaks, plan exercise with a backup, and
               review your cumulative progress.
