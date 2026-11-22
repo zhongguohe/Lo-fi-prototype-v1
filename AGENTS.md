@@ -1,3 +1,7 @@
+# Current stage override — 2026-11-22
+
+The user explicitly authorized Prototype 2 Color Edition and the proposed usability improvements. Current src is V2, with purple/mint/peach/cream colors and three static vector pet forms. Read the current sections at the top of README and PROJECT_STATUS before historical V1 notes below. Preserve the 390×844 layout, behavior separation and no missed-day penalties.
+
 # SI684 project instructions
 
 ## Project context
