@@ -63,3 +63,10 @@ Research summaries and references in the original documents are preserved withou
 ## Publication authorization — 2026-11-07
 
 The user supplied the existing public group repository and authorized uploading the project and Pages configuration, then explicitly chose to wait for the owner to enable Pages. Public demonstration is now authorized as that limited follow-up scope; earlier maintenance-only no-upload statements remain historical. No intervention or visual redesign is authorized. Production-only HashRouter and a Vite deployment base resolve static-host refresh/resource paths; local development keeps its original paths. No live URL is considered verified until a deployment succeeds and is opened.
+
+
+## 2026-11-22 — Prototype 2 Color Edition
+
+User authorized colorful code iteration and previously proposed flow improvements. Updated shared src with purple/mint/peach/cream styling, three pet forms, explicit intensity, shorter backup option, weekly comparison, demo badge, shared session draft, saved-navigation release, honest short completion and effective-goal preservation. Preserved the complete pre-edit V1 archive locally under outputs/archive. 19 tests and production build passed. Browser rendering and physical-device checks remain unverified due to localhost connection failures. No remote push or deployment.
+
+The explicit November 22 user instruction supersedes grayscale/V1-only requirements for this iteration. Pet display stages remain derived from corrected records; no missed-day penalties. Both progress movement categories now use the displayed week; cumulative growth/history retain all dates. Shorter exercise is an alternative within the existing backup/rescheduling intervention, not a new core component.
