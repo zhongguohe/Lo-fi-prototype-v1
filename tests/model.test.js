@@ -9,6 +9,9 @@ import {
   saveRecord,
   tick,
   goalFor,
+  scheduleGoal,
+  activityCompletion,
+  releaseSavedActivity,
 } from "../src/model.js";
 const today = dateKey();
 const record = (extra = {}) => ({
@@ -127,4 +130,40 @@ test("next day without activity retains cumulative points; empty start has no re
   assert.equal(next.todayBreaks, 0);
   assert.equal(initialState(false).plans.length, 0);
   assert.equal(initialState(false).records.length, 0);
+});
+
+test("replacing a future goal preserves an already effective goal", () => {
+  let state = initialState(false);
+  state.prefs.scheduledGoal = { value: 90, week: "2026-11-16" };
+  state = scheduleGoal(state, 120, "2026-11-23", "2026-11-22");
+  assert.equal(goalFor(state, "2026-11-22"), 90);
+  assert.equal(goalFor(state, "2026-11-23"), 120);
+});
+test("shorter actual activity is ended early and preserves explicit early ending", () => {
+  assert.equal(activityCompletion(5, 20), "Ended Early");
+  assert.equal(activityCompletion(20, 20), "Completed");
+  assert.equal(activityCompletion(22, 20, true), "Ended Early");
+});
+test("leaving saved feedback releases the activity and preserves its credit", () => {
+  let state = initialState(false);
+  state = saveRecord(state, record({ category: "study", duration: 3 }));
+  state.active = { ...state.records[0], status: "saved" };
+  state.study.status = "on-break";
+  const next = releaseSavedActivity(state);
+  assert.equal(next.active, null);
+  assert.equal(next.study.status, "paused");
+  assert.equal(stats(next.records, today).total, 3);
+  const running = { ...state, active: { status: "running" } };
+  assert.equal(releaseSavedActivity(running), running);
+});
+test("weekly study and exercise views share Monday boundaries while growth remains cumulative", () => {
+  const result = stats([
+    record({ id: "old", category: "study", date: "2026-11-15", duration: 8 }),
+    record({ id: "new", category: "study", date: "2026-11-16", duration: 3 }),
+    record({ id: "exercise", date: "2026-11-22", duration: 20 }),
+  ], "2026-11-22");
+  assert.equal(result.weekBreaks, 1);
+  assert.equal(result.weekBreakMinutes, 3);
+  assert.equal(result.moderate, 20);
+  assert.equal(result.total, 31);
 });
