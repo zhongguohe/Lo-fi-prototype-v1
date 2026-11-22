@@ -95,6 +95,8 @@ export function stats(records, day) {
   );
   const total = round(records.reduce((a, r) => a + Number(r.duration), 0));
   return {
+    weekBreaks: breaks.filter((r) => weekKey(r.date) === weekKey(day)).length,
+    weekBreakMinutes: round(breaks.filter((r) => weekKey(r.date) === weekKey(day)).reduce((a, r) => a + Number(r.duration), 0)),
     breaks: breaks.length,
     breakMinutes: round(breaks.reduce((a, r) => a + Number(r.duration), 0)),
     todayBreaks: breaks.filter((r) => r.date === day).length,
@@ -139,4 +141,29 @@ export function readState() {
       return s;
   } catch {}
   return initialState();
+}
+
+// Commit an effective scheduled goal before replacing the single future slot.
+export function scheduleGoal(state, value, week, day = todayFor(state)) {
+  return {
+    ...state,
+    prefs: {
+      ...state.prefs,
+      goal: goalFor(state, day),
+      scheduledGoal: { value: Number(value), week },
+    },
+  };
+}
+export function activityCompletion(duration, planned, endedEarly = false) {
+  return endedEarly || Number(duration) < Number(planned) ? "Ended Early" : "Completed";
+}
+export function releaseSavedActivity(state) {
+  if (state.active?.status !== "saved") return state;
+  return {
+    ...state,
+    active: null,
+    study: state.active.category === "study"
+      ? { ...state.study, status: "paused", remaining: state.prefs.interval * 60 }
+      : state.study,
+  };
 }
