@@ -47,3 +47,7 @@ Uploaded 61 reviewed project files to the existing zhongguohe/Lo-fi-prototype-v1
 ## 2026-11-22 — Prototype 2 Color Edition
 
 User authorized colorful code iteration and previously proposed flow improvements. Updated shared src with purple/mint/peach/cream styling, three pet forms, explicit intensity, shorter backup option, weekly comparison, demo badge, shared session draft, saved-navigation release, honest short completion and effective-goal preservation. Preserved the complete pre-edit V1 archive locally under outputs/archive. 19 tests and production build passed. Browser rendering and physical-device checks remain unverified due to localhost connection failures. No remote push or deployment.
+
+## 2026-11-22 — GitHub source publication
+
+The user explicitly requested direct publication to the existing group GitHub repository. Submitted the 18 changed/new files to main through the signed-in collaborator browser and verified each remote file against local bytes at 70aeba7. A fresh remote clone passed npm ci, 19 tests, and build. Existing Pages workflow triggered automatically; source verification is separate from deployment verification.
