@@ -5,7 +5,7 @@
 - **Implemented and Verified (automated):** weekly study totals, saved-state release, completion classification, effective-goal scheduling. All 19 model/validation tests and production build pass.
 - **Implemented but Unverified (real browser):** colorful UI, pet artwork, shared/session-persisted draft, explicit intensity, shorter activity UI, navigation wiring, mobile rendering. Connected and cloud browsers refused workspace localhost connections. DOM emulation is separate evidence, not browser verification.
 - K01 goal rollback addressed and covered by a regression; full historical goal ledger remains absent. K03 draft is shared and saved to sessionStorage per tab; Back wiring requires real-browser recheck. K04 intensity is explicit for new plans and activities; legacy fallback remains. K05 saved state release covered in model tests; end-to-end browser confirmation pending. K02 timer throttling and K06 storage/concurrency limits remain.
-- No remote upload or deployment in this iteration. No participant or health-efficacy claims.
+- GitHub source update authorized and completed November 22, 2026 through the signed-in collaborator browser. All 18 updated files matched local bytes at 70aeba7. A fresh remote clone passed npm ci, all 19 tests and production build. Pages publication is being checked separately; do not infer deployment success from source upload. No participant or health-efficacy claims.
 
 ---
 
