@@ -7,12 +7,12 @@ import json
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
-OUTPUT = ROOT / 'outputs' / 'SI684-Health-Technology-LoFiV1.zip'
+OUTPUT = ROOT / 'outputs' / 'MoveMore-Prototype2-Color.zip'
 PREFIX = 'SI684-Health-Technology/'
 ROOT_FILES = ['AGENTS.md', 'README.md', 'PROJECT_STATUS.md', 'CHANGELOG.md',
               '.gitignore', 'package.json', 'package-lock.json', 'index.html']
 TREES = ['src', 'tests', 'docs', 'prototypes', 'scripts', '.github']
-OPTIONAL = ['vite.config.js', 'vite.config.mjs', 'public', '.env.example']
+OPTIONAL = ['vite.config.js', 'vite.config.mjs', 'public', '.env.example', 'MoveMore-Prototype2.html']
 EXCLUDED = {'node_modules', 'dist', '.git', '.vite', 'coverage', 'work', 'outputs',
             '__pycache__', 'participant-data', 'private', '.idea', '.vscode'}
 SECRET_PATTERNS = [re.compile(r'\bsk-(?:proj-)?[A-Za-z0-9_-]{20,}'),
