@@ -1,6 +1,6 @@
 # Move More — Prototype 2 · Color Edition
 
-Updated November 22, 2026. User-authorized colorful iteration of the existing React app. The shared `src/` is now Prototype 2. Earlier V1 documents are historical evidence, not the current operating guide. No remote upload or public deployment has been performed for this iteration.
+Updated November 22, 2026. User-authorized colorful iteration of the existing React app. The shared `src/` is now Prototype 2. Earlier V1 documents are historical evidence, not the current operating guide. The user authorized updating the existing GitHub repository on November 22, 2026. Source and offline preview are now committed on main; the existing Pages workflow handles publication. Check Actions for the latest deployment status.
 
 ## Open this version
 
