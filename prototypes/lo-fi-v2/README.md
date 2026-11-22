@@ -1,7 +1,26 @@
-# Lo-fi V2 — not started
+# Prototype 2 — Color Edition
 
-This stage will iterate on Lo-fi V1 using actual classroom feedback and the course's confirmed requirements. No V2 design or source fork has been created.
+Implemented November 22, 2026 under explicit user authorization. Shared runnable source remains in src; no duplicate React app. Full operating guide and changes are at the top of README.md. V1 baseline ZIP is preserved locally under outputs/archive.
 
-Record observed usability findings, evidence-linked group decisions, updated flows, iteration history and verification here when work begins. Until then, proposals remain unconfirmed. Preserve the complete V1 ZIP before modifying the shared root src/; later a Git tag such as lofi-v1 may protect that baseline. Do not create a second React application in this directory.
+## Evidence
 
-Existing planning notes are retained in [docs/lo-fi-v2](../../docs/lo-fi-v2/README.md). [Project status](../../PROJECT_STATUS.md) is the overall source of progress and issues.
+19 model/validation tests and production build passed. Added regressions cover effective-goal rollover, saved-feedback release preserving records, actual-versus-planned completion, and matching weekly study/exercise windows. Actual new-version browser verification was blocked by localhost connection refusal in both browsers. No physical-phone or classroom-participant findings.
+
+## Pending
+
+Run Home, Study, Exercise, Progress, Pet, Personal Center and dialog walkthroughs in a real browser; specifically test saved→Progress→new activity and backup→top Back→Next→refresh. Check 390×844 and narrow/short devices. Re-test light backups, reschedule, skip, pet visibility and edited record totals. Existing timer throttling, one-future-goal/history limits and cross-tab storage risks remain.
+
+## Visual direction
+
+Soft purple actions; mint study cards; peach exercise cards; cream rewards; warm off-white background. Pet forms are static SVG, with no new network dependencies. Colors supplement labels and icons. No full accessibility audit or visual sign-off claimed.
+
+
+## Additional verification — 2026-11-22
+
+DOM-emulated integration using jsdom and the compiled production bundle passed: setup/pet choice; Home demo label and SVG; study start/reminder/activity/short duration confirmation/save; saved feedback→Progress clears active; opening the pending exercise reaches Ready to start; discard; new plan→backup edit→header Back→Next retains the field; session draft persists and clears on Save; shorter activity opens with five-minute planned duration. No DOM error events were observed. This does not verify real-browser rendering, focus behavior, native form controls, phone sizing, or background timers.
+
+The standalone HTML is reproducible with `npm run build` then `python3 scripts/build-standalone.py`. Package with `python3 scripts/package-project.py`.
+
+## Package verification
+
+The source ZIP was extracted into a fresh directory. `npm ci`, all 19 tests and `npm run build` passed in that extracted copy. ZIP CRC and file hashes passed. Standalone HTML has no external script or stylesheet references. Real-browser local-file execution and visual rendering remain unverified.
