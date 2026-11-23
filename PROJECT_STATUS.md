@@ -1,9 +1,9 @@
 # Project status
 
-**Last updated:** 2026-11-20 (America/New_York)
+**Last updated:** 2026-11-23 (America/New_York)
 
-**Current project phase:** Lo-fi Prototype V2 — Local iteration in progress
-**Current task:** user-authorized grayscale V2 changes on Valen_branch; implementation accepted for branch publication and a PR to main. Owner review/merge remains a separate next step. See [owner handoff](docs/lo-fi-v2/owner-handoff-zh.md).
+**Current project phase:** Grayscale Lo-fi V2 — selected for submission
+**Current task:** user authorized preserving the color edition on its own branch and using reviewed grayscale V2 on main through PR #1. Color preservation is Implemented and Verified: remote `codex/color-prototype-2026-11-23` equals original main39dae0d. Product files match reviewed457e138; color behavior/artifacts remain on the preserved branch. See [branch decision](docs/lo-fi-v2/branch-decision-2026-11-23.md). Earlier owner-only merge and local-only statements below are historical.
 
 ## Current V2 status — 2026-11-20
 

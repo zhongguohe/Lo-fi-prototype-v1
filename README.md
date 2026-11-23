@@ -1,4 +1,8 @@
-# SI684 Health Technology — Lo-fi V2 in progress
+# SI684 Health Technology — Grayscale Lo-fi V2
+
+## Current version decision — 2026-11-23
+
+The group selected reviewed grayscale V2 for the V2 submission. Main follows the grayscale V1 → V2 progression. The color edition is preserved intact at [`codex/color-prototype-2026-11-23`](https://github.com/zhongguohe/Lo-fi-prototype-v1/tree/codex/color-prototype-2026-11-23), commit `39dae0d42e37f25152d216bc13f835bc0ec1498a`. No Canvas submission is claimed. See [branch decision](docs/lo-fi-v2/branch-decision-2026-11-23.md). Earlier local-iteration/publication notes below are historical.
 
 **Helping University Students Move More During and Beyond Study Time**  
 **Course:** SI/HBHE 684 — Prototyping and Evaluation of Consumer Health Technologies

@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-23 — Select grayscale V2 and preserve color edition
+
+- User authorized keeping main's runnable product on reviewed grayscale V2 and preserving the color iteration separately.
+- Pushed and verified `codex/color-prototype-2026-11-23` equals original main39dae0d before resolving conflicts.
+- Selected reviewed457e138 product files during merge resolution; retained both histories and added branch-decision documentation. No force push or history deletion.
+
 ## 2026-11-20 — New plan opening time
 
 - New exercise plans initialize to today's displayed date and the local hour/minute when the editor opens, instead of 17:30. The value stays fixed until edited; returning to a draft preserves it. Existing save-time checks reject past schedules.

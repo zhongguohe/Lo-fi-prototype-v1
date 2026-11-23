@@ -1,5 +1,9 @@
 # Design decision register
 
+## 2026-11-23 — Preserve color edition; main uses grayscale V2
+
+The user reported the final group decision to submit reviewed grayscale V2, then explicitly directed preserving the color edition on its own branch and keeping main's grayscale V1→V2 progression. Remote `codex/color-prototype-2026-11-23` preserves the complete color tree/history at39dae0d. Conflict resolution selects reviewed grayscale product files at457e138 with current version-routing documentation. Both histories are retained through merge ancestry; no force push, history rewrite or silent integration of color-only features. Earlier instructions to leave merge to the owner are superseded by this task.
+
 Updated 2026-11-07. “Confirmed” below means explicitly fixed by the supplied project brief and/or the user's development instructions. No independent group vote, signed approval, or meeting decision is inferred. If the group changes these decisions, record the new source and date rather than replacing the historical source documents.
 
 ## Confirmed decisions
