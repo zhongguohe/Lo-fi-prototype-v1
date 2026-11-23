@@ -1,21 +1,37 @@
-# Current status — 2026-11-22
-
-**Phase: Prototype 2 Color Edition.** Explicit user request authorized colorful UI and flow changes. Current src is V2; the V1 archive is preserved under outputs/archive. See README and prototypes/lo-fi-v2/README.md. Earlier status below is historical.
-
-- **Implemented and Verified (automated):** weekly study totals, saved-state release, completion classification, effective-goal scheduling. All 19 model/validation tests and production build pass.
-- **Implemented but Unverified (real browser):** colorful UI, pet artwork, shared/session-persisted draft, explicit intensity, shorter activity UI, navigation wiring, mobile rendering. Connected and cloud browsers refused workspace localhost connections. DOM emulation is separate evidence, not browser verification.
-- K01 goal rollback addressed and covered by a regression; full historical goal ledger remains absent. K03 draft is shared and saved to sessionStorage per tab; Back wiring requires real-browser recheck. K04 intensity is explicit for new plans and activities; legacy fallback remains. K05 saved state release covered in model tests; end-to-end browser confirmation pending. K02 timer throttling and K06 storage/concurrency limits remain.
-- GitHub source update authorized and completed November 22, 2026 through the signed-in collaborator browser. All 18 updated files matched local bytes at 70aeba7. A fresh remote clone passed npm ci, all 19 tests and production build. Pages publication is being checked separately; do not infer deployment success from source upload. No participant or health-efficacy claims.
-
----
-
 # Project status
 
-**Last updated:** 2026-11-07 (America/Detroit)  
-**Current project phase:** Lo-fi Prototype V1 — Initial Implementation / Preparation for Classroom Testing  
-**Current task:** user-authorized upload of source and GitHub Pages configuration to the existing group repository; owner Pages activation pending.
+**Last updated:** 2026-11-23 (America/New_York)
+
+**Current project phase:** Grayscale Lo-fi V2 — selected for submission
+**Current task:** user authorized preserving the color edition on its own branch and using reviewed grayscale V2 on main through PR #1. Color preservation is Implemented and Verified: remote `codex/color-prototype-2026-11-23` equals original main39dae0d. Product files match reviewed457e138; color behavior/artifacts remain on the preserved branch. See [branch decision](docs/lo-fi-v2/branch-decision-2026-11-23.md). Earlier owner-only merge and local-only statements below are historical.
+
+## Current V2 status — 2026-11-20
+
+This section supersedes the historical V1 feature/known-issue status below for the changes listed here. Preserve the V1 evidence as history.
+
+| Area | Status | Current evidence |
+| --- | --- | --- |
+| A01 / K05 saved-feedback task blocking | Implemented and Verified | Model regression plus browser: saved study break → Progress → a different planned activity opens correctly |
+| A02 future actual-record credit | Implemented and Verified | Model guard + exclusion of legacy future records from totals; browser future-date error, valid record saved afterward |
+| A03 / part of K03 backup return draft | Implemented and Verified | Browser top Back and bottom Back both retain changed backup text; refresh persistence remains unimplemented |
+| A05 / K01 repeated future goals | Implemented and Verified | Model regression and browser simulated Monday: current goal90 retained when following week is scheduled120 |
+| A06 past schedules | Implemented and Verified | Shared schedule rules; browser rejects past reschedule date and same-day past time, accepts future date |
+| A07 pet stage progress label | Implemented and Verified | Browser shows8/30 earned this stage and22 remaining at38 total points |
+| A04 explicit exercise intensity | Implemented and Verified | User approved; model regression and browser: exercise confirmation/manual records require a choice, Light/Moderate credit stays separate |
+| Preparation labels and activity-first feedback | Implemented and Verified | User approved; browser verifies explicit preparation, activity summary, light-activity explanation and pet-off feedback without Stage |
+
+- `npm test`: 22 passed. `npm run build`: passed (existing React Router use-client warnings remain non-blocking). Targeted browser checks are in [iteration-01-zh.md](docs/lo-fi-v2/iteration-01-zh.md).
+- V1 tracked source snapshot preserved before product edits at the parent workspace's `tmp/SI684-LoFiV1-c22e7a8-before-v2.zip`; it includes original code, lockfile and docs, excluding dependencies and Git metadata.
+- No research results or group approvals inferred. Existing unverified phone/accessibility/background-time and shallow-storage-validation limits remain.
 
 ## Project summary
+
+### Documentation update — 2026-11-20 (America/New_York)
+
+- Added `docs/lo-fi-v2/user-flow-baseline-zh.md`, a Chinese source-grounded V1 baseline with 14 Mermaid diagrams, stable flow/node/task IDs, unexecuted walkthrough cases, audit references and a future change-log/PR template.
+- Added `user-flow-review-zh.html` and `scripts/build-flow-review.py` for a navigable, zoomable view of the same content. The Markdown remains the editable source; the HTML uses a CDN renderer.
+- Documentation/render tooling only: `src/`, tests, package files and prototype behavior remain unchanged. This does not mean V2 implementation or participant evaluation has started.
+- Browser rendering check: all 14 diagrams loaded; navigation, zoom and source disclosure were checked. This is documentation verification, not a rerun of all product task cases.
 
 Helping University Students Move More During and Beyond Study Time is a SI/HBHE 684 group project for undergraduate/graduate students aged 18+ who study for long periods. It supports short Study Breaks and separate Planned Exercise through (1) Adjustable Study-Break Prompts, (2) Backup Exercise Plans and Rescheduling, and (3) Cumulative Progress Feedback and Optional Virtual Pet.
 
@@ -137,3 +153,6 @@ Deployment changes are limited to vite.config.js, production HashRouter selectio
 - **GitHub Actions build: Implemented and Verified.** [Run #1](https://github.com/zhongguohe/Lo-fi-prototype-v1/actions/runs/42413227164) completed the build job successfully. Deploy failed at configure-pages with “Get Pages site failed” / Not Found because Pages is not enabled. No source build failure was observed.
 - **Online demo: Implemented but Unverified.** Pending owner Pages enablement, rerun, and real public-URL browser verification. Expected URL alone is not evidence that the site works. Source upload and configuration are complete; owner activation remains external to this task.
 - Existing V1 known issues and physical-device/accessibility limits remain. Local preflight and source upload are not participant tests.
+
+### 2026-11-20 — Walkthrough follow-up
+New plans now default to today's displayed date and the editor-opening local hour/minute, fixed until edited. Existing drafts retain their values. Past schedules remain rejected at submission. Status: Implemented but Unverified in browser for this default-value change; 22 automated tests and build passed.

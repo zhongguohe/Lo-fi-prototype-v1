@@ -85,18 +85,63 @@ export function goalFor(state, day = todayFor(state)) {
     ? scheduled.value
     : state.prefs.goal;
 }
+export function updateWeeklyGoal(state, value, when, day = todayFor(state)) {
+  return {
+    ...state,
+    prefs: {
+      ...state.prefs,
+      goal: when === "next" ? goalFor(state, day) : Number(value),
+      scheduledGoal:
+        when === "next"
+          ? { value: Number(value), week: shiftDate(weekKey(day), 7) }
+          : null,
+    },
+  };
+}
+function validDate(day) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(day || "")) return false;
+  const parsed = new Date(`${day}T12:00:00`);
+  return !Number.isNaN(parsed.getTime()) && dateKey(parsed) === day;
+}
+export function recordDateError(day, today) {
+  if (!validDate(day)) return "Enter a valid activity date.";
+  return day > today ? "Choose today or an earlier date for completed activity." : "";
+}
+export function scheduleErrors(day, time, today, now = new Date()) {
+  const errors = {};
+  if (!validDate(day) || day < today)
+    errors.date = "Choose today or a later date for your plan.";
+  if (!/^([01]\d|2[0-3]):[0-5]\d$/.test(time || ""))
+    errors.time = "Enter a valid time.";
+  else if (
+    day === today &&
+    time < `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`
+  )
+    errors.time = "Choose the current time or a later time today.";
+  return errors;
+}
+export function releaseSavedActivity(state) {
+  if (state.active?.status !== "saved") return state;
+  return {
+    ...state,
+    active: null,
+    study:
+      state.active.category === "study" && state.study.status === "on-break"
+        ? { ...state.study, status: "paused", remaining: state.prefs.interval * 60 }
+        : state.study,
+  };
+}
 export function stats(records, day) {
-  const breaks = records.filter((r) => r.category === "study");
-  const weekly = records.filter(
+  const eligible = records.filter((r) => !recordDateError(r.date, day));
+  const breaks = eligible.filter((r) => r.category === "study");
+  const weekly = eligible.filter(
     (r) =>
       r.category === "exercise" &&
       r.intensity === "Moderate" &&
       weekKey(r.date) === weekKey(day),
   );
-  const total = round(records.reduce((a, r) => a + Number(r.duration), 0));
+  const total = round(eligible.reduce((a, r) => a + Number(r.duration), 0));
   return {
-    weekBreaks: breaks.filter((r) => weekKey(r.date) === weekKey(day)).length,
-    weekBreakMinutes: round(breaks.filter((r) => weekKey(r.date) === weekKey(day)).reduce((a, r) => a + Number(r.duration), 0)),
     breaks: breaks.length,
     breakMinutes: round(breaks.reduce((a, r) => a + Number(r.duration), 0)),
     todayBreaks: breaks.filter((r) => r.date === day).length,
@@ -107,6 +152,8 @@ export function stats(records, day) {
   };
 }
 export function saveRecord(state, record) {
+  if (recordDateError(record.date, todayFor(state))) return state;
+  if (!["Light", "Moderate"].includes(record.intensity)) return state;
   const records = [...state.records.filter((r) => r.id !== record.id), record];
   return {
     ...state,
@@ -141,29 +188,4 @@ export function readState() {
       return s;
   } catch {}
   return initialState();
-}
-
-// Commit an effective scheduled goal before replacing the single future slot.
-export function scheduleGoal(state, value, week, day = todayFor(state)) {
-  return {
-    ...state,
-    prefs: {
-      ...state.prefs,
-      goal: goalFor(state, day),
-      scheduledGoal: { value: Number(value), week },
-    },
-  };
-}
-export function activityCompletion(duration, planned, endedEarly = false) {
-  return endedEarly || Number(duration) < Number(planned) ? "Ended Early" : "Completed";
-}
-export function releaseSavedActivity(state) {
-  if (state.active?.status !== "saved") return state;
-  return {
-    ...state,
-    active: null,
-    study: state.active.category === "study"
-      ? { ...state.study, status: "paused", remaining: state.prefs.interval * 60 }
-      : state.study,
-  };
 }

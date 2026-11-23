@@ -1,5 +1,9 @@
 # Design decision register
 
+## 2026-11-23 — Preserve color edition; main uses grayscale V2
+
+The user reported the final group decision to submit reviewed grayscale V2, then explicitly directed preserving the color edition on its own branch and keeping main's grayscale V1→V2 progression. Remote `codex/color-prototype-2026-11-23` preserves the complete color tree/history at39dae0d. Conflict resolution selects reviewed grayscale product files at457e138 with current version-routing documentation. Both histories are retained through merge ancestry; no force push, history rewrite or silent integration of color-only features. Earlier instructions to leave merge to the owner are superseded by this task.
+
 Updated 2026-11-07. “Confirmed” below means explicitly fixed by the supplied project brief and/or the user's development instructions. No independent group vote, signed approval, or meeting decision is inferred. If the group changes these decisions, record the new source and date rather than replacing the historical source documents.
 
 ## Confirmed decisions
@@ -64,9 +68,15 @@ Research summaries and references in the original documents are preserved withou
 
 The user supplied the existing public group repository and authorized uploading the project and Pages configuration, then explicitly chose to wait for the owner to enable Pages. Public demonstration is now authorized as that limited follow-up scope; earlier maintenance-only no-upload statements remain historical. No intervention or visual redesign is authorized. Production-only HashRouter and a Vite deployment base resolve static-host refresh/resource paths; local development keeps its original paths. No live URL is considered verified until a deployment succeeds and is opened.
 
+## V2 local repair authorization — 2026-11-20
 
-## 2026-11-22 — Prototype 2 Color Edition
+The user authorized local changes on the existing grayscale implementation, with approval requested before key interaction changes. The first batch repairs developer-audit A01/A02/A03/A05/A06/A07 without adding an intervention or changing reward rules. Leaving saved feedback pauses an on-break study session; unsaved activity remains protected. Backup fields share the existing in-memory plan draft; refresh persistence is still out of scope. When a future goal has taken effect, its value is promoted to the current base before storing the next appointment; this is not a full goal-history model. Actual records must be dated no later than the displayed day; past schedules require a valid new date/time. Legacy future records are retained for correction but excluded from current totals.
 
-User authorized colorful code iteration and previously proposed flow improvements. Updated shared src with purple/mint/peach/cream styling, three pet forms, explicit intensity, shorter backup option, weekly comparison, demo badge, shared session draft, saved-navigation release, honest short completion and effective-goal preservation. Preserved the complete pre-edit V1 archive locally under outputs/archive. 19 tests and production build passed. Browser rendering and physical-device checks remain unverified due to localhost connection failures. No remote push or deployment.
+The user subsequently approved all three proposals in `lo-fi-v2/interaction-proposals-zh.md`: explicit actual-intensity choice for planned exercise (including manual entry), accurate preparation labels without automatic timing, and activity-first saved feedback with pet-off levels hidden. These are implemented locally. Intensity inference A06 in the historical V1 assumptions is superseded for new V2 exercise records; already-saved records are not silently reclassified. Code review remains assigned to other teammates' agents. This authorization does not include pushing or merging changes.
 
-The explicit November 22 user instruction supersedes grayscale/V1-only requirements for this iteration. Pet display stages remain derived from corrected records; no missed-day penalties. Both progress movement categories now use the displayed week; cumulative growth/history retain all dates. Shorter exercise is an alternative within the existing backup/rescheduling intervention, not a new core component.
+### 2026-11-20 — Plan time and backup provenance
+User requested new plans default to today and the time the editor opens, without automatic ticking; implemented. Save-time past-date/time checks remain. The formally submitted SI684_Causal_Diagrams_Revised.pdf, page 1, component 2 explicitly describes choosing a shorter backup and making an if-then plan while planning a workout. It does not prescribe a mandatory separate page or form validation. Existing required backup fields remain pending any explicit change to that interaction.
+
+### 2026-11-20 — Publication authorized
+
+After the walkthrough discussion, the user accepted the remaining contents and explicitly requested committing/pushing Valen_branch and opening a PR to main. Required backup behavior is retained. The owner/teammates handle code review, task walkthrough and merge; no merge or deployment is authorized by this request.

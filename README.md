@@ -1,49 +1,8 @@
-# Move More — Prototype 2 · Color Edition
+# SI684 Health Technology — Grayscale Lo-fi V2
 
-Updated November 22, 2026. User-authorized colorful iteration of the existing React app. The shared `src/` is now Prototype 2. Earlier V1 documents are historical evidence, not the current operating guide. The user authorized updating the existing GitHub repository on November 22, 2026. Source and offline preview are now committed on main; the existing Pages workflow handles publication. Check Actions for the latest deployment status.
+## Current version decision — 2026-11-23
 
-## Open this version
-
-**Quickest:** double-click `MoveMore-Prototype2.html` in this source package. It contains the production JavaScript, styles, icons and pet artwork, works offline, and requires no npm installation. Browser local-file storage behavior varies; use the local server for repeatable testing. Local file records and hosted records are separate.
-
-**Development:** use a supported Node version (20.19+ or 22.12+), then `npm ci` and `npm run dev`. Open the Local URL printed in Terminal and leave Terminal running. If a restricted environment reports `uv_interface_addresses`, use `npm run dev -- --host 127.0.0.1`.
-
-`npm test` runs 19 model/validation tests. `npm run build` creates the production build. The included HTML preview is generated from that build.
-
-## Changes
-
-- Purple primary actions, mint study cards, peach exercise cards, cream pet rewards; readable dark text, visible focus and mobile layout retained.
-- Three source-native vector pet forms: Little explorer, Growing companion, Blooming buddy. Higher stages keep the third form. Home preview and saved-activity feedback honor pet visibility.
-- Saved-feedback navigation releases old activity state; active/pending activities stay protected.
-- New-plan and backup edits use one draft persisted in sessionStorage within the current tab, including refresh. Top and in-page Back preserve edits; Cancel/Save clear the draft.
-- Activity intensity is explicit in plan, backup and activity screens. Legacy plans retain an initial fallback and can be corrected.
-- Finish & Review prompts for actual minutes; shorter activity saves as Ended Early. Explicit End Early remains available.
-- Disruption flow offers a shorter activity up to five minutes, prepared backup, reschedule or skip. Selection alone earns nothing.
-- Progress shows both movement categories for the displayed Monday–Sunday week; growth remains cumulative. History retains all dates.
-- Effective goal is preserved when scheduling another future goal. There is still only one future goal slot.
-- Demo records are visibly labeled on Home; Home's study entry is now Open Study Session.
-
-## Walkthrough
-
-1. Setup → choose Yes, show my pet → Save & Continue.
-2. Home → Open Study Session → Start Studying.
-3. Prototype time controls → Simulate Next Reminder → Start Break → Start Activity.
-4. Advance Activity 1 Minute as needed → Finish & Review → review/edit actual time → Save Activity.
-5. View Progress can now be used before starting another activity. Continue Studying resumes study; leaving feedback for Progress pauses study.
-6. Exercise → Create Exercise Plan → activity/date/time/minutes/intensity → Next → backup/barrier/intensity → Save Plan.
-7. I Can't Do This Now → shorter activity / Use Backup / Reschedule / Skip.
-8. Progress → View Activity History → record → Edit → Save. Existing record contribution is replaced.
-9. Progress → View Virtual Pet → toggle off/on. Ordinary records and points remain.
-
-## Verification and limits
-
-November 22, 2026: 19 automated tests passed; production build passed. Actual browser screenshot/responsive/click verification of the new version was blocked because both connected and cloud browsers could not reach this workspace's localhost. Component checks, when recorded separately in prototypes/lo-fi-v2/README.md, are DOM emulation, not real-browser evidence. Physical phone, background timing and full accessibility testing remain unverified. No classroom participant results are claimed.
-
-Reminders, device connection and timer controls remain prototypes. Records are self-reported and local; no real push, sensors, account, backend or sync. Pet art is static; there is no animation or permanent unlock ledger.
-
-## Earlier V1 documentation (historical)
-
-# SI684 Health Technology — Lo-fi V1
+The group selected reviewed grayscale V2 for the V2 submission. Main follows the grayscale V1 → V2 progression. The color edition is preserved intact at [`codex/color-prototype-2026-11-23`](https://github.com/zhongguohe/Lo-fi-prototype-v1/tree/codex/color-prototype-2026-11-23), commit `39dae0d42e37f25152d216bc13f835bc0ec1498a`. No Canvas submission is claimed. See [branch decision](docs/lo-fi-v2/branch-decision-2026-11-23.md). Earlier local-iteration/publication notes below are historical.
 
 **Helping University Students Move More During and Beyond Study Time**  
 **Course:** SI/HBHE 684 — Prototyping and Evaluation of Consumer Health Technologies
@@ -56,7 +15,7 @@ A group design project for undergraduate and graduate students aged 18+ who stud
 2. **Backup Exercise Plans and Rescheduling:** original plan plus backup; use backup, choose a new time or skip; confirm actual movement before credit.
 3. **Cumulative Progress Feedback and Optional Virtual Pet:** classified totals, editable history/manual records and optional pet without missed-day punishment.
 
-Current stage: **Lo-fi Prototype V1 — preparation for classroom testing**. Fifteen interfaces connect Home, Study, Exercise, Progress and header-entry Personal Center. No classroom feedback results, V2, or Hi-fi implementation have been created.
+Current stage: **Lo-fi Prototype V2 — local iteration in progress on Valen_branch**. The first batch repairs confirmed V1 interaction and data issues while retaining the grayscale mobile wireframe. Fifteen interfaces connect Home, Study, Exercise, Progress and header-entry Personal Center. Classroom participant findings and the V2 walkthrough video have not been supplied. See [V2 changes and walkthrough](docs/lo-fi-v2/iteration-01-zh.md); V1 source materials remain preserved.
 
 ## Open the interactive prototype
 
@@ -83,7 +42,7 @@ For a clean checkout, `npm ci` uses the included lockfile. No .env, API key, acc
 | --- | --- |
 | Current runnable code | [src/](src/) — one shared React/Vite/JavaScript application |
 | V1 goals, flows, actual screenshots and blank feedback | [prototypes/lo-fi-v1/](prototypes/lo-fi-v1/README.md) |
-| Future V2 | [prototypes/lo-fi-v2/](prototypes/lo-fi-v2/README.md) — waiting for actual feedback |
+| Current V2 iteration | [prototypes/lo-fi-v2/](prototypes/lo-fi-v2/README.md) — changes, verification and pending decisions |
 | Future Hi-fi | [prototypes/hi-fi/](prototypes/hi-fi/README.md) — not started |
 | Design sources | [docs/README.md](docs/README.md) — real DOCX files; original causal PDF unavailable |
 | Progress / issues / version preservation | [PROJECT_STATUS.md](PROJECT_STATUS.md) |
@@ -116,7 +75,7 @@ Vite uses vite.config.js to support a repository-specific deployment base path. 
 
 English grayscale mobile wireframe; logical 390 × 844 canvas, proportional desktop preview, responsive phone CSS. Timers, in-app reminders, device toggle, sample data and pet visuals are demonstrations. Records are self-reported and stored only in each browser's localStorage. There is no real push/sensing/sync, login, backend, AI. Pages is prepared but awaits owner setup and verification. Pet-off preserves saved records.
 
-Known issues include effective future-goal replacement, memory-only plan drafts, initial intensity guessing and saved-feedback navigation edges. Physical phones, full accessibility and background timing remain unverified. See PROJECT_STATUS; developer checks do not establish health effectiveness.
+The first V2 batch repairs effective future-goal replacement, saved-feedback navigation, future-record credit, backup-step return behavior and schedule validation. Unsaved plan drafts remain memory-only, and initial intensity guessing awaits an interaction decision. Physical phones, full accessibility and background timing remain unverified. See PROJECT_STATUS and the V2 iteration record; developer checks do not establish health effectiveness.
 
 The complete `SI684-Health-Technology-LoFiV1.zip` is a restorable V1 source snapshot. Keep it before editing the shared src for later stages. Once Git is set up separately, reviewed commits and tags such as `lofi-v1` / `lofi-v2` can preserve versions; the repository already belongs to the group; this publication task uploads source/configuration without creating a new repository or tag. Pages activation remains an owner action. Group members can clone/download, install and run the same commands above. Uploading source alone will not publish a clickable app.
 

@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SI684 协作说明与用户流程</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f4f5f7;color:#202833;font:16px/1.65 system-ui,"Microsoft YaHei",sans-serif}header{background:#152b39;color:#fff;padding:28px 34px}h1{font-size:26px;margin:0 0 8px}header p{margin:0;color:#d6e1e8}.layout{display:grid;grid-template-columns:275px minmax(0,1fr);max-width:1800px;margin:auto}nav{position:sticky;top:0;height:100vh;overflow:auto;padding:22px 14px;border-right:1px solid #d7dce2}nav a{display:block;color:#294c60;text-decoration:none;padding:9px 12px;font-size:14px;border-radius:5px}nav a:hover,nav a.active{background:#dce8ee}main{min-width:0;padding:26px 36px 100px}section{scroll-margin-top:22px;margin-bottom:44px;background:#fff;padding:24px 28px;border:1px solid #dce1e6;border-radius:8px}h2{font-size:21px;margin:0 0 16px}h3{font-size:18px}p{margin:12px 0}code{background:#edf2f5;padding:1px 4px;overflow-wrap:anywhere}pre{white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.6 ui-monospace,monospace;background:#f4f6f8;padding:16px}.diagram{overflow:auto;max-height:82vh;padding:18px 0;min-height:100px}.diagram svg{max-width:none!important;height:auto;display:block;margin:0 auto}.diagram-toolbar{display:flex;gap:8px;flex-wrap:wrap}button{font:inherit;font-size:13px;padding:6px 12px;background:#fff;border:1px solid #b7c6d0;border-radius:4px;cursor:pointer}button:hover{background:#e9f0f4}.table-wrap{overflow:auto}table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:10px 12px;text-align:left;border-bottom:1px solid #dce1e6;vertical-align:top}th{background:#eef3f6;white-space:nowrap}.note{font-size:13px;color:#536473}#render-status{display:inline-block;margin-top:12px;font-size:13px}nav .section-title{font-size:12px;letter-spacing:.08em;color:#677d89;padding:12px}a{color:#235c7d}.bullet{padding-left:12px}@media(max-width:850px){.layout{grid-template-columns:1fr}nav{position:relative;height:auto;max-height:240px;border-bottom:1px solid #ccd6dd}main{padding:15px}section{padding:18px 16px}header{padding:22px}}@media print{nav,.diagram-toolbar,#render-status{display:none}.layout{display:block}header{background:white;color:black}header p{color:black}main{padding:0}section{break-before:page;border:0;padding:0}.diagram{max-height:none;overflow:visible}.diagram svg{max-width:100%!important}table{font-size:10px}}
+</style></head><body><header><h1>SI684｜V2变更与用户流程对照</h1><p>先查看已实现的V2变化，再参考完整V1流程 · 2026-11-20</p><div id="render-status">正在加载流程图</div></header><div class="layout"><nav aria-label="流程目录"><div class="section-title">文档目录</div><a href="#v2section1">V2｜本轮变更位置</a><a href="#v2section3">V2｜计划运动的确认与保存</a><a href="#v2section5">V2｜保存后衔接下一项任务</a><a href="#v2section7">V2｜返回与日期限制</a><a href="#section1">V1参考｜协作背景与分工</a><a href="#section3">V1参考｜主要走查任务</a><a href="#section5">V1参考｜问题反馈格式</a><a href="#section7">V1参考｜变更说明格式</a><a href="#section9">V1参考｜流程图阅读说明</a><a href="#F00">V1参考｜F00｜首次进入、初始化与设置</a><a href="#F01">V1参考｜F01｜首页入口与全局导航</a><a href="#F02">V1参考｜F02｜学习设置、开始、暂停、继续与结束</a><a href="#F03">V1参考｜F03｜休息提醒、延后、暂停与恢复提醒</a><a href="#F04">V1参考｜F04｜共用活动：准备、计时、暂停、提前结束与丢弃</a><a href="#F05">V1参考｜F05｜实际确认、编辑、保存与离开反馈</a><a href="#F06">V1参考｜F06｜创建、填写备用、返回与编辑运动计划</a><a href="#F07">V1参考｜F07｜查看、执行、备用、改期、跳过与计划状态</a><a href="#F08">V1参考｜F08｜进度、历史筛选、详情、纠错与手动补录</a><a href="#F09">V1参考｜F09｜宠物启用、关闭、成长与普通反馈</a><a href="#F10">V1参考｜F10｜个人资料、每周目标与全局偏好</a><a href="#F11">V1参考｜F11｜课堂演示、设备说明、模拟时间与数据重置</a><a href="#F12">V1参考｜F12｜顶部返回、离开、刷新与缺少前置数据</a><a href="#F13">V1参考｜F13｜共享表单验证与弹窗关闭规则</a><a href="#section39">V1参考｜详细检查清单（扩展参考）</a><a href="#section41">V1参考｜已知问题到流程、用例和代码的映射</a><a href="#section43">V1参考｜详细变更记录模板</a><a href="#section45">V1参考｜版本维护约定</a><a href="agent-review-notes-en.md">English agent review notes</a><a href="user-flow-baseline-zh.md">V1文字版基线</a></nav><main><section id="v2section1"><h2>V2｜本轮变更位置</h2><div class="table-wrap"><table><thead><tr><th>流程位置</th><th>V2行为</th><th>组员复查</th></tr></thead><tbody><tr><td>F01-07</td><td>首页未开始学习时使用Open Study Session</td><td>点击进入学习页，再明确开始计时</td></tr><tr><td>F03-05</td><td>提醒使用Prepare Break</td><td>进入活动准备页后计时仍为0</td></tr><tr><td>F04-03 / F05-12</td><td>已保存活动离开反馈后释放任务，休息后的学习暂停</td><td>查看进度后可以开始新运动</td></tr><tr><td>F05-02/03</td><td>计划运动在确认页直接必选Actual intensity</td><td>不选不能保存；Light/Moderate按选择统计</td></tr><tr><td>F05-07</td><td>保存反馈先展示活动名称、实际时长和类别</td><td>轻量运动有说明；宠物关闭不显示Stage</td></tr><tr><td>F06-09</td><td>顶部与底部Back都保留备用输入</td><td>往返上一步后输入一致</td></tr><tr><td>F07-07</td><td>计划详情使用Prepare Activity</td><td>进入准备页，Start Activity才开始计时</td></tr><tr><td>F07-11/12</td><td>改期不能在过去；新建/编辑计划也检查日期时间</td><td>过去日期和当天过去时间均有错误提示</td></tr><tr><td>F08-10/11</td><td>实际补录不能填未来日期；运动强度必须明确选择</td><td>不合法值不会增加记录或积分</td></tr><tr><td>F09-03</td><td>本阶段已积累与升级剩余明确分开</td><td>38总分时显示8/30和剩余22</td></tr><tr><td>F10-06</td><td>当前生效目标不因下一预约回退</td><td>生效90后再预约120，当前仍90</td></tr></tbody></table></div></section><section id="v2section3"><h2>V2｜计划运动的确认与保存</h2><div class="diagram-toolbar"><button data-zoom="-1">缩小</button><button data-zoom="0">适合宽度</button><button data-zoom="1">放大</button><button data-source>图源</button></div><div class="diagram"><pre class="mermaid">flowchart TD
+  v2a[&quot;F07-07 Prepare Activity&quot;] --&gt; v2b[&quot;F04-05 活动准备，尚未计时&quot;]
+  v2b --&gt;|&quot;Start Activity&quot;| v2c[&quot;F04-07 活动计时&quot;]
+  v2c --&gt;|&quot;Finish Activity或提前结束后审核&quot;| v2d[&quot;F05-02 查看实际活动，直接选择Actual intensity&quot;]
+  v2d --&gt; v2e{&quot;已选择Light或Moderate，日期和时长有效？&quot;}
+  v2e --&gt;|&quot;否&quot;| v2f[&quot;英文字段提示，不保存或加分&quot;]
+  v2f --&gt; v2d
+  v2e --&gt;|&quot;是&quot;| v2g[&quot;F05-06 保存一次，重算进度&quot;]
+  v2g --&gt; v2h[&quot;F05-07 先显示活动名称、实际时长和类别，再显示点数&quot;]
+  v2h --&gt;|&quot;Light&quot;| v2i[&quot;解释仅加入累积进度，不增加周中等强度分钟&quot;]
+  v2h --&gt;|&quot;Moderate&quot;| v2j[&quot;本周的计划运动计入周分钟&quot;]
+  v2i --&gt; v2k[&quot;F05-12 查看进度后可开始另一活动&quot;]
+  v2j --&gt; v2k</pre></div><pre class="source" hidden>flowchart TD
+  v2a[&quot;F07-07 Prepare Activity&quot;] --&gt; v2b[&quot;F04-05 活动准备，尚未计时&quot;]
+  v2b --&gt;|&quot;Start Activity&quot;| v2c[&quot;F04-07 活动计时&quot;]
+  v2c --&gt;|&quot;Finish Activity或提前结束后审核&quot;| v2d[&quot;F05-02 查看实际活动，直接选择Actual intensity&quot;]
+  v2d --&gt; v2e{&quot;已选择Light或Moderate，日期和时长有效？&quot;}
+  v2e --&gt;|&quot;否&quot;| v2f[&quot;英文字段提示，不保存或加分&quot;]
+  v2f --&gt; v2d
+  v2e --&gt;|&quot;是&quot;| v2g[&quot;F05-06 保存一次，重算进度&quot;]
+  v2g --&gt; v2h[&quot;F05-07 先显示活动名称、实际时长和类别，再显示点数&quot;]
+  v2h --&gt;|&quot;Light&quot;| v2i[&quot;解释仅加入累积进度，不增加周中等强度分钟&quot;]
+  v2h --&gt;|&quot;Moderate&quot;| v2j[&quot;本周的计划运动计入周分钟&quot;]
+  v2i --&gt; v2k[&quot;F05-12 查看进度后可开始另一活动&quot;]
+  v2j --&gt; v2k</pre></section><section id="v2section5"><h2>V2｜保存后衔接下一项任务</h2><div class="diagram-toolbar"><button data-zoom="-1">缩小</button><button data-zoom="0">适合宽度</button><button data-zoom="1">放大</button><button data-source>图源</button></div><div class="diagram"><pre class="mermaid">flowchart TD
+  nexta[&quot;F05-07 活动已保存&quot;] --&gt;|&quot;View Progress或进入个人中心&quot;| nextb[&quot;释放已保存任务，保留记录&quot;]
+  nextb --&gt; nextc{&quot;刚完成的是学习休息？&quot;}
+  nextc --&gt;|&quot;是&quot;| nextd[&quot;学习暂停，保留已学时长&quot;]
+  nextc --&gt;|&quot;否&quot;| nexte[&quot;原学习状态保留&quot;]
+  nextd --&gt; nextf[&quot;F07-07 打开另一计划，Prepare Activity&quot;]
+  nexte --&gt; nextf
+  nextf --&gt; nextg[&quot;新活动准备页，不返回旧保存反馈&quot;]
+  nextd --&gt;|&quot;返回Study并Resume Study&quot;| nexth[&quot;继续学习与提醒计时&quot;]</pre></div><pre class="source" hidden>flowchart TD
+  nexta[&quot;F05-07 活动已保存&quot;] --&gt;|&quot;View Progress或进入个人中心&quot;| nextb[&quot;释放已保存任务，保留记录&quot;]
+  nextb --&gt; nextc{&quot;刚完成的是学习休息？&quot;}
+  nextc --&gt;|&quot;是&quot;| nextd[&quot;学习暂停，保留已学时长&quot;]
+  nextc --&gt;|&quot;否&quot;| nexte[&quot;原学习状态保留&quot;]
+  nextd --&gt; nextf[&quot;F07-07 打开另一计划，Prepare Activity&quot;]
+  nexte --&gt; nextf
+  nextf --&gt; nextg[&quot;新活动准备页，不返回旧保存反馈&quot;]
+  nextd --&gt;|&quot;返回Study并Resume Study&quot;| nexth[&quot;继续学习与提醒计时&quot;]</pre></section><section id="v2section7"><h2>V2｜返回与日期限制</h2><div class="diagram-toolbar"><button data-zoom="-1">缩小</button><button data-zoom="0">适合宽度</button><button data-zoom="1">放大</button><button data-source>图源</button></div><div class="diagram"><pre class="mermaid">flowchart TD
+  drafta[&quot;F06-05 填写备用方案&quot;] --&gt;|&quot;顶部或页面内Back&quot;| draftb[&quot;F06-08/09 保留备用输入，返回原计划&quot;]
+  draftb --&gt;|&quot;Next&quot;| drafta
+  plana[&quot;F07-11 选择新的计划时间&quot;] --&gt; planb{&quot;今天或未来，且不是当天过去时间？&quot;}
+  planb --&gt;|&quot;是&quot;| planc[&quot;F07-12 保存改期，不增加活动进度&quot;]
+  planb --&gt;|&quot;否&quot;| pland[&quot;字段错误，保留输入供修改&quot;]
+  recorda[&quot;F08-10 补录实际活动&quot;] --&gt; recordb{&quot;活动日期为今天或以前？&quot;}
+  recordb --&gt;|&quot;是&quot;| recordc[&quot;继续检查强度与实际时长后保存&quot;]
+  recordb --&gt;|&quot;否&quot;| recordd[&quot;字段错误，不提前获得进度&quot;]</pre></div><pre class="source" hidden>flowchart TD
+  drafta[&quot;F06-05 填写备用方案&quot;] --&gt;|&quot;顶部或页面内Back&quot;| draftb[&quot;F06-08/09 保留备用输入，返回原计划&quot;]
+  draftb --&gt;|&quot;Next&quot;| drafta
+  plana[&quot;F07-11 选择新的计划时间&quot;] --&gt; planb{&quot;今天或未来，且不是当天过去时间？&quot;}
+  planb --&gt;|&quot;是&quot;| planc[&quot;F07-12 保存改期，不增加活动进度&quot;]
+  planb --&gt;|&quot;否&quot;| pland[&quot;字段错误，保留输入供修改&quot;]
+  recorda[&quot;F08-10 补录实际活动&quot;] --&gt; recordb{&quot;活动日期为今天或以前？&quot;}
+  recordb --&gt;|&quot;是&quot;| recordc[&quot;继续检查强度与实际时长后保存&quot;]
+  recordb --&gt;|&quot;否&quot;| recordd[&quot;字段错误，不提前获得进度&quot;]</pre>
+<p>来源：当前源码、22项自动测试及本轮开发者浏览器走查。课堂反馈、真实手机及完整无障碍验证仍待补充。</p></section><section id="section1"><h2>V1参考｜协作背景与分工</h2><p>本次工作基于共同仓库中已有的 v1 原型，在 <code>Valen_branch</code> 上完成 lo-fi v2 作业的修改。分支提交后，组员检查更新内容并进行用户任务走查，再按小组约定合并。</p>
+<p>代码审查由负责的组员及其 agent 完成。用户任务走查主要检查流程是否连贯、操作结果是否符合预期，以及活动记录和进度是否一致。组员优先检查本次修改涉及的任务，并完整体验一次学习休息和计划运动流程；61项详细检查作为进一步排查的参考。</p>
+<p>下方流程图记录修改前的 v1；任务表列出预期结果，其中部分仍对应已知问题。v2实施后，更新说明将列出实际改动和重点复查任务。</p></section><section id="section3"><h2>V1参考｜主要走查任务</h2><p>获取 <code>Valen_branch</code> 的最新代码并启动本地网页，确认当前分支和提交版本。走查可使用示例数据或自建测试记录；重置前确认本地数据可以清除。环境准备可交由各自的 agent 完成。</p>
+<div class="table-wrap"><table><thead><tr><th>用户任务</th><th>操作步骤</th><th>预期结果</th></tr></thead><tbody><tr><td>1. 完成首次设置</td><td>设置学习和运动偏好，选择是否显示宠物，点击 Save &amp; Continue</td><td>进入首页；再次打开时保留设置</td></tr><tr><td>2. 完成学习休息</td><td>首页 → Study → Start Studying；展开 Prototype time controls → Simulate Next Reminder → Start Break → Start Activity → Finish Activity → Save Activity</td><td>提醒、活动和确认页面衔接正常；保存后才计入休息记录</td></tr><tr><td>3. 延后休息提醒</td><td>提醒出现时选择 Remind Later，再选5或10分钟</td><td>返回学习页并显示新的提醒时间；延后操作不计为活动</td></tr><tr><td>4. 暂停与恢复</td><td>分别操作 Pause Study／Resume Study 和 Pause Reminders／Resume Reminders</td><td>暂停学习会停止学习计时；仅暂停提醒时学习计时继续</td></tr><tr><td>5. 创建运动计划</td><td>Exercise → Create Exercise Plan → 填写活动和时间 → Next → 填写备用活动 → Save Plan</td><td>计划保存并显示在列表中；创建计划不增加运动分钟</td></tr><tr><td>6. 返回修改备用方案</td><td>填写备用活动后返回上一步，再点击 Next；分别检查顶部和页面内的 Back</td><td>两种返回方式均保留已输入内容</td></tr><tr><td>7. 调整受阻的运动计划</td><td>计划详情 → I Can&#x27;t Do This Now；分别操作 Use Backup、Reschedule，以及取消或确认 Skip</td><td>备用活动可以执行；改期更新计划时间；跳过不扣除历史进度，也不计为完成</td></tr><tr><td>8. 连续完成不同活动</td><td>保存活动 → View Progress → 进入另一项运动并开始</td><td>正常进入新活动，不返回上一条活动的保存页面</td></tr><tr><td>9. 更正活动记录</td><td>Progress → View Activity History → 记录 → Edit → 修改时长 → Save；另检查取消编辑</td><td>统计按更正后的记录更新，无重复计分；取消保留原记录</td></tr><tr><td>10. 检查日期限制</td><td>补录实际活动时选择未来日期；运动改期时选择过去时间</td><td>未来活动不计为已完成；过去的计划时间有明确提示或限制</td></tr><tr><td>11. 查看进度与切换宠物</td><td>查看两类活动的进度；在宠物页关闭后重新开启</td><td>两类活动分别统计，数字含义明确；宠物开关不影响记录和累计进度</td></tr><tr><td>12. 调整目标与检查导航</td><td>调整周目标，检查其生效时间；检查页面返回、取消与切换</td><td>目标按所选时间生效；操作无阻断、意外输入丢失或结果不一致</td></tr></tbody></table></div>
+<p>走查范围以本次修改为主，并保留两条核心流程的完整检查。可使用模拟时间控件缩短等待；模拟操作仅用于检查原型交互，不作为真实活动完成的证据。</p></section><section id="section5"><h2>V1参考｜问题反馈格式</h2><p>反馈应包含用户任务、操作路径、实际结果和预期结果。必要时附截图，便于复现和定位。</p>
+<pre>用户任务：保存休息后开始另一项运动。
+操作路径：Save Activity → View Progress → Exercise → 计划详情 → Start Activity。
+实际结果：返回上一条活动的保存页面。
+预期结果：进入所选运动。
+截图及补充：……</pre></section><section id="section7"><h2>V1参考｜变更说明格式</h2><p>变更说明应交代原问题、调整后的行为和复查方式。以下为拟议修复的说明示例，尚未实施：</p>
+<pre>改动内容：修复已保存活动阻挡下一项活动的问题。
+原有行为：保存后查看进度，再开始运动时会返回旧的保存页面。
+调整后行为：可以进入新运动，上一条记录保留且只计入一次。
+复查路径：保存休息 → 查看进度 → 打开运动计划 → 开始运动。
+验证状态：待实施及复查。</pre>
+<p>完整流程图用于核对行为和追踪修改位置。流程编号与详细检查项供记录维护和进一步排查使用；英文技术交接另见 <code>agent-review-notes-en.md</code>。</p></section><section id="section9"><h2>V1参考｜流程图阅读说明</h2><p class="bullet">• 先看 F00–F01 理解入口，再看 F02–F07 的学习和运动，最后看 F08–F13 的反馈、设置及异常处理。</p>
+<p class="bullet">• 每个节点含稳定编号，如 <code>F05-08</code>。后续修改保留原编号，新分支追加编号；不要为了排版重排编号。</p>
+<p class="bullet">• 方框：页面、操作或状态；菱形：条件或选择；双框：调用另一张流程图。红色且写有“问题”的节点表示现状缺陷，不能当作预期验收结果。</p>
+<p class="bullet">• 图按操作与状态变化拆分。同一页面的每个输入字段在说明中列全；共享活动、确认和验证只画一次，通过跨图入口复用。</p>
+<p class="bullet">• 来源为 <code>src/App.jsx</code>、<code>src/model.js</code>、<code>src/Form.jsx</code>、<code>src/validation.js</code> 和项目说明。除单独标注的 11/18 audit 复现外，其余分支为源码核对，尚未全部重新进行浏览器验证。</p>
+<p class="bullet">• 应用界面保留英文；这里用中文解释，关键按钮附英文便于定位。<code>P01–P15</code> 为原页面编号，<code>Fxx</code> 为流程编号，<code>Txx.yy</code> 为走查用例。</p></section><section id="F00"><h2>V1参考｜F00｜首次进入、初始化与设置</h2><p>入口：第一次打开网站，或明确重置后。输出：保存偏好并进入首页。没有注册、登录、真实设备授权。</p>
+<div class="diagram-toolbar"><button data-zoom="-1">缩小</button><button data-zoom="0">适合宽度</button><button data-zoom="1">放大</button><button data-source>图源</button></div><div class="diagram"><pre class="mermaid">flowchart TD
+  f00a[&quot;F00-01 打开网站&quot;] --&gt; f00b{&quot;F00-02 本地数据可读取且基础结构符合版本1？&quot;}
+  f00b --&gt;|&quot;是&quot;| f00c[&quot;F00-03 恢复设置、计划、记录、学习与活动状态&quot;]
+  f00b --&gt;|&quot;否或读取失败&quot;| f00d[&quot;F00-04 加载默认示例数据，setup为未完成&quot;]
+  f00c --&gt; f00e{&quot;F00-05 已完成首次设置？&quot;}
+  f00d --&gt; f00e
+  f00e --&gt;|&quot;是&quot;| f00h[[&quot;F00-08 首页或当前有效路由，见F01&quot;]]
+  f00e --&gt;|&quot;否&quot;| f00f[&quot;F00-06 P01 设置间隔、休息、活动、周目标及宠物选择&quot;]
+  f00f --&gt; f00g[[&quot;F00-07 Save &amp; Continue，经F13验证&quot;]]
+  f00g --&gt;|&quot;有效&quot;| f00i[&quot;F00-09 保存偏好和初始提醒倒计时，不新增活动积分&quot;]
+  f00i --&gt; f00h
+  f00g --&gt;|&quot;无效&quot;| f00f</pre></div><pre class="source" hidden>flowchart TD
+  f00a[&quot;F00-01 打开网站&quot;] --&gt; f00b{&quot;F00-02 本地数据可读取且基础结构符合版本1？&quot;}
+  f00b --&gt;|&quot;是&quot;| f00c[&quot;F00-03 恢复设置、计划、记录、学习与活动状态&quot;]
+  f00b --&gt;|&quot;否或读取失败&quot;| f00d[&quot;F00-04 加载默认示例数据，setup为未完成&quot;]
+  f00c --&gt; f00e{&quot;F00-05 已完成首次设置？&quot;}
+  f00d --&gt; f00e
+  f00e --&gt;|&quot;是&quot;| f00h[[&quot;F00-08 首页或当前有效路由，见F01&quot;]]
+  f00e --&gt;|&quot;否&quot;| f00f[&quot;F00-06 P01 设置间隔、休息、活动、周目标及宠物选择&quot;]
+  f00f --&gt; f00g[[&quot;F00-07 Save &amp; Continue，经F13验证&quot;]]
+  f00g --&gt;|&quot;有效&quot;| f00i[&quot;F00-09 保存偏好和初始提醒倒计时，不新增活动积分&quot;]
+  f00i --&gt; f00h
+  f00g --&gt;|&quot;无效&quot;| f00f</pre>
+<p>字段：学习间隔1–180分钟；休息1–60分钟；活动四选一（Short walk／Stretching／Walk to get water／Gentle movement）；周目标1–3000分钟；宠物必须明确选 Yes 或 No。默认45分钟学习、3分钟休息、60分钟周目标均为原型设定。默认示例为3分钟休息、20分钟中等强度运动和一项待执行计划；Empty Reset 则没有这些示例。手动访问 <code>/setup</code> 仍会显示设置表单，并要求重新选择宠物。</p></section><section id="F01"><h2>V1参考｜F01｜首页入口与全局导航</h2><div class="diagram-toolbar"><button data-zoom="-1">缩小</button><button data-zoom="0">适合宽度</button><button data-zoom="1">放大</button><button data-source>图源</button></div><div class="diagram"><pre class="mermaid">flowchart TD
+  f01a[&quot;F01-01 P02 首页&quot;] --&gt; f01b[&quot;F01-02 查看今日休息、本周运动、累计点数&quot;]
+  f01a --&gt; f01c{&quot;F01-03 是否有活动待继续？&quot;}
+  f01c --&gt;|&quot;有，ready/running/paused&quot;| f01d[[&quot;F01-04 Return to Activity，进入F04&quot;]]
+  f01c --&gt;|&quot;有，pending/saved&quot;| f01e[[&quot;F01-05 返回确认或保存反馈，进入F05&quot;]]
+  f01c --&gt;|&quot;无&quot;| f01f[&quot;F01-06 不显示活动继续卡&quot;]
+  f01a --&gt; f01g[[&quot;F01-07 Start Studying或View Study Session，进入F02&quot;]]
+  f01a --&gt; f01h{&quot;F01-08 是否有待执行运动？&quot;}
+  f01h --&gt;|&quot;有&quot;| f01i[[&quot;F01-09 View Exercise Plan，进入F07&quot;]]
+  f01h --&gt;|&quot;无&quot;| f01j[[&quot;F01-10 Create Exercise Plan，进入F06&quot;]]
+  f01a --&gt; f01k[[&quot;F01-11 View Progress，进入F08&quot;]]
+  f01a --&gt; f01l[[&quot;F01-12 顶部头像，进入个人中心F10&quot;]]
+  f01a --&gt; f01m[&quot;F01-13 底部Home、Study、Exercise、Progress&quot;]
+  f01m --&gt; f01g
+  f01m --&gt; f01n[[&quot;F01-14 Exercise计划列表，进入F07&quot;]]
+  f01m --&gt; f01k</pre></div><pre class="source" hidden>flowchart TD
+  f01a[&quot;F01-01 P02 首页&quot;] --&gt; f01b[&quot;F01-02 查看今日休息、本周运动、累计点数&quot;]
+  f01a --&gt; f01c{&quot;F01-03 是否有活动待继续？&quot;}
+  f01c --&gt;|&quot;有，ready/running/paused&quot;| f01d[[&quot;F01-04 Return to Activity，进入F04&quot;]]
+  f01c --&gt;|&quot;有，pending/saved&quot;| f01e[[&quot;F01-05 返回确认或保存反馈，进入F05&quot;]]
+  f01c --&gt;|&quot;无&quot;| f01f[&quot;F01-06 不显示活动继续卡&quot;]
+  f01a --&gt; f01g[[&quot;F01-07 Start Studying或View Study Session，进入F02&quot;]]
+  f01a --&gt; f01h{&quot;F01-08 是否有待执行运动？&quot;}
+  f01h --&gt;|&quot;有&quot;| f01i[[&quot;F01-09 View Exercise Plan，进入F07&quot;]]
+  f01h --&gt;|&quot;无&quot;| f01j[[&quot;F01-10 Create Exercise Plan，进入F06&quot;]]
+  f01a --&gt; f01k[[&quot;F01-11 View Progress，进入F08&quot;]]
+  f01a --&gt; f01l[[&quot;F01-12 顶部头像，进入个人中心F10&quot;]]
+  f01a --&gt; f01m[&quot;F01-13 底部Home、Study、Exercise、Progress&quot;]
+  f01m --&gt; f01g
+  f01m --&gt; f01n[[&quot;F01-14 Exercise计划列表，进入F07&quot;]]
+  f01m --&gt; f01k</pre>
+<p>说明：首页 Start Studying 当前只导航到学习页，仍需再次按 Start Studying。待执行计划按日期和时间排序，包含 Planned、Rescheduled、In Progress；没有独立逾期分组。今日没有记录时，显示空状态或“之前的进度仍保留”。Setup、Activity、Confirmation 隐藏底部导航；活动页头像不会直接打开个人中心，见F12。</p></section><section id="F02"><h2>V1参考｜F02｜学习设置、开始、暂停、继续与结束</h2><div class="diagram-toolbar"><button data-zoom="-1">缩小</button><button data-zoom="0">适合宽度</button><button data-zoom="1">放大</button><button data-source>图源</button></div><div class="diagram"><pre class="mermaid">flowchart TD
+  f02a[&quot;F02-01 P04 学习页&quot;] --&gt; f02b{&quot;F02-02 当前学习状态？&quot;}
+  f02b --&gt;|&quot;idle&quot;| f02c[&quot;F02-03 Start Studying，开始学习并设置新提醒间隔&quot;]
+  f02b --&gt;|&quot;studying&quot;| f02d[&quot;F02-04 Pause Study，冻结学习与提醒计时&quot;]
+  f02d --&gt; f02e[&quot;F02-05 Resume Study，继续两个计时&quot;]
+  f02b --&gt;|&quot;paused&quot;| f02e
+  f02b --&gt;|&quot;on-break&quot;| f02f[[&quot;F02-06 Return to Break，按活动状态进入F04或F05&quot;]]
+  f02c --&gt; f02g[[&quot;F02-07 提醒计时与选择，见F03&quot;]]
+  f02e --&gt; f02g
+  f02a --&gt; f02h[&quot;F02-08 Break Settings，P03修改间隔、时长、活动&quot;]
+  f02h --&gt; f02i{&quot;F02-09 保存还是取消？&quot;}
+  f02i --&gt;|&quot;Save，有效&quot;| f02j[&quot;F02-10 保存偏好，重置提醒间隔，提醒状态设为on&quot;]
+  f02i --&gt;|&quot;Cancel或顶部Back&quot;| f02a
+  f02i --&gt;|&quot;无效&quot;| f02h
+  f02j --&gt; f02a
+  f02a --&gt;|&quot;非idle时End Study Session&quot;| f02k{&quot;F02-11 结束确认&quot;}
+  f02k --&gt;|&quot;Cancel或关闭&quot;| f02a
+  f02k --&gt;|&quot;确认且无未保存休息&quot;| f02l[&quot;F02-12 学习归idle、计时清零、保留已存记录，回首页&quot;]
+  f02k --&gt;|&quot;存在未保存休息&quot;| f02m[[&quot;F02-13 转丢弃确认，见F04；丢弃后回暂停学习，需再次结束&quot;]]</pre></div><pre class="source" hidden>flowchart TD
+  f02a[&quot;F02-01 P04 学习页&quot;] --&gt; f02b{&quot;F02-02 当前学习状态？&quot;}
+  f02b --&gt;|&quot;idle&quot;| f02c[&quot;F02-03 Start Studying，开始学习并设置新提醒间隔&quot;]
+  f02b --&gt;|&quot;studying&quot;| f02d[&quot;F02-04 Pause Study，冻结学习与提醒计时&quot;]
+  f02d --&gt; f02e[&quot;F02-05 Resume Study，继续两个计时&quot;]
+  f02b --&gt;|&quot;paused&quot;| f02e
+  f02b --&gt;|&quot;on-break&quot;| f02f[[&quot;F02-06 Return to Break，按活动状态进入F04或F05&quot;]]
+  f02c --&gt; f02g[[&quot;F02-07 提醒计时与选择，见F03&quot;]]
+  f02e --&gt; f02g
+  f02a --&gt; f02h[&quot;F02-08 Break Settings，P03修改间隔、时长、活动&quot;]
+  f02h --&gt; f02i{&quot;F02-09 保存还是取消？&quot;}
+  f02i --&gt;|&quot;Save，有效&quot;| f02j[&quot;F02-10 保存偏好，重置提醒间隔，提醒状态设为on&quot;]
+  f02i --&gt;|&quot;Cancel或顶部Back&quot;| f02a
+  f02i --&gt;|&quot;无效&quot;| f02h
+  f02j --&gt; f02a
+  f02a --&gt;|&quot;非idle时End Study Session&quot;| f02k{&quot;F02-11 结束确认&quot;}
+  f02k --&gt;|&quot;Cancel或关闭&quot;| f02a
+  f02k --&gt;|&quot;确认且无未保存休息&quot;| f02l[&quot;F02-12 学习归idle、计时清零、保留已存记录，回首页&quot;]
+  f02k --&gt;|&quot;存在未保存休息&quot;| f02m[[&quot;F02-13 转丢弃确认，见F04；丢弃后回暂停学习，需再次结束&quot;]]</pre>
+<p>注意：学习暂停与提醒暂停不同。编辑设置后保存会重新开启本次提醒状态并重置间隔；全局通知开关仍单独生效。学习计时按前台 interval 增加，不补算关闭页面或后台节流的真实经过时间。已有其他类型活动时，结束学习不会自动删除那项活动。</p></section><section id="F03"><h2>V1参考｜F03｜休息提醒、延后、暂停与恢复提醒</h2><div class="diagram-toolbar"><button data-zoom="-1">缩小</button><button data-zoom="0">适合宽度</button><button data-zoom="1">放大</button><button data-source>图源</button></div><div class="diagram"><pre class="mermaid">flowchart TD
+  f03a[&quot;F03-01 学习运行，倒计时到0&quot;] --&gt; f03b{&quot;F03-02 提醒on、全局开、无活动、无弹窗且不在设置页？&quot;}
+  f03b --&gt;|&quot;否&quot;| f03c[&quot;F03-03 暂不弹窗，条件满足时重新检查&quot;]
+  f03c --&gt; f03b
+  f03b --&gt;|&quot;是&quot;| f03d[&quot;F03-04 Time for a study break弹窗&quot;]
+  f03d --&gt;|&quot;Start Break&quot;| f03e[[&quot;F03-05 学习变on-break，建立ready活动，进入F04&quot;]]
+  f03d --&gt;|&quot;Remind Later&quot;| f03f[&quot;F03-06 选择5或10 Minutes&quot;]
+  f03f --&gt;|&quot;Back&quot;| f03d
+  f03f --&gt;|&quot;选择时长&quot;| f03g[&quot;F03-07 Reminder Delayed，学习继续，倒计时重设&quot;]
+  f03g --&gt;|&quot;到0，delayed转on&quot;| f03b
+  f03d --&gt;|&quot;Pause Reminders&quot;| f03h{&quot;F03-08 确认暂停提醒？&quot;}
+  f03i[&quot;F03-09 学习页Pause Reminders&quot;] --&gt; f03h
+  f03h --&gt;|&quot;确认&quot;| f03j[&quot;F03-10 提醒paused，学习时间继续&quot;]
+  f03h --&gt;|&quot;取消且倒计时为0&quot;| f03d
+  f03h --&gt;|&quot;取消且倒计时大于0&quot;| f03k[&quot;F03-11 关闭弹窗，保留原状态&quot;]
+  f03j --&gt;|&quot;Resume Reminders&quot;| f03l[&quot;F03-12 提醒on，从完整间隔重新计时&quot;]
+  f03l --&gt; f03b</pre></div><pre class="source" hidden>flowchart TD
+  f03a[&quot;F03-01 学习运行，倒计时到0&quot;] --&gt; f03b{&quot;F03-02 提醒on、全局开、无活动、无弹窗且不在设置页？&quot;}
+  f03b --&gt;|&quot;否&quot;| f03c[&quot;F03-03 暂不弹窗，条件满足时重新检查&quot;]
+  f03c --&gt; f03b
+  f03b --&gt;|&quot;是&quot;| f03d[&quot;F03-04 Time for a study break弹窗&quot;]
+  f03d --&gt;|&quot;Start Break&quot;| f03e[[&quot;F03-05 学习变on-break，建立ready活动，进入F04&quot;]]
+  f03d --&gt;|&quot;Remind Later&quot;| f03f[&quot;F03-06 选择5或10 Minutes&quot;]
+  f03f --&gt;|&quot;Back&quot;| f03d
+  f03f --&gt;|&quot;选择时长&quot;| f03g[&quot;F03-07 Reminder Delayed，学习继续，倒计时重设&quot;]
+  f03g --&gt;|&quot;到0，delayed转on&quot;| f03b
+  f03d --&gt;|&quot;Pause Reminders&quot;| f03h{&quot;F03-08 确认暂停提醒？&quot;}
+  f03i[&quot;F03-09 学习页Pause Reminders&quot;] --&gt; f03h
+  f03h --&gt;|&quot;确认&quot;| f03j[&quot;F03-10 提醒paused，学习时间继续&quot;]
+  f03h --&gt;|&quot;取消且倒计时为0&quot;| f03d
+  f03h --&gt;|&quot;取消且倒计时大于0&quot;| f03k[&quot;F03-11 关闭弹窗，保留原状态&quot;]
+  f03j --&gt;|&quot;Resume Reminders&quot;| f03l[&quot;F03-12 提醒on，从完整间隔重新计时&quot;]
+  f03l --&gt; f03b</pre>
+<p>提醒、延后选择、提醒暂停确认没有关闭X，也不响应 Escape；必须选择提供的动作。全局关闭提醒见F10。模拟提醒见F11，不计活动分数。自然提醒是全局效果，在首页、运动或进度等页面也可能出现，不限学习页；其他弹窗或活动存在时暂不出现。</p></section><section id="F04"><h2>V1参考｜F04｜共用活动：准备、计时、暂停、提前结束与丢弃</h2><p>入口：学习提醒、原计划或备用活动。输出：转确认，或不保存退出。</p>
+<div class="diagram-toolbar"><button data-zoom="-1">缩小</button><button data-zoom="0">适合宽度</button><button data-zoom="1">放大</button><button data-source>图源</button></div><div class="diagram"><pre class="mermaid">flowchart TD
+  f04a[&quot;F04-01 请求开始学习休息或运动&quot;] --&gt; f04b{&quot;F04-02 已有active活动？&quot;}
+  f04b --&gt;|&quot;pending或saved&quot;| f04c[[&quot;F04-03 回已有确认F05；saved也阻挡新任务：问题A01&quot;]]
+  f04b --&gt;|&quot;ready/running/paused&quot;| f04d[&quot;F04-04 回已有活动，不创建第二项&quot;]
+  f04b --&gt;|&quot;无&quot;| f04e[&quot;F04-05 P05 Ready，读取原计划或备用活动&quot;]
+  f04e --&gt; f04f[&quot;F04-06 可改活动名称；空白时启动禁用&quot;]
+  f04f --&gt;|&quot;Start Activity&quot;| f04g[&quot;F04-07 running，开始计时；关联计划为In Progress&quot;]
+  f04d --&gt; f04f
+  f04g --&gt;|&quot;Pause Activity&quot;| f04h[&quot;F04-08 paused，计时冻结&quot;]
+  f04h --&gt;|&quot;Resume Activity&quot;| f04g
+  f04g --&gt;|&quot;Finish Activity，秒数大于0&quot;| f04i[[&quot;F04-09 pending，标记Completed，进入F05&quot;]]
+  f04h --&gt;|&quot;Finish Activity，秒数大于0&quot;| f04i
+  f04g --&gt;|&quot;End Early&quot;| f04j{&quot;F04-10 提前结束弹窗&quot;}
+  f04h --&gt;|&quot;End Early，秒数大于0&quot;| f04j
+  f04j --&gt;|&quot;Save Actual Activity&quot;| f04k[[&quot;F04-11 pending，标记Ended Early，进入F05&quot;]]
+  f04j --&gt;|&quot;Cancel或关闭&quot;| f04n
+  f04j --&gt;|&quot;No Activity / Discard&quot;| f04m[&quot;F04-13 清active，恢复运动计划原状态；休息回暂停学习，运动回详情&quot;]
+  f04e --&gt;|&quot;No Activity / Discard&quot;| f04l{&quot;F04-12 丢弃确认&quot;}
+  f04g --&gt;|&quot;Discard、顶部Back或头像&quot;| f04l
+  f04h --&gt;|&quot;Discard、顶部Back或头像&quot;| f04l
+  f04l --&gt;|&quot;Keep Activity或关闭&quot;| f04n[&quot;F04-14 保持打开弹窗前的活动状态&quot;]
+  f04l --&gt;|&quot;Discard Activity&quot;| f04m</pre></div><pre class="source" hidden>flowchart TD
+  f04a[&quot;F04-01 请求开始学习休息或运动&quot;] --&gt; f04b{&quot;F04-02 已有active活动？&quot;}
+  f04b --&gt;|&quot;pending或saved&quot;| f04c[[&quot;F04-03 回已有确认F05；saved也阻挡新任务：问题A01&quot;]]
+  f04b --&gt;|&quot;ready/running/paused&quot;| f04d[&quot;F04-04 回已有活动，不创建第二项&quot;]
+  f04b --&gt;|&quot;无&quot;| f04e[&quot;F04-05 P05 Ready，读取原计划或备用活动&quot;]
+  f04e --&gt; f04f[&quot;F04-06 可改活动名称；空白时启动禁用&quot;]
+  f04f --&gt;|&quot;Start Activity&quot;| f04g[&quot;F04-07 running，开始计时；关联计划为In Progress&quot;]
+  f04d --&gt; f04f
+  f04g --&gt;|&quot;Pause Activity&quot;| f04h[&quot;F04-08 paused，计时冻结&quot;]
+  f04h --&gt;|&quot;Resume Activity&quot;| f04g
+  f04g --&gt;|&quot;Finish Activity，秒数大于0&quot;| f04i[[&quot;F04-09 pending，标记Completed，进入F05&quot;]]
+  f04h --&gt;|&quot;Finish Activity，秒数大于0&quot;| f04i
+  f04g --&gt;|&quot;End Early&quot;| f04j{&quot;F04-10 提前结束弹窗&quot;}
+  f04h --&gt;|&quot;End Early，秒数大于0&quot;| f04j
+  f04j --&gt;|&quot;Save Actual Activity&quot;| f04k[[&quot;F04-11 pending，标记Ended Early，进入F05&quot;]]
+  f04j --&gt;|&quot;Cancel或关闭&quot;| f04n
+  f04j --&gt;|&quot;No Activity / Discard&quot;| f04m[&quot;F04-13 清active，恢复运动计划原状态；休息回暂停学习，运动回详情&quot;]
+  f04e --&gt;|&quot;No Activity / Discard&quot;| f04l{&quot;F04-12 丢弃确认&quot;}
+  f04g --&gt;|&quot;Discard、顶部Back或头像&quot;| f04l
+  f04h --&gt;|&quot;Discard、顶部Back或头像&quot;| f04l
+  f04l --&gt;|&quot;Keep Activity或关闭&quot;| f04n[&quot;F04-14 保持打开弹窗前的活动状态&quot;]
+  f04l --&gt;|&quot;Discard Activity&quot;| f04m</pre>
+<p>补充：返回既有活动、取消提前结束、Keep Activity均保留原ready/running/paused状态，不强制开始运行。弹窗本身不暂停计时。秒数0时 Finish／End Early 禁用；Finish 不检查是否达到计划时长。实际时长建议至少0.1分钟，用户稍后可更正；强度由名称关键词默认猜测（A04），并非传感检测。丢弃不产生记录或积分。</p></section><section id="F05"><h2>V1参考｜F05｜实际确认、编辑、保存与离开反馈</h2><div class="diagram-toolbar"><button data-zoom="-1">缩小</button><button data-zoom="0">适合宽度</button><button data-zoom="1">放大</button><button data-source>图源</button></div><div class="diagram"><pre class="mermaid">flowchart TD
+  f05a[&quot;F05-01 P06 待确认活动&quot;] --&gt; f05b[&quot;F05-02 查看活动、实际时长、强度、来源、完成状态、类别&quot;]
+  f05b --&gt;|&quot;Edit&quot;| f05c[&quot;F05-03 修改名称、日期、实际时长和强度&quot;]
+  f05c --&gt;|&quot;Review Changes&quot;| f05b
+  f05b --&gt;|&quot;Save Activity&quot;| f05d{&quot;F05-04 有效且未保存同ID？&quot;}
+  f05c --&gt;|&quot;Save Activity&quot;| f05d
+  f05d --&gt;|&quot;无效&quot;| f05c
+  f05d --&gt;|&quot;已存在同ID&quot;| f05e[&quot;F05-05 不再写入，不重复加分&quot;]
+  f05d --&gt;|&quot;有效&quot;| f05f[&quot;F05-06 写记录，更新计划完成状态，重新计算统计&quot;]
+  f05f --&gt; f05g[&quot;F05-07 active仍为saved，显示Activity saved&quot;]
+  f05g --&gt;|&quot;休息：Continue Studying&quot;| f05h[[&quot;F05-08 清active，开始新学习间隔，进入F02&quot;]]
+  f05g --&gt;|&quot;休息：End Study Session&quot;| f05i[&quot;F05-09 清active，学习归idle，回首页&quot;]
+  f05g --&gt;|&quot;运动：Done&quot;| f05j[[&quot;F05-10 清active，回关联计划F07&quot;]]
+  f05g --&gt;|&quot;顶部Back&quot;| f05k[&quot;F05-11 清active；休息回暂停学习，运动回计划&quot;]
+  f05g --&gt;|&quot;View Progress或头像&quot;| f05l[[&quot;F05-12 导航至F08或F10，但保留saved active：问题A01&quot;]]
+  f05b --&gt;|&quot;Back to Activity&quot;| f05m[[&quot;F05-13 活动设为paused，回F04&quot;]]
+  f05b --&gt;|&quot;Discard或顶部Back&quot;| f05n[[&quot;F05-14 丢弃确认，沿用F04-12至14&quot;]]</pre></div><pre class="source" hidden>flowchart TD
+  f05a[&quot;F05-01 P06 待确认活动&quot;] --&gt; f05b[&quot;F05-02 查看活动、实际时长、强度、来源、完成状态、类别&quot;]
+  f05b --&gt;|&quot;Edit&quot;| f05c[&quot;F05-03 修改名称、日期、实际时长和强度&quot;]
+  f05c --&gt;|&quot;Review Changes&quot;| f05b
+  f05b --&gt;|&quot;Save Activity&quot;| f05d{&quot;F05-04 有效且未保存同ID？&quot;}
+  f05c --&gt;|&quot;Save Activity&quot;| f05d
+  f05d --&gt;|&quot;无效&quot;| f05c
+  f05d --&gt;|&quot;已存在同ID&quot;| f05e[&quot;F05-05 不再写入，不重复加分&quot;]
+  f05d --&gt;|&quot;有效&quot;| f05f[&quot;F05-06 写记录，更新计划完成状态，重新计算统计&quot;]
+  f05f --&gt; f05g[&quot;F05-07 active仍为saved，显示Activity saved&quot;]
+  f05g --&gt;|&quot;休息：Continue Studying&quot;| f05h[[&quot;F05-08 清active，开始新学习间隔，进入F02&quot;]]
+  f05g --&gt;|&quot;休息：End Study Session&quot;| f05i[&quot;F05-09 清active，学习归idle，回首页&quot;]
+  f05g --&gt;|&quot;运动：Done&quot;| f05j[[&quot;F05-10 清active，回关联计划F07&quot;]]
+  f05g --&gt;|&quot;顶部Back&quot;| f05k[&quot;F05-11 清active；休息回暂停学习，运动回计划&quot;]
+  f05g --&gt;|&quot;View Progress或头像&quot;| f05l[[&quot;F05-12 导航至F08或F10，但保留saved active：问题A01&quot;]]
+  f05b --&gt;|&quot;Back to Activity&quot;| f05m[[&quot;F05-13 活动设为paused，回F04&quot;]]
+  f05b --&gt;|&quot;Discard或顶部Back&quot;| f05n[[&quot;F05-14 丢弃确认，沿用F04-12至14&quot;]]</pre>
+<p>日期目前允许未来值（A02）；编辑活动名称不会重新推断强度。只更改未保存表单不会增加记录；类别在此确认页不可更改，来源固定 Self-reported。积分＝已存实际分钟；同ID替换而非叠加。编辑模式的 Review Changes 只切换显示，不相当于正式保存。</p></section><section id="F06"><h2>V1参考｜F06｜创建、填写备用、返回与编辑运动计划</h2><div class="diagram-toolbar"><button data-zoom="-1">缩小</button><button data-zoom="0">适合宽度</button><button data-zoom="1">放大</button><button data-source>图源</button></div><div class="diagram"><pre class="mermaid">flowchart TD
+  f06a[&quot;F06-01 首页或Exercise点击Create Exercise Plan&quot;] --&gt; f06b[&quot;F06-02 P08 填名称、日期、时间、计划分钟&quot;]
+  f06b --&gt;|&quot;Next，有效&quot;| f06c[&quot;F06-03 保存内存草稿，进入P09&quot;]
+  f06b --&gt;|&quot;Cancel&quot;| f06d[&quot;F06-04 清草稿，回运动列表，无计划或积分&quot;]
+  f06c --&gt; f06e[&quot;F06-05 填障碍可选、备用活动、备用分钟&quot;]
+  f06e --&gt;|&quot;Save Plan，有效&quot;| f06f[&quot;F06-06 新ID计划为Planned，清草稿，不加分&quot;]
+  f06f --&gt; f06g[[&quot;F06-07 进入计划详情F07&quot;]]
+  f06e --&gt;|&quot;底部Back&quot;| f06h[&quot;F06-08 保留备用输入，回P08&quot;]
+  f06h --&gt; f06b
+  f06e --&gt;|&quot;顶部Back&quot;| f06i[&quot;F06-09 只导航，备用输入未写回草稿：问题A03&quot;]
+  f06i --&gt; f06b
+  f06e --&gt;|&quot;Cancel&quot;| f06d
+  f06j[&quot;F06-10 未完成计划详情点Edit Plan&quot;] --&gt; f06k[&quot;F06-11 P08编辑原计划与备用字段&quot;]
+  f06k --&gt;|&quot;Save Changes，有效&quot;| f06l[&quot;F06-12 替换原ID计划，保留当前状态，无活动信用&quot;]
+  f06l --&gt; f06g
+  f06k --&gt;|&quot;Cancel&quot;| f06g
+  f06k --&gt;|&quot;顶部Back&quot;| f06m[&quot;F06-13 回Exercise，未保存修改丢弃&quot;]
+  f06b --&gt;|&quot;验证无效&quot;| f06b
+  f06e --&gt;|&quot;验证无效&quot;| f06e
+  f06k --&gt;|&quot;验证无效&quot;| f06k</pre></div><pre class="source" hidden>flowchart TD
+  f06a[&quot;F06-01 首页或Exercise点击Create Exercise Plan&quot;] --&gt; f06b[&quot;F06-02 P08 填名称、日期、时间、计划分钟&quot;]
+  f06b --&gt;|&quot;Next，有效&quot;| f06c[&quot;F06-03 保存内存草稿，进入P09&quot;]
+  f06b --&gt;|&quot;Cancel&quot;| f06d[&quot;F06-04 清草稿，回运动列表，无计划或积分&quot;]
+  f06c --&gt; f06e[&quot;F06-05 填障碍可选、备用活动、备用分钟&quot;]
+  f06e --&gt;|&quot;Save Plan，有效&quot;| f06f[&quot;F06-06 新ID计划为Planned，清草稿，不加分&quot;]
+  f06f --&gt; f06g[[&quot;F06-07 进入计划详情F07&quot;]]
+  f06e --&gt;|&quot;底部Back&quot;| f06h[&quot;F06-08 保留备用输入，回P08&quot;]
+  f06h --&gt; f06b
+  f06e --&gt;|&quot;顶部Back&quot;| f06i[&quot;F06-09 只导航，备用输入未写回草稿：问题A03&quot;]
+  f06i --&gt; f06b
+  f06e --&gt;|&quot;Cancel&quot;| f06d
+  f06j[&quot;F06-10 未完成计划详情点Edit Plan&quot;] --&gt; f06k[&quot;F06-11 P08编辑原计划与备用字段&quot;]
+  f06k --&gt;|&quot;Save Changes，有效&quot;| f06l[&quot;F06-12 替换原ID计划，保留当前状态，无活动信用&quot;]
+  f06l --&gt; f06g
+  f06k --&gt;|&quot;Cancel&quot;| f06g
+  f06k --&gt;|&quot;顶部Back&quot;| f06m[&quot;F06-13 回Exercise，未保存修改丢弃&quot;]
+  f06b --&gt;|&quot;验证无效&quot;| f06b
+  f06e --&gt;|&quot;验证无效&quot;| f06e
+  f06k --&gt;|&quot;验证无效&quot;| f06k</pre>
+<p>字段：活动名必填且不全空格，最多70字符；日期、时间必填；计划和备用时长1–600整数分钟；障碍最多180字符，可不填。日期目前不限制过去（A06）。新计划默认 Brisk walk、今天17:30、20分钟、Indoor stretching 10分钟；没有强度输入。P08顶部Back回Exercise但不明确清除先前内存草稿；P09刷新丢草稿并显示先创建计划（见F12）。完成、提前结束、跳过的计划详情不再显示编辑或再次启动按钮。</p></section><section id="F07"><h2>V1参考｜F07｜查看、执行、备用、改期、跳过与计划状态</h2><div class="diagram-toolbar"><button data-zoom="-1">缩小</button><button data-zoom="0">适合宽度</button><button data-zoom="1">放大</button><button data-source>图源</button></div><div class="diagram"><pre class="mermaid">flowchart TD
+  f07a[&quot;F07-01 P07查看周目标与计划分组&quot;] --&gt; f07b[&quot;F07-02 选择计划，进入P10详情&quot;]
+  f07b --&gt; f07c{&quot;F07-03 已Completed、Ended Early或Skipped？&quot;}
+  f07c --&gt;|&quot;是&quot;| f07d[&quot;F07-04 显示实际活动或跳过说明&quot;]
+  f07d --&gt; f07e[[&quot;F07-05 查看历史F08或回列表&quot;]]
+  f07c --&gt;|&quot;否&quot;| f07f{&quot;F07-06 选择下一步&quot;}
+  f07f --&gt;|&quot;Start Activity&quot;| f07g[[&quot;F07-07 原计划活动，进入F04再F05&quot;]]
+  f07f --&gt;|&quot;Edit Plan&quot;| f07h[[&quot;F07-08 编辑，进入F06-10&quot;]]
+  f07f --&gt;|&quot;I Can&#x27;t Do This Now&quot;| f07i[&quot;F07-09 显示备用与应对选项&quot;]
+  f07i --&gt;|&quot;Use Backup&quot;| f07j[[&quot;F07-10 使用备用名称及时长，进入F04再F05&quot;]]
+  f07i --&gt;|&quot;Reschedule&quot;| f07k[&quot;F07-11 填新日期和时间&quot;]
+  f07k --&gt;|&quot;Save，有效&quot;| f07l[&quot;F07-12 状态Rescheduled，保存最初时间，不加分&quot;]
+  f07k --&gt;|&quot;Cancel或关闭&quot;| f07b
+  f07l --&gt; f07b
+  f07i --&gt;|&quot;Skip&quot;| f07m{&quot;F07-13 确认跳过？&quot;}
+  f07m --&gt;|&quot;Confirm Skip&quot;| f07n[&quot;F07-14 Skipped，保留进度，不加分，停留详情&quot;]
+  f07n --&gt; f07b
+  f07m --&gt;|&quot;Cancel或关闭&quot;| f07b
+  f07i --&gt;|&quot;Cancel或关闭&quot;| f07b
+  f07g --&gt;|&quot;活动保存并Done&quot;| f07b
+  f07j --&gt;|&quot;活动保存并Done&quot;| f07b</pre></div><pre class="source" hidden>flowchart TD
+  f07a[&quot;F07-01 P07查看周目标与计划分组&quot;] --&gt; f07b[&quot;F07-02 选择计划，进入P10详情&quot;]
+  f07b --&gt; f07c{&quot;F07-03 已Completed、Ended Early或Skipped？&quot;}
+  f07c --&gt;|&quot;是&quot;| f07d[&quot;F07-04 显示实际活动或跳过说明&quot;]
+  f07d --&gt; f07e[[&quot;F07-05 查看历史F08或回列表&quot;]]
+  f07c --&gt;|&quot;否&quot;| f07f{&quot;F07-06 选择下一步&quot;}
+  f07f --&gt;|&quot;Start Activity&quot;| f07g[[&quot;F07-07 原计划活动，进入F04再F05&quot;]]
+  f07f --&gt;|&quot;Edit Plan&quot;| f07h[[&quot;F07-08 编辑，进入F06-10&quot;]]
+  f07f --&gt;|&quot;I Can&#x27;t Do This Now&quot;| f07i[&quot;F07-09 显示备用与应对选项&quot;]
+  f07i --&gt;|&quot;Use Backup&quot;| f07j[[&quot;F07-10 使用备用名称及时长，进入F04再F05&quot;]]
+  f07i --&gt;|&quot;Reschedule&quot;| f07k[&quot;F07-11 填新日期和时间&quot;]
+  f07k --&gt;|&quot;Save，有效&quot;| f07l[&quot;F07-12 状态Rescheduled，保存最初时间，不加分&quot;]
+  f07k --&gt;|&quot;Cancel或关闭&quot;| f07b
+  f07l --&gt; f07b
+  f07i --&gt;|&quot;Skip&quot;| f07m{&quot;F07-13 确认跳过？&quot;}
+  f07m --&gt;|&quot;Confirm Skip&quot;| f07n[&quot;F07-14 Skipped，保留进度，不加分，停留详情&quot;]
+  f07n --&gt; f07b
+  f07m --&gt;|&quot;Cancel或关闭&quot;| f07b
+  f07i --&gt;|&quot;Cancel或关闭&quot;| f07b
+  f07g --&gt;|&quot;活动保存并Done&quot;| f07b
+  f07j --&gt;|&quot;活动保存并Done&quot;| f07b</pre>
+<p>列表分组：Planned 与 In Progress 同组；Rescheduled；Completed 与 Ended Early 同组；Skipped。开始活动计时才设为In Progress；丢弃未保存活动恢复此前计划状态。备用完成显示实际活动的 Backup 标签，但顶层仍叫Completed。改期与跳过都不计完成运动；轻量备用仅贡献累计点数，不计中等强度周分钟。更正关联活动可同步计划完成状态。当前改期允许过去时间（A06），只保存第一次原定时间而非完整历次改期日志。</p></section><section id="F08"><h2>V1参考｜F08｜进度、历史筛选、详情、纠错与手动补录</h2><div class="diagram-toolbar"><button data-zoom="-1">缩小</button><button data-zoom="0">适合宽度</button><button data-zoom="1">放大</button><button data-source>图源</button></div><div class="diagram"><pre class="mermaid">flowchart TD
+  f08a[&quot;F08-01 P11 查看累计休息、本周中等强度、总点数&quot;] --&gt; f08b[&quot;F08-02 View Activity History，进入P12&quot;]
+  f08b --&gt; f08c[&quot;F08-03 All、Study Breaks或Planned Exercise筛选&quot;]
+  f08c --&gt; f08d{&quot;F08-04 是否有匹配记录？&quot;}
+  f08d --&gt;|&quot;否&quot;| f08e[&quot;F08-05 显示无记录提示，仍可手动补录&quot;]
+  f08d --&gt;|&quot;是&quot;| f08f[&quot;F08-06 按日期倒序，选记录进入P13&quot;]
+  f08f --&gt;|&quot;Edit&quot;| f08g[&quot;F08-07 修改名称、日期、时长、强度&quot;]
+  f08g --&gt;|&quot;Save，有效&quot;| f08h[&quot;F08-08 同ID替换，更新关联计划，重算统计，回历史&quot;]
+  f08g --&gt;|&quot;Cancel&quot;| f08f
+  f08g --&gt;|&quot;顶部Back或底部导航&quot;| f08i[&quot;F08-09 离开页面，未保存编辑丢失，无提醒&quot;]
+  f08b --&gt;|&quot;Add Manual Record&quot;| f08j[&quot;F08-10 P13填类别、名称、日期、时长、强度&quot;]
+  f08e --&gt; f08j
+  f08j --&gt;|&quot;Save，有效&quot;| f08k[&quot;F08-11 新ID自报Completed记录，重算统计，回历史&quot;]
+  f08j --&gt;|&quot;Cancel或顶部Back&quot;| f08b
+  f08h --&gt; f08b
+  f08k --&gt; f08b
+  f08b --&gt;|&quot;顶部Back或Progress导航&quot;| f08a
+  f08a --&gt; f08l[[&quot;F08-12 查看或关闭宠物，进入F09&quot;]]</pre></div><pre class="source" hidden>flowchart TD
+  f08a[&quot;F08-01 P11 查看累计休息、本周中等强度、总点数&quot;] --&gt; f08b[&quot;F08-02 View Activity History，进入P12&quot;]
+  f08b --&gt; f08c[&quot;F08-03 All、Study Breaks或Planned Exercise筛选&quot;]
+  f08c --&gt; f08d{&quot;F08-04 是否有匹配记录？&quot;}
+  f08d --&gt;|&quot;否&quot;| f08e[&quot;F08-05 显示无记录提示，仍可手动补录&quot;]
+  f08d --&gt;|&quot;是&quot;| f08f[&quot;F08-06 按日期倒序，选记录进入P13&quot;]
+  f08f --&gt;|&quot;Edit&quot;| f08g[&quot;F08-07 修改名称、日期、时长、强度&quot;]
+  f08g --&gt;|&quot;Save，有效&quot;| f08h[&quot;F08-08 同ID替换，更新关联计划，重算统计，回历史&quot;]
+  f08g --&gt;|&quot;Cancel&quot;| f08f
+  f08g --&gt;|&quot;顶部Back或底部导航&quot;| f08i[&quot;F08-09 离开页面，未保存编辑丢失，无提醒&quot;]
+  f08b --&gt;|&quot;Add Manual Record&quot;| f08j[&quot;F08-10 P13填类别、名称、日期、时长、强度&quot;]
+  f08e --&gt; f08j
+  f08j --&gt;|&quot;Save，有效&quot;| f08k[&quot;F08-11 新ID自报Completed记录，重算统计，回历史&quot;]
+  f08j --&gt;|&quot;Cancel或顶部Back&quot;| f08b
+  f08h --&gt; f08b
+  f08k --&gt; f08b
+  f08b --&gt;|&quot;顶部Back或Progress导航&quot;| f08a
+  f08a --&gt; f08l[[&quot;F08-12 查看或关闭宠物，进入F09&quot;]]</pre>
+<p>统计规则：休息次数和分钟为所有日期累计；首页休息为当天；周运动只含本周一至周日、exercise类别且Moderate的记录；所有已存记录时长汇总成成长点数。历史无日期范围搜索、无记录删除、无实际完成时间排序。手动补录与更正的日期目前可填未来，立即影响点数与同周分钟（A02）；完整表单验证见F13。更正已有记录时不可切换类别，手动新增时可以。</p></section><section id="F09"><h2>V1参考｜F09｜宠物启用、关闭、成长与普通反馈</h2><div class="diagram-toolbar"><button data-zoom="-1">缩小</button><button data-zoom="0">适合宽度</button><button data-zoom="1">放大</button><button data-source>图源</button></div><div class="diagram"><pre class="mermaid">flowchart TD
+  f09a[&quot;F09-01 P11或个人中心进入P14&quot;] --&gt; f09b{&quot;F09-02 Show Virtual Pet开关？&quot;}
+  f09b --&gt;|&quot;开&quot;| f09c[&quot;F09-03 占位宠物、当前等级、本阶段累计与升级所需&quot;]
+  f09b --&gt;|&quot;关&quot;| f09d[&quot;F09-04 Pet Disabled，提示记录和点数仍保存&quot;]
+  f09c --&gt;|&quot;关闭&quot;| f09d
+  f09d --&gt;|&quot;重新开启&quot;| f09c
+  f09c --&gt; f09e[&quot;F09-05 Growth Explanation解释1分钟1点、30点一级&quot;]
+  f09d --&gt; f09e
+  f09e --&gt;|&quot;Back to Progress或顶部Back&quot;| f09f[[&quot;F09-06 回F08，普通进度始终保留&quot;]]
+  f09g[&quot;F09-07 保存或更正记录&quot;] --&gt; f09h[&quot;F09-08 重新计算总分与等级&quot;]
+  f09h --&gt; f09b
+  f09i[&quot;F09-09 某天没有新活动&quot;] --&gt; f09j[&quot;F09-10 不删记录、不扣分、不伤害宠物&quot;]
+  f09j --&gt; f09b</pre></div><pre class="source" hidden>flowchart TD
+  f09a[&quot;F09-01 P11或个人中心进入P14&quot;] --&gt; f09b{&quot;F09-02 Show Virtual Pet开关？&quot;}
+  f09b --&gt;|&quot;开&quot;| f09c[&quot;F09-03 占位宠物、当前等级、本阶段累计与升级所需&quot;]
+  f09b --&gt;|&quot;关&quot;| f09d[&quot;F09-04 Pet Disabled，提示记录和点数仍保存&quot;]
+  f09c --&gt;|&quot;关闭&quot;| f09d
+  f09d --&gt;|&quot;重新开启&quot;| f09c
+  f09c --&gt; f09e[&quot;F09-05 Growth Explanation解释1分钟1点、30点一级&quot;]
+  f09d --&gt; f09e
+  f09e --&gt;|&quot;Back to Progress或顶部Back&quot;| f09f[[&quot;F09-06 回F08，普通进度始终保留&quot;]]
+  f09g[&quot;F09-07 保存或更正记录&quot;] --&gt; f09h[&quot;F09-08 重新计算总分与等级&quot;]
+  f09h --&gt; f09b
+  f09i[&quot;F09-09 某天没有新活动&quot;] --&gt; f09j[&quot;F09-10 不删记录、不扣分、不伤害宠物&quot;]
+  f09j --&gt; f09b</pre>
+<p>当前图形不会因等级改变而出现不同成长外观，没有动画、装饰或解锁账本。更正记录可能降低累计分与等级；这是数据更正，不是漏做惩罚。进度条把阶段累计称为 points to next stage，与实际剩余值含义不符（A07）。</p></section><section id="F10"><h2>V1参考｜F10｜个人资料、每周目标与全局偏好</h2><div class="diagram-toolbar"><button data-zoom="-1">缩小</button><button data-zoom="0">适合宽度</button><button data-zoom="1">放大</button><button data-source>图源</button></div><div class="diagram"><pre class="mermaid">flowchart TD
+  f10a[&quot;F10-01 P15个人中心&quot;] --&gt;|&quot;Edit Profile&quot;| f10b[&quot;F10-02 填昵称及头像S、M或图标&quot;]
+  f10b --&gt;|&quot;Save，有效&quot;| f10c[&quot;F10-03 更新本地资料，回个人中心&quot;]
+  f10b --&gt;|&quot;Cancel或关闭&quot;| f10a
+  f10a --&gt;|&quot;Edit Weekly Goal&quot;| f10d[&quot;F10-04 填分钟及Apply change&quot;]
+  f10d --&gt;|&quot;This week，Save有效&quot;| f10e[&quot;F10-05 更新基础目标，清除未来预约&quot;]
+  f10d --&gt;|&quot;Starting next week，Save有效&quot;| f10f[&quot;F10-06 替换唯一未来目标槽，不改活动分钟&quot;]
+  f10e --&gt; f10a
+  f10f --&gt; f10a
+  f10d --&gt;|&quot;Cancel或关闭&quot;| f10a
+  f10a --&gt;|&quot;Edit Study Break Preferences&quot;| f10g[[&quot;F10-07 进入F02设置；保存或取消都回学习页&quot;]]
+  f10a --&gt;|&quot;In-app Break Reminders关&quot;| f10h[&quot;F10-08 学习计时继续，提醒倒计时冻结&quot;]
+  f10a --&gt;|&quot;In-app Break Reminders开&quot;| f10i[&quot;F10-09 重设完整间隔、提醒on；不补播漏掉提醒&quot;]
+  f10a --&gt;|&quot;Show Virtual Pet开或关&quot;| f10j[&quot;F10-10 同步宠物偏好，不删除记录&quot;]
+  f10a --&gt;|&quot;Open Virtual Pet&quot;| f10k[[&quot;F10-11 进入F09&quot;]]
+  f10a --&gt;|&quot;Activity History&quot;| f10l[[&quot;F10-12 进入F08&quot;]]
+  f10a --&gt;|&quot;Device &amp; Data&quot;| f10m[[&quot;F10-13 进入F11&quot;]]
+  f10a --&gt;|&quot;Help / About&quot;| f10n[&quot;F10-14 查看规则和模拟限制，Done或关闭回原页&quot;]
+  f10a --&gt;|&quot;顶部Back&quot;| f10o[&quot;F10-15 回首页&quot;]</pre></div><pre class="source" hidden>flowchart TD
+  f10a[&quot;F10-01 P15个人中心&quot;] --&gt;|&quot;Edit Profile&quot;| f10b[&quot;F10-02 填昵称及头像S、M或图标&quot;]
+  f10b --&gt;|&quot;Save，有效&quot;| f10c[&quot;F10-03 更新本地资料，回个人中心&quot;]
+  f10b --&gt;|&quot;Cancel或关闭&quot;| f10a
+  f10a --&gt;|&quot;Edit Weekly Goal&quot;| f10d[&quot;F10-04 填分钟及Apply change&quot;]
+  f10d --&gt;|&quot;This week，Save有效&quot;| f10e[&quot;F10-05 更新基础目标，清除未来预约&quot;]
+  f10d --&gt;|&quot;Starting next week，Save有效&quot;| f10f[&quot;F10-06 替换唯一未来目标槽，不改活动分钟&quot;]
+  f10e --&gt; f10a
+  f10f --&gt; f10a
+  f10d --&gt;|&quot;Cancel或关闭&quot;| f10a
+  f10a --&gt;|&quot;Edit Study Break Preferences&quot;| f10g[[&quot;F10-07 进入F02设置；保存或取消都回学习页&quot;]]
+  f10a --&gt;|&quot;In-app Break Reminders关&quot;| f10h[&quot;F10-08 学习计时继续，提醒倒计时冻结&quot;]
+  f10a --&gt;|&quot;In-app Break Reminders开&quot;| f10i[&quot;F10-09 重设完整间隔、提醒on；不补播漏掉提醒&quot;]
+  f10a --&gt;|&quot;Show Virtual Pet开或关&quot;| f10j[&quot;F10-10 同步宠物偏好，不删除记录&quot;]
+  f10a --&gt;|&quot;Open Virtual Pet&quot;| f10k[[&quot;F10-11 进入F09&quot;]]
+  f10a --&gt;|&quot;Activity History&quot;| f10l[[&quot;F10-12 进入F08&quot;]]
+  f10a --&gt;|&quot;Device &amp; Data&quot;| f10m[[&quot;F10-13 进入F11&quot;]]
+  f10a --&gt;|&quot;Help / About&quot;| f10n[&quot;F10-14 查看规则和模拟限制，Done或关闭回原页&quot;]
+  f10a --&gt;|&quot;顶部Back&quot;| f10o[&quot;F10-15 回首页&quot;]</pre>
+<p>资料昵称必填且不全空格，最多30字符；周目标1–3000整数分钟，默认下周生效。设置预约时不会增加活动或点数。已生效预约被下一预约替换后，当前目标可能回退（A05，模型复现）。资料、目标弹窗取消不保存；开关则立即保存，没有单独Save。提醒开关不等于系统推送授权。</p></section><section id="F11"><h2>V1参考｜F11｜课堂演示、设备说明、模拟时间与数据重置</h2><div class="diagram-toolbar"><button data-zoom="-1">缩小</button><button data-zoom="0">适合宽度</button><button data-zoom="1">放大</button><button data-source>图源</button></div><div class="diagram"><pre class="mermaid">flowchart TD
+  f11a[&quot;F11-01 学习页Prototype time controls&quot;] --&gt; f11b[&quot;F11-02 Simulate Next Reminder，直接显示提醒F03&quot;]
+  f11a --&gt; f11c[&quot;F11-03 Advance 5 Minutes，tick增加学习及正在运行活动计时&quot;]
+  f11d[&quot;F11-04 活动页Prototype time controls&quot;] --&gt; f11e[&quot;F11-05 Advance Activity 1 Minute，调用共用tick&quot;]
+  f11f[&quot;F11-06 个人中心Device &amp; Data弹窗&quot;] --&gt; f11g[&quot;F11-07 Demo Device Connection开关，仅本地演示&quot;]
+  f11f --&gt; f11h[&quot;F11-08 展开Prototype data controls&quot;]
+  f11h --&gt;|&quot;Preview Next Day&quot;| f11i[&quot;F11-09 日期偏移加1，回首页；不增加或删除记录&quot;]
+  f11h --&gt;|&quot;偏移非0时Return to Today&#x27;s Date&quot;| f11j[&quot;F11-10 日期偏移归0，关闭弹窗，留个人中心&quot;]
+  f11h --&gt;|&quot;Reset to Empty Start&quot;| f11k{&quot;F11-11 空数据重置确认&quot;}
+  f11h --&gt;|&quot;Reload Sample Data&quot;| f11l{&quot;F11-12 示例重置确认&quot;}
+  f11k --&gt;|&quot;Confirm Reset&quot;| f11m[&quot;F11-13 替换全部本地状态为空初始值，进入F00&quot;]
+  f11l --&gt;|&quot;Confirm Reset&quot;| f11n[&quot;F11-14 替换全部本地状态为示例初始值，进入F00&quot;]
+  f11k --&gt;|&quot;Cancel或关闭&quot;| f11o[&quot;F11-15 关闭确认，回底层个人中心，数据不变&quot;]
+  f11l --&gt;|&quot;Cancel或关闭&quot;| f11o
+  f11f --&gt;|&quot;Done或关闭&quot;| f11o</pre></div><pre class="source" hidden>flowchart TD
+  f11a[&quot;F11-01 学习页Prototype time controls&quot;] --&gt; f11b[&quot;F11-02 Simulate Next Reminder，直接显示提醒F03&quot;]
+  f11a --&gt; f11c[&quot;F11-03 Advance 5 Minutes，tick增加学习及正在运行活动计时&quot;]
+  f11d[&quot;F11-04 活动页Prototype time controls&quot;] --&gt; f11e[&quot;F11-05 Advance Activity 1 Minute，调用共用tick&quot;]
+  f11f[&quot;F11-06 个人中心Device &amp; Data弹窗&quot;] --&gt; f11g[&quot;F11-07 Demo Device Connection开关，仅本地演示&quot;]
+  f11f --&gt; f11h[&quot;F11-08 展开Prototype data controls&quot;]
+  f11h --&gt;|&quot;Preview Next Day&quot;| f11i[&quot;F11-09 日期偏移加1，回首页；不增加或删除记录&quot;]
+  f11h --&gt;|&quot;偏移非0时Return to Today&#x27;s Date&quot;| f11j[&quot;F11-10 日期偏移归0，关闭弹窗，留个人中心&quot;]
+  f11h --&gt;|&quot;Reset to Empty Start&quot;| f11k{&quot;F11-11 空数据重置确认&quot;}
+  f11h --&gt;|&quot;Reload Sample Data&quot;| f11l{&quot;F11-12 示例重置确认&quot;}
+  f11k --&gt;|&quot;Confirm Reset&quot;| f11m[&quot;F11-13 替换全部本地状态为空初始值，进入F00&quot;]
+  f11l --&gt;|&quot;Confirm Reset&quot;| f11n[&quot;F11-14 替换全部本地状态为示例初始值，进入F00&quot;]
+  f11k --&gt;|&quot;Cancel或关闭&quot;| f11o[&quot;F11-15 关闭确认，回底层个人中心，数据不变&quot;]
+  f11l --&gt;|&quot;Cancel或关闭&quot;| f11o
+  f11f --&gt;|&quot;Done或关闭&quot;| f11o</pre>
+<p>限制：模拟提醒仅学习运行、提醒未paused、全局通知开时可用；学习Advance 5 Minutes仅学习运行时可用；活动Advance 1 Minute仅活动running时可用。它们调用同一个tick；若学习和运动同时running，两个计时会一起推进。模拟计时本身不加分，但之后保存的建议时长可来自模拟，测试者应标记为演示数据。重置替换所有记录和设置，不可当成关闭宠物测试；只在明确的测试数据中使用。</p></section><section id="F12"><h2>V1参考｜F12｜顶部返回、离开、刷新与缺少前置数据</h2><div class="diagram-toolbar"><button data-zoom="-1">缩小</button><button data-zoom="0">适合宽度</button><button data-zoom="1">放大</button><button data-source>图源</button></div><div class="diagram"><pre class="mermaid">flowchart TD
+  f12a[&quot;F12-01 顶部Back或头像&quot;] --&gt; f12b{&quot;F12-02 当前页面？&quot;}
+  f12b --&gt;|&quot;Activity：Back或头像&quot;| f12c[[&quot;F12-03 丢弃或Keep Activity，见F04；不会直接去个人中心&quot;]]
+  f12b --&gt;|&quot;Confirmation未保存：Back&quot;| f12d[[&quot;F12-04 丢弃确认，见F05&quot;]]
+  f12b --&gt;|&quot;Confirmation已保存：Back&quot;| f12e[[&quot;F12-05 清任务，见F05-11&quot;]]
+  f12b --&gt;|&quot;Backup：Back&quot;| f12f[[&quot;F12-06 回新建计划，未保存备用输入丢失A03&quot;]]
+  f12b --&gt;|&quot;其他页面头像&quot;| f12g[&quot;F12-07 去个人中心；未保存表单无离开提示&quot;]
+  f12b --&gt;|&quot;计划、新建或编辑：Back&quot;| f12h[&quot;F12-08 回Exercise&quot;]
+  f12b --&gt;|&quot;记录：Back&quot;| f12i[&quot;F12-09 回History；History或Pet的Back回Progress&quot;]
+  f12b --&gt;|&quot;Study Settings：Back&quot;| f12j[&quot;F12-10 回Study；其他Back通常回Home&quot;]
+  f12k[&quot;F12-11 刷新或重新打开&quot;] --&gt; f12l[&quot;F12-12 从localStorage恢复已写状态，但不补真实经过时间&quot;]
+  f12l --&gt; f12m[&quot;F12-13 页面草稿、表单编辑、弹窗、通知及内存planDraft丢失&quot;]
+  f12n[&quot;F12-14 直接进入依赖数据的路由&quot;] --&gt; f12o{&quot;F12-15 前置数据存在？&quot;}
+  f12o --&gt;|&quot;是&quot;| f12p[&quot;F12-16 按活动状态展示或重定向&quot;]
+  f12o --&gt;|&quot;否&quot;| f12q[&quot;F12-17 无活动回Home入口；无备用草稿先建计划；无计划回Exercise；无记录回History&quot;]</pre></div><pre class="source" hidden>flowchart TD
+  f12a[&quot;F12-01 顶部Back或头像&quot;] --&gt; f12b{&quot;F12-02 当前页面？&quot;}
+  f12b --&gt;|&quot;Activity：Back或头像&quot;| f12c[[&quot;F12-03 丢弃或Keep Activity，见F04；不会直接去个人中心&quot;]]
+  f12b --&gt;|&quot;Confirmation未保存：Back&quot;| f12d[[&quot;F12-04 丢弃确认，见F05&quot;]]
+  f12b --&gt;|&quot;Confirmation已保存：Back&quot;| f12e[[&quot;F12-05 清任务，见F05-11&quot;]]
+  f12b --&gt;|&quot;Backup：Back&quot;| f12f[[&quot;F12-06 回新建计划，未保存备用输入丢失A03&quot;]]
+  f12b --&gt;|&quot;其他页面头像&quot;| f12g[&quot;F12-07 去个人中心；未保存表单无离开提示&quot;]
+  f12b --&gt;|&quot;计划、新建或编辑：Back&quot;| f12h[&quot;F12-08 回Exercise&quot;]
+  f12b --&gt;|&quot;记录：Back&quot;| f12i[&quot;F12-09 回History；History或Pet的Back回Progress&quot;]
+  f12b --&gt;|&quot;Study Settings：Back&quot;| f12j[&quot;F12-10 回Study；其他Back通常回Home&quot;]
+  f12k[&quot;F12-11 刷新或重新打开&quot;] --&gt; f12l[&quot;F12-12 从localStorage恢复已写状态，但不补真实经过时间&quot;]
+  f12l --&gt; f12m[&quot;F12-13 页面草稿、表单编辑、弹窗、通知及内存planDraft丢失&quot;]
+  f12n[&quot;F12-14 直接进入依赖数据的路由&quot;] --&gt; f12o{&quot;F12-15 前置数据存在？&quot;}
+  f12o --&gt;|&quot;是&quot;| f12p[&quot;F12-16 按活动状态展示或重定向&quot;]
+  f12o --&gt;|&quot;否&quot;| f12q[&quot;F12-17 无活动回Home入口；无备用草稿先建计划；无计划回Exercise；无记录回History&quot;]</pre>
+<p>应用顶部Back是固定目标导航，不是浏览器历史后退。浏览器Back没有统一未保存拦截，应单独走查；不能假设和顶部Back相同。<code>/activity</code>遇pending/saved自动转<code>/confirm</code>；<code>/confirm</code>遇ready/running/paused自动转<code>/activity</code>。未知路由在setup已完成时回首页，未完成时去setup。已有状态持久化为尽力保存；写入失败会显示“Keep this tab open”，没有云端备份。损坏但通过浅层版本检查的数据可能仍出错，未全面防护。</p></section><section id="F13"><h2>V1参考｜F13｜共享表单验证与弹窗关闭规则</h2><div class="diagram-toolbar"><button data-zoom="-1">缩小</button><button data-zoom="0">适合宽度</button><button data-zoom="1">放大</button><button data-source>图源</button></div><div class="diagram"><pre class="mermaid">flowchart TD
+  f13a[&quot;F13-01 点击表单Save、Next或Continue&quot;] --&gt; f13b[&quot;F13-02 检查所有未禁用字段&quot;]
+  f13b --&gt; f13c{&quot;F13-03 缺失、空格、格式、范围或步长错误？&quot;}
+  f13c --&gt;|&quot;是&quot;| f13d[&quot;F13-04 英文汇总和字段错误，聚焦第一个错误，不提交&quot;]
+  f13d --&gt;|&quot;修改字段&quot;| f13e[&quot;F13-05 清除该字段旧错误&quot;]
+  f13e --&gt; f13a
+  f13c --&gt;|&quot;否&quot;| f13f[&quot;F13-06 执行当前流程保存或下一步&quot;]
+  f13g[&quot;F13-07 打开弹窗&quot;] --&gt; f13h[&quot;F13-08 聚焦首个可聚焦控件，Tab在弹窗内循环&quot;]
+  f13h --&gt; f13i{&quot;F13-09 是提醒、延后或提醒暂停弹窗？&quot;}
+  f13i --&gt;|&quot;是&quot;| f13j[&quot;F13-10 不显示X，不支持Escape；用明确动作离开&quot;]
+  f13i --&gt;|&quot;否&quot;| f13k[&quot;F13-11 X或Escape关闭，不执行未提交动作&quot;]
+  f13k --&gt; f13l[&quot;F13-12 尝试恢复打开前焦点&quot;]</pre></div><pre class="source" hidden>flowchart TD
+  f13a[&quot;F13-01 点击表单Save、Next或Continue&quot;] --&gt; f13b[&quot;F13-02 检查所有未禁用字段&quot;]
+  f13b --&gt; f13c{&quot;F13-03 缺失、空格、格式、范围或步长错误？&quot;}
+  f13c --&gt;|&quot;是&quot;| f13d[&quot;F13-04 英文汇总和字段错误，聚焦第一个错误，不提交&quot;]
+  f13d --&gt;|&quot;修改字段&quot;| f13e[&quot;F13-05 清除该字段旧错误&quot;]
+  f13e --&gt; f13a
+  f13c --&gt;|&quot;否&quot;| f13f[&quot;F13-06 执行当前流程保存或下一步&quot;]
+  f13g[&quot;F13-07 打开弹窗&quot;] --&gt; f13h[&quot;F13-08 聚焦首个可聚焦控件，Tab在弹窗内循环&quot;]
+  f13h --&gt; f13i{&quot;F13-09 是提醒、延后或提醒暂停弹窗？&quot;}
+  f13i --&gt;|&quot;是&quot;| f13j[&quot;F13-10 不显示X，不支持Escape；用明确动作离开&quot;]
+  f13i --&gt;|&quot;否&quot;| f13k[&quot;F13-11 X或Escape关闭，不执行未提交动作&quot;]
+  f13k --&gt; f13l[&quot;F13-12 尝试恢复打开前焦点&quot;]</pre>
+<p>数值限制见各图；英文错误来自共享验证，不使用系统本地化的验证气泡。日期有效不等于业务时间合理：过去改期、未来已完成活动目前都能通过（A02/A06）。开关等立即写入的动作，在关闭弹窗时不会被撤销。弹窗关闭不是“返回上一级弹窗”：例如取消改期直接回计划详情。</p></section><section id="section39"><h2>V1参考｜详细检查清单（扩展参考）</h2><p>执行前记录：代码提交／日期／浏览器与视口／空数据或示例数据／测试者。以下全部为待执行用例，不把空表当作已通过。实际结果建议填 <code>通过 / 失败 / 未测 / 被已知问题阻挡</code>，并附截图、实际值或观察。已知问题的当前表现不等于修复验收标准。</p>
+<div class="table-wrap"><table><thead><tr><th>用例</th><th>用户任务或分支</th><th>流程节点</th><th>检查结果与边界</th><th>实际结果</th></tr></thead><tbody><tr><td>T00.01</td><td>首次完成设置，宠物Yes</td><td>F00-06至09</td><td>偏好保存、进Home；示例不是新活动</td><td>未测</td></tr><tr><td>T00.02</td><td>宠物No及漏选、数值越界</td><td>F00-06/07、F13</td><td>No可保存；无效值英文报错且不进入Home</td><td>未测</td></tr><tr><td>T00.03</td><td>重开网站及直接访问setup</td><td>F00-01至05</td><td>已存状态恢复；重新setup需明确宠物选择</td><td>未测</td></tr><tr><td>T01.01</td><td>Home、Study、Exercise、Progress和头像导航</td><td>F01-07至14</td><td>路由和活动状态保留，查看页面不加分</td><td>未测</td></tr><tr><td>T01.02</td><td>有活动时使用Return to Activity</td><td>F01-03至05</td><td>ready/running/paused去活动；pending/saved去确认</td><td>未测</td></tr><tr><td>T01.03</td><td>无记录或无待执行计划</td><td>F01-02/08</td><td>空状态有下一步；不虚构活动</td><td>未测</td></tr><tr><td>T02.01</td><td>开始、Pause Study、Resume Study</td><td>F02-03至05</td><td>两个计时随学习暂停一起冻结，再继续</td><td>未测</td></tr><tr><td>T02.02</td><td>修改休息设置并保存</td><td>F02-08至10</td><td>新间隔生效，提醒状态on；不改旧活动记录</td><td>未测</td></tr><tr><td>T02.03</td><td>修改设置后取消或顶部返回</td><td>F02-09</td><td>旧设置保留；均回Study</td><td>未测</td></tr><tr><td>T02.04</td><td>End Study确认与取消</td><td>F02-11/12</td><td>确认停止学习，保留已存活动；取消不结束</td><td>未测</td></tr><tr><td>T02.05</td><td>有未保存休息时结束学习</td><td>F02-13、F04-12</td><td>当前转丢弃流程，丢弃回暂停状态，需再结束</td><td>未测</td></tr><tr><td>T03.01</td><td>提醒后立即Start Break</td><td>F03-01至05</td><td>有明确活动，进入Ready，不立即加分</td><td>未测</td></tr><tr><td>T03.02</td><td>提醒延后5分钟、10分钟、Back</td><td>F03-06/07</td><td>保留学习时长，正确重设延后倒计时</td><td>未测</td></tr><tr><td>T03.03</td><td>提醒暂停确认、取消、恢复</td><td>F03-08至12</td><td>学习继续；恢复从新间隔开始；取消分零/非零</td><td>未测</td></tr><tr><td>T03.04</td><td>在其他页、弹窗或活动期间到提醒时间</td><td>F03-02/03</td><td>核对全局触发、抑制与再次出现条件</td><td>未测</td></tr><tr><td>T04.01</td><td>原计划、备用、休息分别开始与暂停</td><td>F04-05至08</td><td>名称、计划时长、类别、来源正确；不串任务</td><td>未测</td></tr><tr><td>T04.02</td><td>空活动名、零秒结束、正常Finish</td><td>F04-06/09</td><td>空名禁用启动；零秒禁用结束；Finish到确认</td><td>未测</td></tr><tr><td>T04.03</td><td>End Early保存、丢弃、取消</td><td>F04-10/11/13/14</td><td>先审核再保存；丢弃无积分；取消保留原状态</td><td>未测</td></tr><tr><td>T04.04</td><td>顶部Back、头像或Discard后Keep</td><td>F04-12至14</td><td>保留活动；Discard恢复计划旧状态或暂停学习</td><td>未测</td></tr><tr><td>T04.05</td><td>有active时再请求开始别的活动</td><td>F04-02至04</td><td>不覆盖未保存活动；saved阻挡为A01回归目标</td><td>未测</td></tr><tr><td>T05.01</td><td>确认前编辑并Review Changes</td><td>F05-02/03</td><td>名称/日期/时长/强度显示新值，仍未计分</td><td>未测</td></tr><tr><td>T05.02</td><td>Save Activity及重复保存同ID</td><td>F05-04至07</td><td>一条记录一份贡献，不重复累计</td><td>未测</td></tr><tr><td>T05.03</td><td>已存休息后Continue、End、顶部Back</td><td>F05-08/09/11</td><td>分别进入运行学习、首页idle、暂停学习</td><td>未测</td></tr><tr><td>T05.04</td><td>已存运动后Done</td><td>F05-10</td><td>回对应计划，active清空，实际摘要更新</td><td>未测</td></tr><tr><td>T05.05</td><td>已存后View Progress再开始新任务</td><td>F05-12、F04-03</td><td>当前A01；修复后不应回旧保存反馈</td><td>未测</td></tr><tr><td>T05.06</td><td>未存时Back to Activity、Discard、顶部Back</td><td>F05-13/14</td><td>返回paused；丢弃需确认；未保存无积分</td><td>未测</td></tr><tr><td>T06.01</td><td>创建原计划和提前备用并保存</td><td>F06-01至07</td><td>新计划Planned；障碍可空；不加活动分</td><td>未测</td></tr><tr><td>T06.02</td><td>备用页底部Back、顶部Back后再次Next</td><td>F06-08/09</td><td>当前顶部返回丢输入A03；应统一保留策略</td><td>未测</td></tr><tr><td>T06.03</td><td>新建、备用和编辑中Cancel</td><td>F06-04/11</td><td>不创建意外计划；编辑取消保留旧值</td><td>未测</td></tr><tr><td>T06.04</td><td>修改已有计划并保存</td><td>F06-10至12</td><td>同一ID替换、保持状态，Home与列表同步</td><td>未测</td></tr><tr><td>T06.05</td><td>修改草稿后导航或刷新</td><td>F06、F12-11至13</td><td>记录顶部/底部/浏览器Back及刷新差异</td><td>未测</td></tr><tr><td>T07.01</td><td>完成原计划或使用备用后完成</td><td>F07-07/10、F04/F05</td><td>实际内容与原计划分开；备用显示Backup</td><td>未测</td></tr><tr><td>T07.02</td><td>改期保存、取消和无效输入</td><td>F07-11/12</td><td>日期更新，Rescheduled，无记录或积分</td><td>未测</td></tr><tr><td>T07.03</td><td>改期到过去日期或当日过去时间</td><td>F07-11/12</td><td>当前A06；未来修复应阻止或明确逾期语义</td><td>未测</td></tr><tr><td>T07.04</td><td>跳过确认和取消</td><td>F07-13/14</td><td>Skipped留在详情和列表；旧进度保留</td><td>未测</td></tr><tr><td>T07.05</td><td>查看四组计划与终态详情</td><td>F07-01至05</td><td>Completed/Ended Early/Skipped无重新启动入口</td><td>未测</td></tr><tr><td>T07.06</td><td>自定义活动名称与实际强度</td><td>F04-05、F05-02/03</td><td>当前名称猜测A04；核对周分钟与实际选择</td><td>未测</td></tr><tr><td>T08.01</td><td>查看进度和三种历史筛选</td><td>F08-01至06</td><td>all-time与本周范围清楚；空结果不丢入口</td><td>未测</td></tr><tr><td>T08.02</td><td>编辑记录：时长、强度、日期</td><td>F08-07/08</td><td>同ID替换、重算，关联计划状态一致</td><td>未测</td></tr><tr><td>T08.03</td><td>编辑Cancel、顶部Back或切Tab</td><td>F08-07/09</td><td>Cancel恢复；离开无提示，不误保存</td><td>未测</td></tr><tr><td>T08.04</td><td>补录休息/轻量运动/中等运动</td><td>F08-10/11</td><td>只有中等exercise进入周目标，各类可累计点数</td><td>未测</td></tr><tr><td>T08.05</td><td>补录或更正未来实际记录</td><td>F08、F13</td><td>当前A02；修复后不提前获得任何进度</td><td>未测</td></tr><tr><td>T09.01</td><td>从进度与个人中心关闭再打开宠物</td><td>F09-01至06</td><td>状态同步，记录与普通进度不变</td><td>未测</td></tr><tr><td>T09.02</td><td>阶段边界29.9、30、38.2及更正</td><td>F09-07/08</td><td>点数与等级一致；累计/剩余文案A07</td><td>未测</td></tr><tr><td>T09.03</td><td>没有新活动的一天</td><td>F09-09/10、F11-09</td><td>没有漏做扣分或宠物惩罚</td><td>未测</td></tr><tr><td>T10.01</td><td>修改昵称头像，保存/取消/验证</td><td>F10-02/03</td><td>本地资料同步，取消不保存</td><td>未测</td></tr><tr><td>T10.02</td><td>目标本周生效、下周预约、取消</td><td>F10-04至06</td><td>不改活动分钟；本周应用会清未来预约</td><td>未测</td></tr><tr><td>T10.03</td><td>预约已生效后再安排未来目标</td><td>F10-06</td><td>当前A05；修复后当前目标不能回退</td><td>未测</td></tr><tr><td>T10.04</td><td>全局提醒关/开与学习暂停交叉</td><td>F10-08/09、F02/F03</td><td>学习计时和提醒分别控制；开启不补播</td><td>未测</td></tr><tr><td>T10.05</td><td>个人中心跳设置/历史/宠物/帮助</td><td>F10-07/11至15</td><td>当前返回目标清楚，不将Back当历史返回</td><td>未测</td></tr><tr><td>T11.01</td><td>模拟提醒、推进学习与活动计时</td><td>F11-01至05</td><td>控件可用条件正确；本身不创建积分</td><td>未测</td></tr><tr><td>T11.02</td><td>演示设备开关</td><td>F11-06/07</td><td>不触发真实授权、导入或删除记录</td><td>未测</td></tr><tr><td>T11.03</td><td>预览下一天及回到今天</td><td>F11-08至10</td><td>日期改变，数据保留，不自动增加活动</td><td>未测</td></tr><tr><td>T11.04</td><td>空数据重置：取消及确认</td><td>F11-11/13/15</td><td>仅确认替换状态，并回Setup</td><td>未测</td></tr><tr><td>T11.05</td><td>重新加载示例：取消及确认</td><td>F11-12/14/15</td><td>示例替换而非叠加，并回Setup</td><td>未测</td></tr><tr><td>T12.01</td><td>顶部Back与浏览器Back分别测试</td><td>F12-01至10</td><td>页面目标、草稿、活动状态分别记录</td><td>未测</td></tr><tr><td>T12.02</td><td>刷新学习/活动/确认/草稿页</td><td>F12-11至13</td><td>已写状态恢复；不声称补算离线计时</td><td>未测</td></tr><tr><td>T12.03</td><td>无前置数据直达路由及未知路由</td><td>F12-14至17</td><td>有提示和返回入口，无白屏或虚假完成</td><td>未测</td></tr><tr><td>T12.04</td><td>本地保存失败或损坏状态</td><td>F12-12、F00-02</td><td>标明失败与恢复限制；不得假设完整容错</td><td>未测</td></tr><tr><td>T13.01</td><td>必填、空格、格式、数值上下限与步长</td><td>F13-01至06</td><td>英文错误、焦点正确、不误提交</td><td>未测</td></tr><tr><td>T13.02</td><td>弹窗Tab、Shift+Tab、Escape及X</td><td>F13-07至12</td><td>分别核对三种不可关闭提醒弹窗与其余弹窗</td><td>未测</td></tr></tbody></table></div></section><section id="section41"><h2>V1参考｜已知问题到流程、用例和代码的映射</h2><div class="table-wrap"><table><thead><tr><th>Audit ID</th><th>当前问题</th><th>流程与用例</th><th>主要实现位置</th><th>后续改动状态</th></tr></thead><tbody><tr><td>A01</td><td>saved活动继续占用新任务</td><td>F04-03 / F05-12；T04.05 / T05.05</td><td>App.jsx startActivity、Confirmation</td><td>未修改</td></tr><tr><td>A02</td><td>未来实际记录提前获得进度</td><td>F05 / F08 / F13；T08.05</td><td>App.jsx ActivityFields、Record、Confirmation；model.js</td><td>未修改</td></tr><tr><td>A03</td><td>顶部返回丢备用输入</td><td>F06-09 / F12-06；T06.02</td><td>App.jsx back、Backup、planDraft</td><td>未修改</td></tr><tr><td>A04</td><td>名称静默推断强度</td><td>F04-05 / F05-03；T07.06</td><td>App.jsx startActivity、ActivityFields</td><td>待讨论</td></tr><tr><td>A05</td><td>生效目标被未来预约覆盖后回退</td><td>F10-06；T10.03</td><td>App.jsx goal弹窗；model.js goalFor</td><td>未修改</td></tr><tr><td>A06</td><td>改期到过去仍待执行</td><td>F07-11/12；T07.03</td><td>App.jsx reschedule、PlanEditor</td><td>未修改</td></tr><tr><td>A07</td><td>阶段累计与剩余文案混淆</td><td>F09-03；T09.02</td><td>App.jsx Meter、Pet</td><td>未修改</td></tr></tbody></table></div></section><section id="section43"><h2>V1参考｜详细变更记录模板</h2><pre>日期 / 分支 / 提交：
+涉及用户任务：Txx.yy
+涉及流程节点：Fxx-xx → Fxx-xx
+问题与证据：真实课堂反馈编号 / 开发者audit编号 / 小组决策日期
+修改前：具体触发条件与原行为
+修改后：用户现在能如何操作，结果是什么
+代码范围：文件与函数
+验证：自动测试结果 + 浏览器任务结果 + 数据前后值
+未覆盖 / 剩余问题：</pre>
+<p>示例（拟议，尚未实施）：<code>F05-12 / T05.05 / A01：保存活动后查看进度不再保留阻挡下一活动的saved任务；验证学习休息保存 → 进度 → 原计划运动可开始，旧记录仍只计一次。</code></p></section><section id="section45"><h2>V1参考｜版本维护约定</h2><p>保留此文件作为v1基线。实施v2后另建对应版本图或显式标记新增、修改、删除分支，并在更新日志引用稳定编号。若流程删除，保留其旧编号及原因。技术验证和参与者结果分开记录；未测不写通过。小组界面语言继续英文，本说明为中文内部协作材料。</p></section></main></div>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.12.0/dist/mermaid.min.js"></script>
+<script>
+(async()=>{const status=document.getElementById('render-status');try{mermaid.initialize({startOnLoad:false,securityLevel:'strict',theme:'base',themeVariables:{fontFamily:'system-ui,Microsoft YaHei,sans-serif',fontSize:'16px',primaryColor:'#edf3f7',primaryTextColor:'#202833',primaryBorderColor:'#8197a7',lineColor:'#60798b',secondaryColor:'#fcf0d6',tertiaryColor:'#edf5ef'},flowchart:{useMaxWidth:false,htmlLabels:false,curve:'linear',nodeSpacing:32,rankSpacing:46}});for(const pre of document.querySelectorAll('.mermaid')){const id='chart'+Math.random().toString(36).slice(2);let raw=pre.textContent;const problems=[...raw.matchAll(/^\s*(f\d\d[a-z]+)\[.*(?:问题A\d\d|A03)/gm)].map(x=>x[1]);if(problems.length)raw+='\nclassDef issue fill:#fff0e8,stroke:#b75c35\nclass '+problems.join(',')+' issue';const result=await mermaid.render(id,raw);pre.parentElement.innerHTML=result.svg;const svg=document.getElementById(id);const natural=Number(svg.getAttribute('viewBox').split(/\s+/)[2]);svg.dataset.natural=natural;svg.style.width=Math.min(natural,svg.parentElement.clientWidth)+'px';}status.textContent='全部 '+document.querySelectorAll('.diagram svg').length+' 张流程图已加载；图可缩放，目录可跳转'}catch(error){status.textContent='图表加载失败，可查看图源或Markdown；'+error.message;console.error(error)}})();
+document.querySelectorAll('[data-zoom]').forEach(button=>button.addEventListener('click',()=>{const svg=button.parentElement.nextElementSibling.querySelector('svg');if(!svg)return;const direction=Number(button.dataset.zoom);const width=direction===0?Math.min(Number(svg.dataset.natural),svg.parentElement.clientWidth):parseFloat(svg.style.width)*(direction>0?1.25:.8);svg.style.width=Math.max(300,Math.min(6000,width))+'px'}));document.querySelectorAll('[data-source]').forEach(button=>button.addEventListener('click',()=>{const source=button.parentElement.nextElementSibling.nextElementSibling;source.hidden=!source.hidden}));const observer=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting){document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('active',a.hash==='#'+entry.target.id))}},{rootMargin:'0px 0px -65% 0px'});document.querySelectorAll('main section').forEach(s=>observer.observe(s));
+</script></body></html>

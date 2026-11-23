@@ -1,26 +1,15 @@
-# Prototype 2 — Color Edition
+# Lo-fi V2 — local iteration in progress
 
-Implemented November 22, 2026 under explicit user authorization. Shared runnable source remains in src; no duplicate React app. Full operating guide and changes are at the top of README.md. V1 baseline ZIP is preserved locally under outputs/archive.
+2026-11-23 current decision: the user authorized selecting reviewed grayscale V2 for main and the V2 submission. The color edition is fully preserved on `codex/color-prototype-2026-11-23` at39dae0d. See [branch decision](../../docs/lo-fi-v2/branch-decision-2026-11-23.md). Earlier local-only and owner-only merge statements below are historical.
 
-## Evidence
+The current shared `src/` contains the first user-authorized V2 repair batch, preserving V1's grayscale design. Changes are based on developer-audit findings; actual classroom findings have not been supplied. There is no second React application.
 
-19 model/validation tests and production build passed. Added regressions cover effective-goal rollover, saved-feedback release preserving records, actual-versus-planned completion, and matching weekly study/exercise windows. Actual new-version browser verification was blocked by localhost connection refusal in both browsers. No physical-phone or classroom-participant findings.
+Start with [中文变更说明与走查](../../docs/lo-fi-v2/iteration-01-zh.md). The first repair batch and three user-approved interaction adjustments are locally implemented and verified. User authorized branch publication and a PR to main on November 20; [owner handoff instructions](../../docs/lo-fi-v2/owner-handoff-zh.md) cover review, walkthrough and merge. Merge/deployment are not part of this publication task.
 
-## Pending
+Record actual observations, evidence-linked decisions and verification here. The V1 source snapshot was preserved before this iteration; proposed changes remain separate from approved implementation.
 
-Run Home, Study, Exercise, Progress, Pet, Personal Center and dialog walkthroughs in a real browser; specifically test saved→Progress→new activity and backup→top Back→Next→refresh. Check 390×844 and narrow/short devices. Re-test light backups, reschedule, skip, pet visibility and edited record totals. Existing timer throttling, one-future-goal/history limits and cross-tab storage risks remain.
+Existing planning notes are retained in [docs/lo-fi-v2](../../docs/lo-fi-v2/README.md). [Project status](../../PROJECT_STATUS.md) is the overall source of progress and issues.
 
-## Visual direction
+2026-11-20: Added a [Chinese V1 flow baseline and walkthrough checklist](../../docs/lo-fi-v2/user-flow-baseline-zh.md) for reviewing later V2 changes. [Visual diagram review](../../docs/lo-fi-v2/user-flow-review-zh.html) provides navigation and zoom. This is source-grounded documentation; the checklist is unexecuted and product behavior remains V1.
 
-Soft purple actions; mint study cards; peach exercise cards; cream rewards; warm off-white background. Pet forms are static SVG, with no new network dependencies. Colors supplement labels and icons. No full accessibility audit or visual sign-off claimed.
-
-
-## Additional verification — 2026-11-22
-
-DOM-emulated integration using jsdom and the compiled production bundle passed: setup/pet choice; Home demo label and SVG; study start/reminder/activity/short duration confirmation/save; saved feedback→Progress clears active; opening the pending exercise reaches Ready to start; discard; new plan→backup edit→header Back→Next retains the field; session draft persists and clears on Save; shorter activity opens with five-minute planned duration. No DOM error events were observed. This does not verify real-browser rendering, focus behavior, native form controls, phone sizing, or background timers.
-
-The standalone HTML is reproducible with `npm run build` then `python3 scripts/build-standalone.py`. Package with `python3 scripts/package-project.py`.
-
-## Package verification
-
-The source ZIP was extracted into a fresh directory. `npm ci`, all 19 tests and `npm run build` passed in that extracted copy. ZIP CRC and file hashes passed. Standalone HTML has no external script or stylesheet references. Real-browser local-file execution and visual rendering remain unverified.
+2026-11-20 walkthrough follow-up: new plan time defaults to the local hour/minute when the editor opens (fixed until edited); draft values are preserved. Past schedules remain blocked at save. 22 tests and build passed; this default-value change has not been rechecked in browser.

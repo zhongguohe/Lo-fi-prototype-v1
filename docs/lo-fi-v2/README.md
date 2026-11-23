@@ -1,22 +1,24 @@
-# Prototype 2 — Color Edition
+# Lo-fi V2 — local iteration in progress
 
-Implemented November 22, 2026 under explicit user authorization. Shared runnable source remains in src; no duplicate React app. Full operating guide and changes are at the top of README.md. V1 baseline ZIP is preserved locally under outputs/archive.
+- [第一批变更说明与走查](iteration-01-zh.md): implemented repairs, verification and remaining issues.
+- [核心交互方案](interaction-proposals-zh.md): user approved and locally implemented.
+- [V2流程变化](flow-changes-v2-zh.md): current changes mapped to stable V1 flow IDs.
 
-## Evidence
+## V1 baseline for V2 review — 2026-11-20
 
-19 model/validation tests and production build passed. Added regressions cover effective-goal rollover, saved-feedback release preserving records, actual-versus-planned completion, and matching weekly study/exercise windows. Actual new-version browser verification was blocked by localhost connection refusal in both browsers. No physical-phone or classroom-participant findings.
+- [Complete Chinese user-flow baseline and task walkthrough checklist](user-flow-baseline-zh.md): F00–F13, stable node/case IDs, current defects and change-log template.
+- [Visual review document](user-flow-review-zh.html): the same diagrams with navigation and zoom; Mermaid loads from a public CDN. While Vite is running, open `/docs/lo-fi-v2/user-flow-review-zh.html`.
+- Regenerate the visual document with `python scripts/build-flow-review.py` after editing the Markdown source.
+- [English agent review notes](agent-review-notes-en.md): review responsibilities, document IDs, verification boundaries and reporting format.
+- Documentation only. No V2 product behavior or approved design changes are implied; no participant test outcomes have been added.
 
-## Pending
+The first user-authorized repair batch has started. The V1 baseline documents below remain unchanged as historical references; their unexecuted checklist is not the current verification record. Classroom participant results remain unavailable.
 
-Run Home, Study, Exercise, Progress, Pet, Personal Center and dialog walkthroughs in a real browser; specifically test saved→Progress→new activity and backup→top Back→Next→refresh. Check 390×844 and narrow/short devices. Re-test light backups, reschedule, skip, pet visibility and edited record totals. Existing timer throttling, one-future-goal/history limits and cross-tab storage risks remain.
+Future records should include:
 
-## Visual direction
+- **Usability Findings:** anonymous observation references, task outcomes, recurring misunderstandings, uncertainties.
+- **Design Changes:** prioritized proposal, group decision/date, rationale tied to evidence.
+- **Updated User Flows:** explicit differences from V1 and confirmation that core behavior boundaries remain clear.
+- **Prototype Iterations:** version, files changed, verification, remaining issues, and next tests.
 
-Soft purple actions; mint study cards; peach exercise cards; cream rewards; warm off-white background. Pet forms are static SVG, with no new network dependencies. Colors supplement labels and icons. No full accessibility audit or visual sign-off claimed.
-
-
-## Additional verification — 2026-11-22
-
-DOM-emulated integration using jsdom and the compiled production bundle passed: setup/pet choice; Home demo label and SVG; study start/reminder/activity/short duration confirmation/save; saved feedback→Progress clears active; opening the pending exercise reaches Ready to start; discard; new plan→backup edit→header Back→Next retains the field; session draft persists and clears on Save; shorter activity opens with five-minute planned duration. No DOM error events were observed. This does not verify real-browser rendering, focus behavior, native form controls, phone sizing, or background timers.
-
-The standalone HTML is reproducible with `npm run build` then `python3 scripts/build-standalone.py`. Package with `python3 scripts/package-project.py`.
+Keep exploratory ideas separate from confirmed work. Do not assume a visual redesign or new intervention mechanism is required. Update PROJECT_STATUS, CHANGELOG and design-decisions after actual iteration work.
